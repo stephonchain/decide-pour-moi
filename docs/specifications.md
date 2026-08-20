@@ -1,6 +1,7 @@
-# Roue de Décision. Spécifications complètes V1
+# Décide pour moi. Spécifications complètes V1
 
 Document de référence pour le développement dans Claude Code.
+L'app s'appelle « Décide pour moi » ; le concept reste celui d'une roue de décision.
 Plateforme : iOS 17+, iPhone, portrait. SwiftUI, SwiftData. Aucune dépendance externe.
 
 ---
@@ -105,7 +106,7 @@ Premier lancement : la roue "Ce soir on mange..." est affichée, prête à tourn
 
 ## 6. App Store et ASO
 
-- **Nom** : Roue de Décision (EN : Decision Wheel)
+- **Nom** : Décide pour moi (EN : Decide for Me)
 - **Sous-titre** : Tirage au sort personnalisable / Custom random picker wheel
 - **Mots-clés FR** : roue, décision, hasard, tirage, sort, choix, aléatoire, fortune, gage, pioche
 - **Mots-clés EN** : wheel, spinner, random, picker, decide, choice, name, raffle, spin, chooser

@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "memento-mori",
+      "nom": "Memento Mori",
+      "accroche": {
+        "fr": "Votre vie en semaines. Une grille, et l'envie de ne plus rien remettre à demain.",
+        "en": "Your life in weeks. One grid, and no more putting things off."
+      },
+      "url": "https://apps.apple.com/fr/app/memento-mori-life-tracker/id6757536750",
+      "audience": "grandPublic",
+      "poids": 10,
+      "symbole": "hourglass",
+      "couleur": "6A4C93"
+    },
+    {
+      "id": "coeur-cosmique",
+      "nom": "Cœur Cosmique",
+      "accroche": {
+        "fr": "Oracles et tirages de cartes, pour les jours où il faut un signe.",
+        "en": "Oracle decks and card draws, for the days you need a sign."
+      },
+      "url": "https://apps.apple.com/fr/app/cosmic-heart-oracles/id6759118287",
+      "audience": "grandPublic",
+      "poids": 10,
+      "symbole": "sparkles",
+      "couleur": "C86FC9"
+    },
+    {
+      "id": "ngap",
+      "nom": "NGAP Infirmier Libéral",
+      "accroche": {
+        "fr": "La cotation NGAP au complet, hors ligne, dans votre poche.",
+        "en": "The full French nursing fee schedule, offline, in your pocket."
+      },
+      "url": "https://apps.apple.com/fr/app/ngap-infirmier-liberal/id6758107985",
+      "audience": "soignants",
+      "poids": 3,
+      "symbole": "eurosign.circle.fill",
+      "couleur": "1B9AAA"
+    },
+    {
+      "id": "pocket-nurse",
+      "nom": "Pocket Nurse Tools",
+      "accroche": {
+        "fr": "Calculs de doses, scores, conversions : la boîte à outils du soignant.",
+        "en": "Dose calculations, scores, conversions: the nurse's toolbox."
+      },
+      "url": "https://apps.apple.com/fr/app/pocket-nurse-tools/id6758239852",
+      "audience": "soignants",
+      "poids": 3,
+      "symbole": "stethoscope",
+      "couleur": "40916C"
+    },
+    {
+      "id": "handoff",
+      "nom": "Handoff",
+      "accroche": {
+        "fr": "Le bien-être des soignants, sans discours : des outils concrets.",
+        "en": "Caregiver well-being, no lectures: just practical tools."
+      },
+      "url": "https://apps.apple.com/fr/app/handoff-bien-%C3%AAtre-soignants/id6758864492",
+      "audience": "soignants",
+      "poids": 3,
+      "symbole": "heart.text.square.fill",
+      "couleur": "EE6C8A"
+    },
+    {
+      "id": "scanordo",
+      "nom": "Scanordo PDF",
+      "accroche": {
+        "fr": "Scannez vos ordonnances en PDF nets, en deux gestes.",
+        "en": "Scan prescriptions into clean PDFs in two taps."
+      },
+      "url": "https://apps.apple.com/fr/app/scanordo-pdf/id6799687529",
+      "audience": "soignants",
+      "poids": 3,
+      "symbole": "doc.viewfinder",
+      "couleur": "3A9BF0"
+    }
+  ]
+}
