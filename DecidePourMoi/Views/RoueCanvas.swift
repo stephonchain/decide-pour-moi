@@ -66,12 +66,8 @@ struct RoueCanvas: View {
         let epaisseur = max(1, rayon * 0.008)
         var trace = Path()
         for part in parts {
-            let angle = part.debut - .pi / 2
             trace.move(to: centre)
-            trace.addLine(to: CGPoint(
-                x: centre.x + cos(angle) * rayon,
-                y: centre.y + sin(angle) * rayon
-            ))
+            trace.addLine(to: Self.point(centre: centre, rayon: rayon, angle: part.debut - .pi / 2))
         }
         contexte.stroke(trace, with: .color(.white.opacity(0.9)), lineWidth: epaisseur)
     }
@@ -120,10 +116,19 @@ struct RoueCanvas: View {
 
     // MARK: Mesures
 
+    /// Point du cercle à l'angle donné. Le calcul se fait entièrement en
+    /// `Double` : mélanger `Double` et `CGFloat` dans une même expression rend
+    /// l'appel à `cos` ambigu.
+    static func point(centre: CGPoint, rayon: CGFloat, angle: Double) -> CGPoint {
+        let x: Double = Double(centre.x) + Double(rayon) * cos(angle)
+        let y: Double = Double(centre.y) + Double(rayon) * sin(angle)
+        return CGPoint(x: x, y: y)
+    }
+
     private func tailleDePolice(rayon: CGFloat, parts: [SpanAngulaire]) -> CGFloat {
         // La contrainte, c'est la hauteur disponible dans le segment le plus étroit.
         let plusEtroit = parts.map(\.largeur).min() ?? SpinEngine.tour
-        let hauteurDisponible = rayon * 0.72 * CGFloat(min(plusEtroit, .pi / 3)) * 0.9
+        let hauteurDisponible = rayon * 0.72 * CGFloat(min(plusEtroit, Double.pi / 3)) * 0.9
         let longueurMax = segments.map { Self.tronquer($0.label).count }.max() ?? 1
         let largeurDisponible = rayon * 0.66 / CGFloat(max(longueurMax, 1)) * 1.85
         return min(max(min(hauteurDisponible, largeurDisponible), 9), rayon * 0.11)
@@ -155,9 +160,9 @@ struct GouttePointeur: Shape {
         let pointe = CGPoint(x: rect.midX, y: rect.maxY)
 
         // Tangentes du cercle passant par la pointe : la goutte se ferme sans cassure.
-        let distance = pointe.y - centre.y
-        guard distance > rayon else { return Path(ellipseIn: rect) }
-        let angle = acos(rayon / distance)
+        let distance = Double(pointe.y - centre.y)
+        guard distance > Double(rayon) else { return Path(ellipseIn: rect) }
+        let angle: Double = acos(Double(rayon) / distance)
 
         var trace = Path()
         // On parcourt le grand arc, celui qui passe par le haut, puis on

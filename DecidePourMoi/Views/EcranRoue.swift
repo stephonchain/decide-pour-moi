@@ -209,7 +209,7 @@ struct EcranRoue: View {
         DragGesture(minimumDistance: 6)
             .onChanged { valeur in
                 guard !controleur.enRotation, roue.peutTourner else { return }
-                let nouvel = atan2(valeur.location.y - centre.y, valeur.location.x - centre.x)
+                let nouvel = Self.angleDuPoint(valeur.location, centre: centre)
                 if let precedent = angleDuDoigt {
                     var delta = nouvel - precedent
                     if delta > .pi { delta -= SpinEngine.tour }
@@ -227,14 +227,22 @@ struct EcranRoue: View {
             }
     }
 
+    /// Angle du doigt vu du centre de la roue, en radians, sens horaire.
+    /// Le calcul reste en `Double` de bout en bout pour éviter toute ambiguïté
+    /// entre les surcharges `Double` et `CGFloat` des fonctions trigonométriques.
+    private static func angleDuPoint(_ point: CGPoint, centre: CGPoint) -> Double {
+        atan2(Double(point.y - centre.y), Double(point.x - centre.x))
+    }
+
     /// Vitesse angulaire du geste, en rad/s : c'est la composante tangentielle
     /// de la vitesse du doigt, ramenée à la distance au centre.
     private func vitesseAngulaire(valeur: DragGesture.Value, centre: CGPoint) -> Double {
-        let rayonX = valeur.location.x - centre.x
-        let rayonY = valeur.location.y - centre.y
-        let distance = sqrt(rayonX * rayonX + rayonY * rayonY)
+        let rayonX = Double(valeur.location.x - centre.x)
+        let rayonY = Double(valeur.location.y - centre.y)
+        let distance = (rayonX * rayonX + rayonY * rayonY).squareRoot()
         guard distance > 24 else { return 0 }
-        let produitVectoriel = rayonX * valeur.velocity.height - rayonY * valeur.velocity.width
+        let produitVectoriel = rayonX * Double(valeur.velocity.height)
+            - rayonY * Double(valeur.velocity.width)
         return produitVectoriel / (distance * distance)
     }
 

@@ -38,17 +38,22 @@ struct Confettis: View {
         let vie = temps - particule.retard
         guard vie > 0 else { return }
 
+        // Toute la physique se calcule en `Double` : mélanger `Double` et
+        // `CGFloat` dans une même expression rend les appels ambigus.
+        let largeur = Double(taille.width)
+        let hauteur = Double(taille.height)
+
         // Chute avec gravité, dérive horizontale et léger balancement.
-        let x = particule.xDepart * taille.width
-            + particule.deriveX * vie * taille.width * 0.12
+        let x: Double = particule.xDepart * largeur
+            + particule.deriveX * vie * largeur * 0.12
             + sin(vie * particule.frequence + particule.phase) * 14
-        let y = -40 + particule.vitesseY * vie * taille.height * 0.30
+        let y: Double = -40 + particule.vitesseY * vie * hauteur * 0.30
             + 0.5 * 340 * vie * vie
-        guard y < taille.height + 40 else { return }
+        guard y < hauteur + 40 else { return }
 
         let opacite = max(0, min(1, (Self.duree - temps) / 0.9))
         var local = dessin
-        local.translateBy(x: x, y: y)
+        local.translateBy(x: CGFloat(x), y: CGFloat(y))
         local.rotate(by: .radians(particule.rotation + vie * particule.vitesseRotation))
         local.opacity = opacite
         local.fill(
