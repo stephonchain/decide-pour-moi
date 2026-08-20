@@ -13,6 +13,11 @@ final class AchatsStoreKit {
     private(set) var produits: [OffrePremium.Sorte: Product] = [:]
     private(set) var estPremium = false
 
+    /// Prévenu à chaque changement de droits, y compris ceux qui n'ont pas
+    /// été déclenchés depuis le paywall : approbation parentale, achat fait
+    /// sur un autre appareil, remboursement, renouvellement.
+    var surChangementDEtat: (() -> Void)?
+
     private var veille: Task<Void, Never>?
 
     /// Démarre l'écoute des transactions. À appeler une fois.
@@ -89,7 +94,9 @@ final class AchatsStoreKit {
             else { continue }
             actif = true
         }
+        guard actif != estPremium else { return }
         estPremium = actif
+        surChangementDEtat?()
     }
 
     private static func verifier(_ resultat: VerificationResult<Transaction>) throws -> Transaction {

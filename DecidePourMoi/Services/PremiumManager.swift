@@ -71,6 +71,10 @@ final class PremiumManager {
             }
         } else {
             source = .storeKit
+            storeKit.surChangementDEtat = { [weak self] in
+                guard let self else { return }
+                self.estPremium = self.storeKit.estPremium
+            }
             storeKit.demarrer()
         }
 
