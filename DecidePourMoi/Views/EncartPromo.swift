@@ -24,7 +24,7 @@ struct EncartPromo: View {
             return
         }
         if app == nil {
-            app = CataloguePromo.shared.appAMettreEnAvant(en: Reglages.promoDerniereApp)
+            app = CataloguePromo.shared.appAMettreEnAvant(evitant: Reglages.promoDerniereApp)
             Reglages.promoDerniereApp = app?.id
         }
         visible = app != nil

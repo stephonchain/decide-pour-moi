@@ -36,7 +36,7 @@ final class CataloguePromo {
 
     /// Tire l'app à mettre en avant : rotation pondérée, en évitant de
     /// remontrer celle de la dernière fois quand il y a le choix.
-    func appAMettreEnAvant(en evitant identifiantPrecedent: String?) -> AppPromue? {
+    func appAMettreEnAvant(evitant identifiantPrecedent: String?) -> AppPromue? {
         guard !apps.isEmpty else { return nil }
         var candidates = apps
         if candidates.count > 1, let identifiantPrecedent {

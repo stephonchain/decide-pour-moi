@@ -35,7 +35,7 @@ enum RouesParDefaut {
             ),
             (
                 String(localized: "Chiffres 1 à 10"),
-                (1...10).map(String.init),
+                (1...10).map { String($0) },
                 1
             ),
             (

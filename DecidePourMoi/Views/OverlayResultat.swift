@@ -52,7 +52,7 @@ struct OverlayResultat: View {
 
                 VStack(spacing: 12) {
                     Button(action: relancer) {
-                        Label("Relancer", systemImage: "arrow.trianglehead.clockwise")
+                        Label("Relancer", systemImage: "arrow.clockwise")
                             .boutonPrincipal()
                     }
                     .disabled(!roue.peutTourner)

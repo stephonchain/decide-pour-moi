@@ -30,7 +30,7 @@ enum ModeTirage: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var symbole: String {
         switch self {
-        case .avecRemise: "arrow.trianglehead.2.clockwise.rotate.90"
+        case .avecRemise: "arrow.triangle.2.circlepath"
         case .sansRemise: "minus.circle"
         case .ordreDePassage: "list.number"
         }
