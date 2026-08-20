@@ -1,101 +1,102 @@
 {
-  "identifier" : "DECIDEPOURMOI",
-  "nonRenewingSubscriptions" : [],
-  "products" : [
+  "identifier": "DECIDEPOURMOI",
+  "nonRenewingSubscriptions": [],
+  "products": [
     {
-      "displayPrice" : "9.99",
-      "familyShareable" : false,
-      "internalID" : "A1000001",
-      "localizations" : [
+      "displayPrice": "9.99",
+      "familyShareable": false,
+      "internalID": "A1000001",
+      "localizations": [
         {
-          "description" : "Toutes les fonctions, une fois pour toutes.",
-          "displayName" : "Décide pour moi Pro — À vie",
-          "locale" : "fr_FR"
+          "description": "Toutes les fonctions, une fois pour toutes.",
+          "displayName": "Décide pour moi Pro — À vie",
+          "locale": "fr_FR"
         },
         {
-          "description" : "Every feature, once and for all.",
-          "displayName" : "Decide for Me Pro — Lifetime",
-          "locale" : "en_US"
+          "description": "Every feature, once and for all.",
+          "displayName": "Decide for Me Pro — Lifetime",
+          "locale": "en_US"
         }
       ],
-      "productID" : "dpm_premium_lifetime",
-      "referenceName" : "Lifetime",
-      "type" : "NonConsumable"
+      "productID": "dpm_premium_lifetime",
+      "referenceName": "Lifetime",
+      "type": "NonConsumable"
     }
   ],
-  "settings" : {
-    "_applicationInternalID" : "6700000001",
-    "_developerTeamID" : "",
-    "_lastSynchronizedDate" : 0,
-    "_locale" : "fr_FR",
-    "_storefront" : "FRA"
+  "settings": {
+    "_applicationInternalID": "6700000001",
+    "_developerTeamID": "",
+    "_lastSynchronizedDate": 0,
+    "_locale": "fr_FR",
+    "_storefront": "FRA"
   },
-  "subscriptionGroups" : [
+  "subscriptionGroups": [
     {
-      "id" : "B1000001",
-      "localizations" : [],
-      "name" : "Premium",
-      "subscriptions" : [
+      "id": "B1000001",
+      "localizations": [],
+      "name": "Premium",
+      "subscriptions": [
         {
-          "adHocOffers" : [],
-          "codeOffers" : [],
-          "displayPrice" : "3.99",
-          "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "C1000001",
-          "introductoryOffer" : {
-            "internalID" : "D1000001",
-            "paymentMode" : "free",
-            "subscriptionPeriod" : "P3D"
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "3.99",
+          "familyShareable": false,
+          "groupNumber": 1,
+          "internalID": "C1000001",
+          "introductoryOffer": {
+            "internalID": "D1000001",
+            "paymentMode": "free",
+            "subscriptionPeriod": "P3D",
+            "numberOfPeriods": 1
           },
-          "localizations" : [
+          "localizations": [
             {
-              "description" : "Toutes les fonctions, chaque mois.",
-              "displayName" : "Décide pour moi Pro — Mensuel",
-              "locale" : "fr_FR"
+              "description": "Toutes les fonctions, chaque mois.",
+              "displayName": "Décide pour moi Pro — Mensuel",
+              "locale": "fr_FR"
             },
             {
-              "description" : "Every feature, every month.",
-              "displayName" : "Decide for Me Pro — Monthly",
-              "locale" : "en_US"
+              "description": "Every feature, every month.",
+              "displayName": "Decide for Me Pro — Monthly",
+              "locale": "en_US"
             }
           ],
-          "productID" : "dpm_premium_monthly",
-          "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Monthly",
-          "subscriptionGroupID" : "B1000001",
-          "type" : "RecurringSubscription"
+          "productID": "dpm_premium_monthly",
+          "recurringSubscriptionPeriod": "P1M",
+          "referenceName": "Monthly",
+          "subscriptionGroupID": "B1000001",
+          "type": "RecurringSubscription"
         },
         {
-          "adHocOffers" : [],
-          "codeOffers" : [],
-          "displayPrice" : "1.99",
-          "familyShareable" : false,
-          "groupNumber" : 2,
-          "internalID" : "C1000002",
-          "localizations" : [
+          "adHocOffers": [],
+          "codeOffers": [],
+          "displayPrice": "1.99",
+          "familyShareable": false,
+          "groupNumber": 2,
+          "internalID": "C1000002",
+          "localizations": [
             {
-              "description" : "Toutes les fonctions, à la semaine.",
-              "displayName" : "Décide pour moi Pro — Hebdomadaire",
-              "locale" : "fr_FR"
+              "description": "Toutes les fonctions, à la semaine.",
+              "displayName": "Décide pour moi Pro — Hebdomadaire",
+              "locale": "fr_FR"
             },
             {
-              "description" : "Every feature, weekly.",
-              "displayName" : "Decide for Me Pro — Weekly",
-              "locale" : "en_US"
+              "description": "Every feature, weekly.",
+              "displayName": "Decide for Me Pro — Weekly",
+              "locale": "en_US"
             }
           ],
-          "productID" : "dpm_premium_weekly",
-          "recurringSubscriptionPeriod" : "P1W",
-          "referenceName" : "Weekly",
-          "subscriptionGroupID" : "B1000001",
-          "type" : "RecurringSubscription"
+          "productID": "dpm_premium_weekly",
+          "recurringSubscriptionPeriod": "P1W",
+          "referenceName": "Weekly",
+          "subscriptionGroupID": "B1000001",
+          "type": "RecurringSubscription"
         }
       ]
     }
   ],
-  "version" : {
-    "major" : 4,
-    "minor" : 0
+  "version": {
+    "major": 4,
+    "minor": 0
   }
 }
