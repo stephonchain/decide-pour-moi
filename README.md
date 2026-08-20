@@ -98,7 +98,11 @@ avec 3 jours d'essai, lifetime 9,99 €).
   création de nouvelles roues passe sous la limite gratuite.
 
 En build DEBUG, un interrupteur « Simuler premium » dans les réglages permet
-de tester le gating sans compte RevenueCat.
+de tester le gating sans compte RevenueCat. Pour tester les achats eux-mêmes,
+le schéma pointe sur `DecidePourMoi.storekit` : prix réels, achats
+instantanés, aucun compte requis. La marche à suivre complète — App Store
+Connect, RevenueCat, sandbox — est dans
+[`docs/achats-configuration.md`](docs/achats-configuration.md).
 
 ## À renseigner avant publication
 

@@ -1,0 +1,163 @@
+{
+  "identifier" : "F0E1D2C3-0001-4000-9000-DEC1DE000001",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "9.99",
+      "familyShareable" : false,
+      "internalID" : "F0E1D2C3-0002-4000-9000-DEC1DE000002",
+      "localizations" : [
+        {
+          "description" : "Tout Décide pour moi, pour toujours.",
+          "displayName" : "Premium à vie",
+          "locale" : "fr_FR"
+        },
+        {
+          "description" : "All of Decide for Me, forever.",
+          "displayName" : "Lifetime Premium",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "dpm_premium_lifetime",
+      "referenceName" : "Premium lifetime",
+      "type" : "NonConsumable"
+    }
+  ],
+  "settings" : {
+    "_failTransactionsEnabled" : false,
+    "_locale" : "fr_FR",
+    "_storefront" : "FRA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "F0E1D2C3-0003-4000-9000-DEC1DE000003",
+      "localizations" : [
+        {
+          "description" : "Tout Décide pour moi",
+          "displayName" : "Premium",
+          "locale" : "fr_FR"
+        }
+      ],
+      "name" : "Premium",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "3.99",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "F0E1D2C3-0004-4000-9000-DEC1DE000004",
+          "introductoryOffer" : {
+            "internalID" : "F0E1D2C3-0005-4000-9000-DEC1DE000005",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
+          "localizations" : [
+            {
+              "description" : "Tout Décide pour moi, chaque mois.",
+              "displayName" : "Premium mensuel",
+              "locale" : "fr_FR"
+            },
+            {
+              "description" : "All of Decide for Me, monthly.",
+              "displayName" : "Monthly Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "dpm_premium_monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Premium mensuel",
+          "subscriptionGroupID" : "F0E1D2C3-0003-4000-9000-DEC1DE000003",
+          "type" : "RecurringSubscription"
+        },
+        {
+          "adHocOffers" : [
+
+          ],
+          "codeOffers" : [
+
+          ],
+          "displayPrice" : "1.99",
+          "familyShareable" : false,
+          "groupNumber" : 2,
+          "internalID" : "F0E1D2C3-0006-4000-9000-DEC1DE000006",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Tout Décide pour moi, chaque semaine.",
+              "displayName" : "Premium hebdo",
+              "locale" : "fr_FR"
+            },
+            {
+              "description" : "All of Decide for Me, weekly.",
+              "displayName" : "Weekly Premium",
+              "locale" : "en_US"
+            }
+          ],
+          "productID" : "dpm_premium_weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Premium hebdo",
+          "subscriptionGroupID" : "F0E1D2C3-0003-4000-9000-DEC1DE000003",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

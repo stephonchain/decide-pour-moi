@@ -101,6 +101,7 @@ struct PaywallView: View {
         .interactiveDismissDisabled(achatEnCours)
         .task {
             await premium.chargerOffre()
+            recalerLaSelection()
             try? await Task.sleep(for: .seconds(2))
             withAnimation(.easeIn(duration: 0.4)) { croixVisible = true }
         }
@@ -139,28 +140,37 @@ struct PaywallView: View {
 
     @ViewBuilder
     private var offres: some View {
-        if premium.offre != nil {
+        if !offresDisponibles.isEmpty {
             VStack(spacing: 10) {
-                CarteOffre(
-                    choisie: selection == .mensuel,
-                    badge: premium.essaiDisponible ? tr("3 JOURS GRATUITS") : nil,
-                    titre: tr("Mensuel"),
-                    detail: libelleMensuel
-                ) { choisir(.mensuel) }
+                // Seules les offres réellement présentes dans l'offering
+                // s'affichent : pendant la configuration RevenueCat, une
+                // offre manquante ne doit pas produire une carte vide.
+                if offresDisponibles.contains(.mensuel) {
+                    CarteOffre(
+                        choisie: selection == .mensuel,
+                        badge: premium.essaiDisponible ? tr("3 JOURS GRATUITS") : nil,
+                        titre: tr("Mensuel"),
+                        detail: libelleMensuel
+                    ) { choisir(.mensuel) }
+                }
 
-                CarteOffre(
-                    choisie: selection == .aVie,
-                    badge: tr("MEILLEURE OFFRE"),
-                    titre: tr("À vie"),
-                    detail: libelleAVie
-                ) { choisir(.aVie) }
+                if offresDisponibles.contains(.aVie) {
+                    CarteOffre(
+                        choisie: selection == .aVie,
+                        badge: tr("MEILLEURE OFFRE"),
+                        titre: tr("À vie"),
+                        detail: libelleAVie
+                    ) { choisir(.aVie) }
+                }
 
-                CarteOffre(
-                    choisie: selection == .hebdo,
-                    badge: nil,
-                    titre: tr("Hebdomadaire"),
-                    detail: libelleHebdo
-                ) { choisir(.hebdo) }
+                if offresDisponibles.contains(.hebdo) {
+                    CarteOffre(
+                        choisie: selection == .hebdo,
+                        badge: nil,
+                        titre: tr("Hebdomadaire"),
+                        detail: libelleHebdo
+                    ) { choisir(.hebdo) }
+                }
             }
         } else {
             VStack(spacing: 12) {
@@ -267,11 +277,26 @@ struct PaywallView: View {
     // MARK: Libellés dynamiques (jamais de prix en dur : ils viennent du store)
 
     private var packageChoisi: Package? {
-        switch selection {
+        package(pour: selection)
+    }
+
+    private func package(pour choix: ChoixOffre) -> Package? {
+        switch choix {
         case .hebdo: premium.packageHebdo
         case .mensuel: premium.packageMensuel
         case .aVie: premium.packageAVie
         }
+    }
+
+    /// Offres présentes dans l'offering, dans l'ordre d'affichage.
+    private var offresDisponibles: [ChoixOffre] {
+        [.mensuel, .aVie, .hebdo].filter { package(pour: $0) != nil }
+    }
+
+    /// Garde la sélection sur une offre qui existe vraiment.
+    private func recalerLaSelection() {
+        guard !offresDisponibles.isEmpty, !offresDisponibles.contains(selection) else { return }
+        selection = offresDisponibles[0]
     }
 
     private var libelleMensuel: String {
