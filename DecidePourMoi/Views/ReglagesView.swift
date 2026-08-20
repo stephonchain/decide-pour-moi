@@ -166,7 +166,11 @@ struct ReglagesView: View {
                 #if DEBUG
                 Section {
                     Toggle(isOn: $debugPremium) {
-                        Label(verbatim: "Simuler premium", systemImage: "wrench.and.screwdriver")
+                        Label {
+                            Text(verbatim: "Simuler premium")
+                        } icon: {
+                            Image(systemName: "wrench.and.screwdriver")
+                        }
                     }
                     .listRowBackground(Fond.carte)
                 } header: {
