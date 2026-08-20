@@ -215,3 +215,44 @@ configure qu'une fois au lancement.
 
 La ligne « Source active » juste en dessous indique laquelle est réellement
 en service, ce qui évite de chercher longtemps.
+
+
+---
+
+## La capture d'écran de revue : 640 × 920
+
+Le champ « Capture d'écran de revue » d'un achat intégré n'a rien à voir avec
+les captures marketing de la fiche App Store. Il n'accepte pas les tailles
+d'écran iPhone : une capture prise sur l'appareil ou dans le simulateur est
+refusée telle quelle.
+
+La taille qui passe est **640 × 920 pixels**, en `.png`, `.jpg` ou `.jpeg`.
+
+Cette capture n'est vue que par l'équipe de revue d'Apple, jamais par un
+utilisateur. Elle doit simplement montrer l'écran où l'achat est proposé,
+prix et mentions compris — le paywall convient parfaitement, et la même
+image sert pour les trois produits.
+
+### Convertir une capture iPhone
+
+Le rapport de forme d'un iPhone n'est pas celui du 640 × 920 : redimensionner
+de force déformerait l'image. On la met donc à l'échelle puis on complète sur
+les côtés avec le fond de l'app, ce qui garde l'écran entier, mentions
+légales comprises.
+
+```bash
+# 1. Mise à l'échelle : le plus grand côté passe à 920 px
+sips -Z 920 capture.png --out /tmp/etape1.png
+
+# 2. Complément latéral jusqu'à 640 × 920, dans l'indigo de l'app
+sips -p 920 640 --padColor 1E1E3C /tmp/etape1.png --out /tmp/etape2.png
+
+# 3. Passage en JPEG : supprime toute couche alpha, souvent en cause
+sips -s format jpeg -s formatOptions 90 /tmp/etape2.png --out paywall-revue.jpg
+
+# 4. Contrôle
+sips -g pixelWidth -g pixelHeight paywall-revue.jpg
+```
+
+`sips` est livré avec macOS, rien à installer. La dernière commande doit
+afficher exactement 640 et 920.
