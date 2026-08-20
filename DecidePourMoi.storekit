@@ -41,7 +41,7 @@
           "codeOffers" : [],
           "displayPrice" : "3.99",
           "familyShareable" : false,
-          "groupNumber" : 2,
+          "groupNumber" : 1,
           "internalID" : "C1000001",
           "introductoryOffer" : {
             "internalID" : "D1000001",
@@ -69,30 +69,25 @@
         {
           "adHocOffers" : [],
           "codeOffers" : [],
-          "displayPrice" : "29.99",
+          "displayPrice" : "1.99",
           "familyShareable" : false,
-          "groupNumber" : 1,
+          "groupNumber" : 2,
           "internalID" : "C1000002",
-          "introductoryOffer" : {
-            "internalID" : "D1000002",
-            "paymentMode" : "free",
-            "subscriptionPeriod" : "P3D"
-          },
           "localizations" : [
             {
-              "description" : "Toutes les fonctions, toute l'année.",
-              "displayName" : "Décide pour moi Pro — Annuel",
+              "description" : "Toutes les fonctions, à la semaine.",
+              "displayName" : "Décide pour moi Pro — Hebdomadaire",
               "locale" : "fr_FR"
             },
             {
-              "description" : "Every feature, all year.",
-              "displayName" : "Decide for Me Pro — Yearly",
+              "description" : "Every feature, weekly.",
+              "displayName" : "Decide for Me Pro — Weekly",
               "locale" : "en_US"
             }
           ],
-          "productID" : "yearly",
-          "recurringSubscriptionPeriod" : "P1Y",
-          "referenceName" : "Yearly",
+          "productID" : "weekly",
+          "recurringSubscriptionPeriod" : "P1W",
+          "referenceName" : "Weekly",
           "subscriptionGroupID" : "B1000001",
           "type" : "RecurringSubscription"
         }

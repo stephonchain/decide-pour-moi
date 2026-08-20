@@ -97,7 +97,6 @@ final class PremiumManager {
                     return OffrePremium(
                         sorte: sorte,
                         prixAffiche: produit.localizedPriceString,
-                        prix: produit.price,
                         aUnEssai: produit.introductoryDiscount != nil
                     )
                 }
@@ -170,12 +169,12 @@ final class PremiumManager {
         #endif
     }
 
-    /// Les accès `monthly`, `annual` et `lifetime` n'existent que si les
+    /// Les accès `monthly`, `weekly` et `lifetime` n'existent que si les
     /// packages portent les identifiants standards de RevenueCat.
     private func packageRevenueCat(_ sorte: OffrePremium.Sorte) -> Package? {
         switch sorte {
         case .mensuel: offreRevenueCat?.monthly
-        case .annuel: offreRevenueCat?.annual
+        case .hebdo: offreRevenueCat?.weekly
         case .aVie: offreRevenueCat?.lifetime
         }
     }

@@ -40,9 +40,9 @@ D'abord le groupe d'abonnements, nommé `Premium`, puis dedans :
 
 | Produit | Type | ID EXACT | Prix | Rang |
 |---|---|---|---|---|
-| Premium mensuel | Abonnement auto-renouvelable | `monthly` | 3,99 € | 2 |
-| Premium annuel | Abonnement auto-renouvelable | `yearly` | à décider | 1 |
-| Premium à vie | Achat non consommable | `lifetime` | à décider | — |
+| Premium mensuel | Abonnement auto-renouvelable | `monthly` | 3,99 € | 1 |
+| Premium hebdo | Abonnement auto-renouvelable | `weekly` | 1,99 € | 2 |
+| Premium à vie | Achat non consommable | `lifetime` | 9,99 € | — |
 
 Les identifiants doivent être **exactement** ceux-là : ils sont repris dans
 `DecidePourMoi.storekit` et devront correspondre à RevenueCat.
@@ -66,13 +66,13 @@ bundle ID `com.stephonchain.decidepourmoi`.
    et y ajouter trois packages.
 
 **Attention aux identifiants de packages.** Le code lit `offering.monthly`,
-`offering.annual` et `offering.lifetime`, qui ne fonctionnent qu'avec les
+`offering.weekly` et `offering.lifetime`, qui ne fonctionnent qu'avec les
 types standards de RevenueCat :
 
 | Package | Identifiant à choisir | Produit rattaché |
 |---|---|---|
 | Monthly | `$rc_monthly` | `monthly` |
-| Annual | `$rc_annual` | `yearly` |
+| Weekly | `$rc_weekly` | `weekly` |
 | Lifetime | `$rc_lifetime` | `lifetime` |
 
 Avec un identifiant personnalisé, la carte correspondante ne s'affichera pas.
@@ -157,29 +157,17 @@ fichier StoreKit local est encore sélectionné dans le schéma.
 
 ---
 
-## L'échelle de prix est incohérente en l'état
+## L'échelle de prix
 
-Le document de monétisation fixait l'offre à vie à 9,99 €, dans un modèle où
-elle n'affrontait qu'un hebdomadaire et un mensuel : « moins de trois mois
-d'abonnement » en faisait une ancre de valeur redoutable.
+Le modèle est celui du document de monétisation : mensuel 3,99 € avec trois
+jours d'essai, hebdomadaire 1,99 €, à vie 9,99 €.
 
-L'arrivée de l'annuel casse ce raisonnement. À 9,99 € l'offre à vie est moins
-chère que n'importe quel annuel plausible : personne ne s'abonnera à l'année,
-et le revenu récurrent — le seul qui compose dans le temps — disparaît.
-
-Trois sorties possibles :
-
-1. **Monter l'offre à vie** à 39,99 € ou 49,99 €, au-dessus de l'annuel. Elle
-   redevient ce qu'elle doit être : le choix de qui refuse l'abonnement, pas
-   le choix par défaut.
-2. **Retirer l'annuel** et revenir au modèle du document, où l'offre à vie à
-   9,99 € joue son rôle d'ancre face au mensuel.
-3. **Retirer l'offre à vie** et garder mensuel + annuel, le schéma le plus
-   courant, qui maximise le récurrent.
-
-Le fichier `DecidePourMoi.storekit` porte pour l'instant 3,99 € / 29,99 € /
-9,99 €, uniquement pour que les trois cartes s'affichent en test. Ces prix
-n'ont aucun effet en production : seuls comptent ceux d'App Store Connect.
+L'offre à vie tient son rôle d'ancre de valeur parce qu'elle coûte moins de
+trois mois d'abonnement. L'hebdomadaire, lui, n'est pas là pour convertir :
+à 1,99 € la semaine il revient à 103 € l'an, ce qui rend les deux autres
+formules évidentes. C'est un choix assumé, à surveiller dans les avis — si
+l'hebdomadaire génère du ressentiment sans conversions, il se retire sans
+toucher au reste du funnel.
 
 ## Le Test Store de RevenueCat
 

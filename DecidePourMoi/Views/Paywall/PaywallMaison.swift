@@ -173,28 +173,15 @@ struct PaywallMaison: View {
         }
     }
 
-    /// Le badge d'essai suit le produit ; l'annuel affiche son économie
-    /// réelle face au mensuel, et « meilleure offre » revient à l'achat
-    /// unique, notre ancre de valeur.
+    /// Le badge d'essai suit le produit ; « meilleure offre » revient à
+    /// l'achat unique, notre ancre de valeur. L'hebdomadaire reste sobre :
+    /// son rôle est de faire paraître les deux autres évidentes.
     private func badge(pour offre: OffrePremium) -> String? {
         switch offre.sorte {
-        case .mensuel:
-            return offre.aUnEssai ? tr("3 JOURS GRATUITS") : nil
-        case .annuel:
-            guard let economie = offre.economieFaceAuMensuel(offreMensuelle) else {
-                return offre.aUnEssai ? tr("3 JOURS GRATUITS") : nil
-            }
-            // Le pourcentage est assemblé à part : un « % » collé à un
-            // spécificateur de format dans une chaîne traduite est ambigu.
-            let pourcentage = "\(economie)\u{202F}%"
-            return tr("ÉCONOMISEZ \(pourcentage)")
-        case .aVie:
-            return tr("MEILLEURE OFFRE")
+        case .mensuel: offre.aUnEssai ? tr("3 JOURS GRATUITS") : nil
+        case .aVie: tr("MEILLEURE OFFRE")
+        case .hebdo: nil
         }
-    }
-
-    private var offreMensuelle: OffrePremium? {
-        premium.offres.first { $0.sorte == .mensuel }
     }
 
     private var boutonPrincipal: some View {
