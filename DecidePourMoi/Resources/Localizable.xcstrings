@@ -35,6 +35,40 @@
         }
       }
     },
+    "%@/an": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/year"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/an"
+          }
+        }
+      }
+    },
+    "%@/an après l'essai": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/year after the trial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/an après l'essai"
+          }
+        }
+      }
+    },
     "%@/mois": {
       "extractionState": "manual",
       "localizations": {
@@ -65,23 +99,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@/mois après l'essai"
-          }
-        }
-      }
-    },
-    "%@/semaine": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@/week"
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@/semaine"
           }
         }
       }
@@ -171,6 +188,23 @@
         }
       }
     },
+    "Abonnement de %@ par an, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per year subscription, automatically renewed. Cancel anytime in your App Store account settings."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnement de %@ par an, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store."
+          }
+        }
+      }
+    },
     "Abonnement de %@ par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
       "extractionState": "manual",
       "localizations": {
@@ -184,23 +218,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abonnement de %@ par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store."
-          }
-        }
-      }
-    },
-    "Abonnement de %@ par semaine, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@ per week subscription, automatically renewed. Cancel anytime in your App Store account settings."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Abonnement de %@ par semaine, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store."
           }
         }
       }
@@ -239,6 +256,23 @@
         }
       }
     },
+    "Annuel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yearly"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuel"
+          }
+        }
+      }
+    },
     "Annuler": {
       "extractionState": "manual",
       "localizations": {
@@ -252,6 +286,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Annuler"
+          }
+        }
+      }
+    },
+    "Après 3 jours d'essai gratuit, abonnement de %@ par an, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After a 3-day free trial, %@ per year subscription, automatically renewed. Cancel anytime in your App Store account settings."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après 3 jours d'essai gratuit, abonnement de %@ par an, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store."
           }
         }
       }
@@ -1497,19 +1548,19 @@
         }
       }
     },
-    "Hebdomadaire": {
+    "Gérer mon abonnement": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Weekly"
+            "value": "Manage my subscription"
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Hebdomadaire"
+            "value": "Gérer mon abonnement"
           }
         }
       }
@@ -4145,6 +4196,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "À vie"
+          }
+        }
+      }
+    },
+    "ÉCONOMISEZ %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "SAVE %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ÉCONOMISEZ %@"
           }
         }
       }

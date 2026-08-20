@@ -1,156 +1,99 @@
 {
-  "identifier" : "F0E1D2C3-0001-4000-9000-DEC1DE000001",
-  "nonRenewingSubscriptions" : [
-
-  ],
+  "identifier" : "DECIDEPOURMOI",
+  "nonRenewingSubscriptions" : [],
   "products" : [
     {
       "displayPrice" : "9.99",
       "familyShareable" : false,
-      "internalID" : "F0E1D2C3-0002-4000-9000-DEC1DE000002",
+      "internalID" : "A1000001",
       "localizations" : [
         {
-          "description" : "Tout Décide pour moi, pour toujours.",
-          "displayName" : "Premium à vie",
+          "description" : "Toutes les fonctions, une fois pour toutes.",
+          "displayName" : "Décide pour moi Pro — À vie",
           "locale" : "fr_FR"
         },
         {
-          "description" : "All of Decide for Me, forever.",
-          "displayName" : "Lifetime Premium",
+          "description" : "Every feature, once and for all.",
+          "displayName" : "Decide for Me Pro — Lifetime",
           "locale" : "en_US"
         }
       ],
-      "productID" : "dpm_premium_lifetime",
-      "referenceName" : "Premium lifetime",
+      "productID" : "lifetime",
+      "referenceName" : "Lifetime",
       "type" : "NonConsumable"
     }
   ],
   "settings" : {
-    "_failTransactionsEnabled" : false,
+    "_applicationInternalID" : "6700000001",
+    "_developerTeamID" : "",
+    "_lastSynchronizedDate" : 0,
     "_locale" : "fr_FR",
-    "_storefront" : "FRA",
-    "_storeKitErrors" : [
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "Load Products"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "Purchase"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "Verification"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "App Store Sync"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "Subscription Status"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "App Transaction"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "Manage Subscriptions Sheet"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "Refund Request Sheet"
-      },
-      {
-        "current" : null,
-        "enabled" : false,
-        "name" : "Offer Code Redeem Sheet"
-      }
-    ]
+    "_storefront" : "FRA"
   },
   "subscriptionGroups" : [
     {
-      "id" : "F0E1D2C3-0003-4000-9000-DEC1DE000003",
-      "localizations" : [
-        {
-          "description" : "Tout Décide pour moi",
-          "displayName" : "Premium",
-          "locale" : "fr_FR"
-        }
-      ],
+      "id" : "B1000001",
+      "localizations" : [],
       "name" : "Premium",
       "subscriptions" : [
         {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
+          "adHocOffers" : [],
+          "codeOffers" : [],
           "displayPrice" : "3.99",
           "familyShareable" : false,
-          "groupNumber" : 1,
-          "internalID" : "F0E1D2C3-0004-4000-9000-DEC1DE000004",
+          "groupNumber" : 2,
+          "internalID" : "C1000001",
           "introductoryOffer" : {
-            "internalID" : "F0E1D2C3-0005-4000-9000-DEC1DE000005",
+            "internalID" : "D1000001",
             "paymentMode" : "free",
             "subscriptionPeriod" : "P3D"
           },
           "localizations" : [
             {
-              "description" : "Tout Décide pour moi, chaque mois.",
-              "displayName" : "Premium mensuel",
+              "description" : "Toutes les fonctions, chaque mois.",
+              "displayName" : "Décide pour moi Pro — Mensuel",
               "locale" : "fr_FR"
             },
             {
-              "description" : "All of Decide for Me, monthly.",
-              "displayName" : "Monthly Premium",
+              "description" : "Every feature, every month.",
+              "displayName" : "Decide for Me Pro — Monthly",
               "locale" : "en_US"
             }
           ],
-          "productID" : "dpm_premium_monthly",
+          "productID" : "monthly",
           "recurringSubscriptionPeriod" : "P1M",
-          "referenceName" : "Premium mensuel",
-          "subscriptionGroupID" : "F0E1D2C3-0003-4000-9000-DEC1DE000003",
+          "referenceName" : "Monthly",
+          "subscriptionGroupID" : "B1000001",
           "type" : "RecurringSubscription"
         },
         {
-          "adHocOffers" : [
-
-          ],
-          "codeOffers" : [
-
-          ],
-          "displayPrice" : "1.99",
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "29.99",
           "familyShareable" : false,
-          "groupNumber" : 2,
-          "internalID" : "F0E1D2C3-0006-4000-9000-DEC1DE000006",
-          "introductoryOffer" : null,
+          "groupNumber" : 1,
+          "internalID" : "C1000002",
+          "introductoryOffer" : {
+            "internalID" : "D1000002",
+            "paymentMode" : "free",
+            "subscriptionPeriod" : "P3D"
+          },
           "localizations" : [
             {
-              "description" : "Tout Décide pour moi, chaque semaine.",
-              "displayName" : "Premium hebdo",
+              "description" : "Toutes les fonctions, toute l'année.",
+              "displayName" : "Décide pour moi Pro — Annuel",
               "locale" : "fr_FR"
             },
             {
-              "description" : "All of Decide for Me, weekly.",
-              "displayName" : "Weekly Premium",
+              "description" : "Every feature, all year.",
+              "displayName" : "Decide for Me Pro — Yearly",
               "locale" : "en_US"
             }
           ],
-          "productID" : "dpm_premium_weekly",
-          "recurringSubscriptionPeriod" : "P1W",
-          "referenceName" : "Premium hebdo",
-          "subscriptionGroupID" : "F0E1D2C3-0003-4000-9000-DEC1DE000003",
+          "productID" : "yearly",
+          "recurringSubscriptionPeriod" : "P1Y",
+          "referenceName" : "Yearly",
+          "subscriptionGroupID" : "B1000001",
           "type" : "RecurringSubscription"
         }
       ]

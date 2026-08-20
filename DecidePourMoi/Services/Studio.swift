@@ -15,17 +15,25 @@ enum Studio {
     /// paywall. À remplacer si le studio publie ses propres conditions.
     static let urlConditions = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
 
-    /// Clé API *publique* RevenueCat (App-specific, commence par "appl_").
-    /// À renseigner avant publication. Tant qu'elle ne l'est pas, l'app
-    /// fonctionne intégralement en gratuit et le paywall explique que les
-    /// achats sont momentanément indisponibles.
-    static let cleRevenueCat = "REMPLACER_PAR_LA_CLE_PUBLIQUE_REVENUECAT"
+    /// Clé API *publique* RevenueCat. Elle est conçue pour être embarquée
+    /// dans l'app — elle ne donne accès qu'aux opérations d'un client.
+    /// `test_…` cible le Test Store de RevenueCat, `appl_…` l'App Store réel :
+    /// c'est cette dernière qu'il faudra mettre avant publication.
+    static let cleRevenueCat = "test_zWemjqxYpBrGdZiONoJLedOaDtl"
 
-    /// Tant que la clé n'est pas renseignée, les achats passent par StoreKit
-    /// en direct : le paywall reste testable, seul le tableau de bord de
-    /// conversion manque.
+    /// Identifiant de l'entitlement dans le tableau de bord RevenueCat.
+    ///
+    /// Attention : c'est l'**identifiant**, pas le nom affiché. Les deux
+    /// coexistent dans le tableau de bord et une confusion entre eux se
+    /// traduit par un premium qui ne se déverrouille jamais. En build de
+    /// développement, `PremiumManager` journalise les identifiants réellement
+    /// reçus pour rendre l'écart visible immédiatement.
+    static let entitlementPremium = "Décide pour moi Pro"
+
+    /// Faux uniquement si la clé n'a pas été renseignée : les achats passent
+    /// alors par StoreKit en direct, ce qui garde le paywall testable.
     static var revenueCatConfigure: Bool {
-        cleRevenueCat.hasPrefix("appl_")
+        cleRevenueCat.hasPrefix("appl_") || cleRevenueCat.hasPrefix("test_")
     }
 
     static var versionAffichee: String {

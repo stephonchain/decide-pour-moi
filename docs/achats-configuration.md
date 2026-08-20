@@ -40,9 +40,9 @@ D'abord le groupe d'abonnements, nommé `Premium`, puis dedans :
 
 | Produit | Type | ID EXACT | Prix | Rang |
 |---|---|---|---|---|
-| Premium mensuel | Abonnement auto-renouvelable | `dpm_premium_monthly` | 3,99 € | 1 |
-| Premium hebdo | Abonnement auto-renouvelable | `dpm_premium_weekly` | 1,99 € | 2 |
-| Premium à vie | Achat non consommable | `dpm_premium_lifetime` | 9,99 € | — |
+| Premium mensuel | Abonnement auto-renouvelable | `monthly` | 3,99 € | 2 |
+| Premium annuel | Abonnement auto-renouvelable | `yearly` | à décider | 1 |
+| Premium à vie | Achat non consommable | `lifetime` | à décider | — |
 
 Les identifiants doivent être **exactement** ceux-là : ils sont repris dans
 `DecidePourMoi.storekit` et devront correspondre à RevenueCat.
@@ -66,14 +66,14 @@ bundle ID `com.stephonchain.decidepourmoi`.
    et y ajouter trois packages.
 
 **Attention aux identifiants de packages.** Le code lit `offering.monthly`,
-`offering.weekly` et `offering.lifetime`, qui ne fonctionnent qu'avec les
+`offering.annual` et `offering.lifetime`, qui ne fonctionnent qu'avec les
 types standards de RevenueCat :
 
 | Package | Identifiant à choisir | Produit rattaché |
 |---|---|---|
-| Monthly | `$rc_monthly` | `dpm_premium_monthly` |
-| Lifetime | `$rc_lifetime` | `dpm_premium_lifetime` |
-| Weekly | `$rc_weekly` | `dpm_premium_weekly` |
+| Monthly | `$rc_monthly` | `monthly` |
+| Annual | `$rc_annual` | `yearly` |
+| Lifetime | `$rc_lifetime` | `lifetime` |
 
 Avec un identifiant personnalisé, la carte correspondante ne s'affichera pas.
 Le paywall masque proprement toute offre absente, donc si une carte manque à
@@ -153,3 +153,44 @@ saisi dans Réglages → App Store au lieu de Réglages → Développeur.
 
 **Les achats sandbox ne remontent pas dans RevenueCat** — normal si le
 fichier StoreKit local est encore sélectionné dans le schéma.
+
+
+---
+
+## L'échelle de prix est incohérente en l'état
+
+Le document de monétisation fixait l'offre à vie à 9,99 €, dans un modèle où
+elle n'affrontait qu'un hebdomadaire et un mensuel : « moins de trois mois
+d'abonnement » en faisait une ancre de valeur redoutable.
+
+L'arrivée de l'annuel casse ce raisonnement. À 9,99 € l'offre à vie est moins
+chère que n'importe quel annuel plausible : personne ne s'abonnera à l'année,
+et le revenu récurrent — le seul qui compose dans le temps — disparaît.
+
+Trois sorties possibles :
+
+1. **Monter l'offre à vie** à 39,99 € ou 49,99 €, au-dessus de l'annuel. Elle
+   redevient ce qu'elle doit être : le choix de qui refuse l'abonnement, pas
+   le choix par défaut.
+2. **Retirer l'annuel** et revenir au modèle du document, où l'offre à vie à
+   9,99 € joue son rôle d'ancre face au mensuel.
+3. **Retirer l'offre à vie** et garder mensuel + annuel, le schéma le plus
+   courant, qui maximise le récurrent.
+
+Le fichier `DecidePourMoi.storekit` porte pour l'instant 3,99 € / 29,99 € /
+9,99 €, uniquement pour que les trois cartes s'affichent en test. Ces prix
+n'ont aucun effet en production : seuls comptent ceux d'App Store Connect.
+
+## Le Test Store de RevenueCat
+
+La clé configurée commence par `test_` : elle vise le Test Store de
+RevenueCat, qui simule les achats sans passer par Apple. Pratique pour
+vérifier le tableau de bord et le paywall distant, mais deux limites :
+
+- les achats n'ont aucune réalité côté App Store, donc rien ne valide la
+  configuration d'App Store Connect ;
+- il faudra impérativement basculer sur la clé `appl_…` du projet avant
+  toute soumission, sinon aucun achat réel ne fonctionnera.
+
+Le repli StoreKit reste donc utile : c'est lui qui teste la vraie chaîne
+Apple, en sandbox, avec les vrais reçus.

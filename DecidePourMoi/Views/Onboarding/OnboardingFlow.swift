@@ -130,7 +130,7 @@ struct OnboardingFlow: View {
             case 13: PageEngagement { avancer() }
             case 14: PageRecapitulatif { avancer() }
             default:
-                PaywallView(contexte: .onboarding) { terminer() }
+                PaywallAdapte(contexte: .onboarding) { terminer() }
             }
         }
         .id(page)

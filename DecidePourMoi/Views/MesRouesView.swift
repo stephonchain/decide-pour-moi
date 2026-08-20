@@ -83,7 +83,7 @@ struct MesRouesView: View {
             }
         }
         .sheet(item: $contextePaywall) { contexte in
-            PaywallView(contexte: contexte)
+            PaywallAdapte(contexte: contexte)
         }
         .sheet(item: $roueEnCreation) { roue in
             EditionRoueView(roue: roue, estUneCreation: true) { creee in

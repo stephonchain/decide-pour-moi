@@ -51,7 +51,7 @@ struct EditionRoueView: View {
         }
         .preferredColorScheme(.dark)
         .sheet(item: $contextePaywall) { contexte in
-            PaywallView(contexte: contexte)
+            PaywallAdapte(contexte: contexte)
         }
         .sheet(isPresented: $listeTexteAffichee) {
             ListeTexteView(texte: roue.optionsOrdonnees.map(\.label).joined(separator: "\n")) { lignes in

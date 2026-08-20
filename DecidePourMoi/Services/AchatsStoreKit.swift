@@ -53,6 +53,7 @@ final class AchatsStoreKit {
             return OffrePremium(
                 sorte: sorte,
                 prixAffiche: produit.displayPrice,
+                prix: produit.price,
                 aUnEssai: produit.subscription?.introductoryOffer != nil
             )
         }

@@ -19,8 +19,8 @@ final class PremiumManager {
 
     static let shared = PremiumManager()
 
-    /// Nom de l'entitlement dans le tableau de bord RevenueCat.
-    static let entitlement = "premium"
+    /// Identifiant de l'entitlement, défini dans `Studio`.
+    static var entitlement: String { Studio.entitlementPremium }
 
     enum Source: Equatable {
         case revenueCat
@@ -34,10 +34,15 @@ final class PremiumManager {
     /// Dernière erreur de chargement des offres, affichée au paywall.
     private(set) var erreurOffre: String?
 
-    private var offreRevenueCat: Offering?
+    /// Offering courant, nécessaire au paywall distant de RevenueCat.
+    private(set) var offreRevenueCat: Offering?
     private let storeKit = AchatsStoreKit()
 
     private init() {}
+
+    /// Vrai quand les outils RevenueCat — paywall distant, Customer Center —
+    /// sont utilisables.
+    var outilsRevenueCatDisponibles: Bool { source == .revenueCat && demarre }
 
     /// Accès courant, à passer aux vues.
     var acces: Acces {
@@ -92,6 +97,7 @@ final class PremiumManager {
                     return OffrePremium(
                         sorte: sorte,
                         prixAffiche: produit.localizedPriceString,
+                        prix: produit.price,
                         aUnEssai: produit.introductoryDiscount != nil
                     )
                 }
@@ -145,14 +151,31 @@ final class PremiumManager {
 
     private func appliquer(_ info: CustomerInfo) {
         estPremium = info.entitlements[Self.entitlement]?.isActive == true
+        journaliserLesEntitlements(info)
     }
 
-    /// Les accès `monthly`, `weekly` et `lifetime` n'existent que si les
+    /// Un identifiant d'entitlement mal orthographié ne produit aucune erreur :
+    /// simplement un premium qui ne se déverrouille jamais. On rend donc
+    /// l'écart visible dès le premier lancement en développement.
+    private func journaliserLesEntitlements(_ info: CustomerInfo) {
+        #if DEBUG
+        let actifs = info.entitlements.active.keys.sorted()
+        if !actifs.isEmpty, !actifs.contains(Self.entitlement) {
+            print("""
+            [RevenueCat] Entitlement « \(Self.entitlement) » introuvable.
+            Entitlements actifs reçus : \(actifs.joined(separator: ", ")).
+            Corrigez Studio.entitlementPremium avec l'identifiant exact.
+            """)
+        }
+        #endif
+    }
+
+    /// Les accès `monthly`, `annual` et `lifetime` n'existent que si les
     /// packages portent les identifiants standards de RevenueCat.
     private func packageRevenueCat(_ sorte: OffrePremium.Sorte) -> Package? {
         switch sorte {
         case .mensuel: offreRevenueCat?.monthly
-        case .hebdo: offreRevenueCat?.weekly
+        case .annuel: offreRevenueCat?.annual
         case .aVie: offreRevenueCat?.lifetime
         }
     }

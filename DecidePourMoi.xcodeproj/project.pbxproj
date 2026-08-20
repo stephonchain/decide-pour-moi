@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DEC1DEA00000000000000001 /* RevenueCat in Frameworks */ = {isa = PBXBuildFile; productRef = DEC1DEA00000000000000003 /* RevenueCat */; };
+		DEC1DEA00000000000000004 /* RevenueCatUI in Frameworks */ = {isa = PBXBuildFile; productRef = DEC1DEA00000000000000005 /* RevenueCatUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEC1DEA00000000000000001 /* RevenueCat in Frameworks */,
+				DEC1DEA00000000000000004 /* RevenueCatUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +90,7 @@
 			name = DecidePourMoi;
 			packageProductDependencies = (
 				DEC1DEA00000000000000003 /* RevenueCat */,
+				DEC1DEA00000000000000005 /* RevenueCatUI */,
 			);
 			productName = DecidePourMoi;
 			productReference = DEC1DE000000000000000004 /* DecidePourMoi.app */;
@@ -146,7 +149,7 @@
 			mainGroup = DEC1DE00000000000000000A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				DEC1DEA00000000000000002 /* XCRemoteSwiftPackageReference "purchases-ios" */,
+				DEC1DEA00000000000000002 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = DEC1DE00000000000000000B /* Products */;
@@ -424,9 +427,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DEC1DEA00000000000000002 /* XCRemoteSwiftPackageReference "purchases-ios" */ = {
+		DEC1DEA00000000000000002 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/RevenueCat/purchases-ios.git";
+			repositoryURL = "https://github.com/RevenueCat/purchases-ios-spm.git";
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 5.0.0;
@@ -437,8 +440,13 @@
 /* Begin XCSwiftPackageProductDependency section */
 		DEC1DEA00000000000000003 /* RevenueCat */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DEC1DEA00000000000000002 /* XCRemoteSwiftPackageReference "purchases-ios" */;
+			package = DEC1DEA00000000000000002 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
 			productName = RevenueCat;
+		};
+		DEC1DEA00000000000000005 /* RevenueCatUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEC1DEA00000000000000002 /* XCRemoteSwiftPackageReference "purchases-ios-spm" */;
+			productName = RevenueCatUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

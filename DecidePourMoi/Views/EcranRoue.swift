@@ -67,7 +67,7 @@ struct EcranRoue: View {
             HistoriqueView(roue: roue)
         }
         .sheet(item: $contextePaywall) { contextePaywall in
-            PaywallView(contexte: contextePaywall)
+            PaywallAdapte(contexte: contextePaywall)
         }
         .task {
             Haptiques.shared.preparer()

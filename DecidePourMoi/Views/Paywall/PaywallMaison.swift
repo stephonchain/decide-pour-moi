@@ -53,9 +53,14 @@ enum SousTitrePersonnalise {
     }
 }
 
-/// Le paywall. Une seule implémentation pour l'onboarding et tous les
-/// déclencheurs de l'app.
-struct PaywallView: View {
+/// Le paywall maison : une seule implémentation pour l'onboarding et tous
+/// les déclencheurs de l'app.
+///
+/// Il porte deux choses que le paywall distant de RevenueCat ne sait pas
+/// faire : un titre qui change selon l'écran d'où l'on vient, et une
+/// traduction pilotée par la langue choisie dans l'app plutôt que par celle
+/// du système.
+struct PaywallMaison: View {
 
     let contexte: ContextePaywall
     /// L'onboarding gère lui-même sa fermeture (dernier écran du flux).
@@ -168,14 +173,28 @@ struct PaywallView: View {
         }
     }
 
-    /// Le badge d'essai suit le produit ; « meilleure offre » revient à
-    /// l'achat unique, notre ancre de valeur.
+    /// Le badge d'essai suit le produit ; l'annuel affiche son économie
+    /// réelle face au mensuel, et « meilleure offre » revient à l'achat
+    /// unique, notre ancre de valeur.
     private func badge(pour offre: OffrePremium) -> String? {
         switch offre.sorte {
-        case .mensuel: offre.aUnEssai ? tr("3 JOURS GRATUITS") : nil
-        case .aVie: tr("MEILLEURE OFFRE")
-        case .hebdo: nil
+        case .mensuel:
+            return offre.aUnEssai ? tr("3 JOURS GRATUITS") : nil
+        case .annuel:
+            guard let economie = offre.economieFaceAuMensuel(offreMensuelle) else {
+                return offre.aUnEssai ? tr("3 JOURS GRATUITS") : nil
+            }
+            // Le pourcentage est assemblé à part : un « % » collé à un
+            // spécificateur de format dans une chaîne traduite est ambigu.
+            let pourcentage = "\(economie)\u{202F}%"
+            return tr("ÉCONOMISEZ \(pourcentage)")
+        case .aVie:
+            return tr("MEILLEURE OFFRE")
         }
+    }
+
+    private var offreMensuelle: OffrePremium? {
+        premium.offres.first { $0.sorte == .mensuel }
     }
 
     private var boutonPrincipal: some View {

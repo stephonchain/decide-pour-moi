@@ -10,6 +10,7 @@ struct ReglagesView: View {
     @State private var confidentialiteAffichee = false
     @State private var premium = PremiumManager.shared
     @State private var paywallAffiche = false
+    @State private var espaceClientAffiche = false
     @State private var onboardingRevisite = false
     @State private var messageRestauration: String? = nil
     #if DEBUG
@@ -33,6 +34,18 @@ struct ReglagesView: View {
                             }
                         }
                         .listRowBackground(Fond.carte)
+
+                        // Changement de formule, annulation, remboursement,
+                        // historique : RevenueCat sait tout faire ici, plutôt
+                        // que de renvoyer l'utilisateur dans les réglages iOS.
+                        if premium.outilsRevenueCatDisponibles {
+                            Button {
+                                espaceClientAffiche = true
+                            } label: {
+                                Label(tr("Gérer mon abonnement"), systemImage: "person.crop.circle")
+                            }
+                            .listRowBackground(Fond.carte)
+                        }
                     } else {
                         Button {
                             paywallAffiche = true
@@ -188,7 +201,10 @@ struct ReglagesView: View {
             ConfidentialiteView()
         }
         .sheet(isPresented: $paywallAffiche) {
-            PaywallView(contexte: .reglages)
+            PaywallAdapte(contexte: .reglages)
+        }
+        .sheet(isPresented: $espaceClientAffiche) {
+            EspaceClient()
         }
         .fullScreenCover(isPresented: $onboardingRevisite) {
             OnboardingFlow(estUneRevisite: true) {
