@@ -55,15 +55,15 @@ struct AucuneRoueView: View {
             Image(systemName: "circle.dashed")
                 .font(.system(size: 54))
                 .foregroundStyle(.white.opacity(0.8))
-            Text("Aucune roue")
+            Text(tr("Aucune roue"))
                 .font(.system(.title2, design: .rounded, weight: .bold))
                 .foregroundStyle(.white)
-            Text("Remettez les roues de départ pour recommencer.")
+            Text(tr("Remettez les roues de départ pour recommencer."))
                 .font(.system(.subheadline, design: .rounded))
                 .foregroundStyle(.white.opacity(0.6))
                 .multilineTextAlignment(.center)
             Button(action: restaurer) {
-                Label("Restaurer les roues de départ", systemImage: "arrow.counterclockwise")
+                Label(tr("Restaurer les roues de départ"), systemImage: "arrow.counterclockwise")
                     .boutonPrincipal()
             }
         }

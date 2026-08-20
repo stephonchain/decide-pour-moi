@@ -27,7 +27,7 @@ struct EditionRoueView: View {
                 FondApplication()
                 formulaire
             }
-            .navigationTitle(estUneCreation ? Text("Nouvelle roue") : Text("Modifier"))
+            .navigationTitle(estUneCreation ? Text(tr("Nouvelle roue")) : Text(tr("Modifier")))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Fond.sombre, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
@@ -35,11 +35,11 @@ struct EditionRoueView: View {
             .toolbar {
                 if estUneCreation {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button(String(localized: "Annuler")) { annuler() }
+                        Button(tr("Annuler")) { annuler() }
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(estUneCreation ? String(localized: "Créer") : String(localized: "Terminé")) {
+                    Button(estUneCreation ? tr("Créer") : tr("Terminé")) {
                         enregistrer()
                     }
                     .fontWeight(.semibold)
@@ -59,7 +59,7 @@ struct EditionRoueView: View {
     private var formulaire: some View {
         List {
             Section {
-                TextField(String(localized: "Titre de la roue"), text: $roue.titre)
+                TextField(tr("Titre de la roue"), text: $roue.titre)
                     .font(.system(.body, design: .rounded, weight: .semibold))
                     .listRowBackground(Fond.carte)
             }
@@ -75,7 +75,7 @@ struct EditionRoueView: View {
                 Button {
                     ajouterUneOption()
                 } label: {
-                    Label("Ajouter une option", systemImage: "plus.circle.fill")
+                    Label(tr("Ajouter une option"), systemImage: "plus.circle.fill")
                         .font(.system(.body, design: .rounded, weight: .semibold))
                 }
                 .listRowBackground(Fond.carte)
@@ -83,14 +83,14 @@ struct EditionRoueView: View {
                 Button {
                     listeTexteAffichee = true
                 } label: {
-                    Label("Coller ou modifier la liste", systemImage: "doc.on.clipboard")
+                    Label(tr("Coller ou modifier la liste"), systemImage: "doc.on.clipboard")
                         .font(.system(.body, design: .rounded))
                 }
                 .listRowBackground(Fond.carte)
             } header: {
-                Text("Options")
+                Text(tr("Options"))
             } footer: {
-                Text("Le poids multiplie la taille de la part **et** ses chances de sortir.")
+                Text(trRiche("Le poids multiplie la taille de la part **et** ses chances de sortir."))
             }
 
             Section {
@@ -120,14 +120,14 @@ struct EditionRoueView: View {
                     .listRowBackground(Fond.carte)
                 }
             } header: {
-                Text("Mode de tirage")
+                Text(tr("Mode de tirage"))
             }
 
             Section {
                 ChoixDePalette(paletteID: $roue.paletteID)
                     .listRowBackground(Fond.carte)
             } header: {
-                Text("Couleurs")
+                Text(tr("Couleurs"))
             }
         }
         .scrollContentBackground(.hidden)
@@ -170,7 +170,7 @@ struct EditionRoueView: View {
             option.label = option.label.trimmingCharacters(in: .whitespacesAndNewlines)
         }
         if roue.titre.trimmingCharacters(in: .whitespaces).isEmpty {
-            roue.titre = String(localized: "Nouvelle roue")
+            roue.titre = tr("Nouvelle roue")
         }
         roue.renumeroter()
         roue.modifieeLe = .now
@@ -196,12 +196,12 @@ struct LigneOption: View {
 
     var body: some View {
         HStack(spacing: 10) {
-            TextField(String(localized: "Option"), text: $option.label)
+            TextField(tr("Option"), text: $option.label)
                 .font(.system(.body, design: .rounded))
                 .submitLabel(.next)
 
             Menu {
-                Picker(String(localized: "Poids"), selection: $option.poids) {
+                Picker(tr("Poids"), selection: $option.poids) {
                     ForEach(1...3, id: \.self) { poids in
                         Text(verbatim: "×\(poids)").tag(poids)
                     }
@@ -216,7 +216,7 @@ struct LigneOption: View {
                         in: .capsule
                     )
             }
-            .accessibilityLabel(Text("Poids de l'option"))
+            .accessibilityLabel(Text(tr("Poids de l'option")))
         }
     }
 }

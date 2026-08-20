@@ -51,6 +51,23 @@ L'animation ne fait qu'aboutir à un angle déjà décidé : aucun biais n'est
 possible, et la pondération d'une option multiplie sa part angulaire **et** sa
 probabilité, jamais l'une sans l'autre.
 
+## Langue
+
+L'app se choisit en français ou en anglais depuis ses propres réglages, sans
+passer par ceux de l'iPhone : un téléphone en anglais peut très bien afficher
+l'app en français.
+
+Le mécanisme tient dans `DecidePourMoi/Services/Langues.swift`. Toutes les
+chaînes passent par `tr(_:)`, qui résout la clé dans le bundle de la langue
+choisie plutôt que dans celui du système ; `trRiche(_:)` fait la même chose en
+conservant le markdown. La racine applique la `Locale` correspondante — seule
+la langue est remplacée, la région de l'utilisateur reste la sienne — et se
+reconstruit à chaque changement, sans redémarrage.
+
+Ajouter une chaîne, c'est donc écrire `Text(tr("Mon texte"))` et non
+`Text("Mon texte")` : ce dernier suivrait la langue du système et ignorerait
+le réglage de l'app.
+
 ## Encart « nos autres apps »
 
 Le catalogue est un fichier embarqué, `DecidePourMoi/Resources/promo_apps.json` :

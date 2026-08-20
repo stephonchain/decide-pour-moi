@@ -7,40 +7,40 @@ enum RouesParDefaut {
 
     /// Titre de la roue affichée au tout premier lancement : la première
     /// expérience est un tirage, pas un formulaire.
-    static let titrePremiereRoue = String(localized: "Ce soir on mange…")
+    static let titrePremiereRoue = tr("Ce soir on mange…")
 
     static func creer(dans contexte: ModelContext) {
         let modeles: [(String, [String], Int)] = [
             (
                 titrePremiereRoue,
                 [
-                    String(localized: "Pizza"),
-                    String(localized: "Sushis"),
-                    String(localized: "Burger"),
-                    String(localized: "Pâtes"),
-                    String(localized: "Salade"),
-                    String(localized: "Restes du frigo")
+                    tr("Pizza"),
+                    tr("Sushis"),
+                    tr("Burger"),
+                    tr("Pâtes"),
+                    tr("Salade"),
+                    tr("Restes du frigo")
                 ],
                 0
             ),
             (
-                String(localized: "Oui / Non"),
-                [String(localized: "Oui"), String(localized: "Non")],
+                tr("Oui / Non"),
+                [tr("Oui"), tr("Non")],
                 2
             ),
             (
-                String(localized: "Pile ou face"),
-                [String(localized: "Pile"), String(localized: "Face")],
+                tr("Pile ou face"),
+                [tr("Pile"), tr("Face")],
                 5
             ),
             (
-                String(localized: "Chiffres 1 à 10"),
+                tr("Chiffres 1 à 10"),
                 (1...10).map { String($0) },
                 1
             ),
             (
-                String(localized: "Qui commence ?"),
-                (1...4).map { String(localized: "Joueur \($0)") },
+                tr("Qui commence ?"),
+                (1...4).map { tr("Joueur \($0)") },
                 3
             )
         ]

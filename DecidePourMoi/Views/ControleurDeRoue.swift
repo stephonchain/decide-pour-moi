@@ -124,7 +124,7 @@ final class ControleurDeRoue {
     }
 
     private func annoncer(_ label: String) {
-        let phrase = String(localized: "Résultat : \(label)")
+        let phrase = tr("Résultat : \(label)")
         Task {
             try? await Task.sleep(for: .milliseconds(350))
             AccessibilityNotification.Announcement(phrase).post()

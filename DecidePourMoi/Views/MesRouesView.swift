@@ -20,7 +20,7 @@ struct MesRouesView: View {
     private let colonnes = [GridItem(.adaptive(minimum: 150), spacing: 14)]
 
     var body: some View {
-        FeuilleSombre(titre: "Mes roues") {
+        FeuilleSombre(titre: tr("Mes roues")) {
             ScrollView {
                 LazyVGrid(columns: colonnes, spacing: 14) {
                     BoutonNouvelleRoue { creer() }
@@ -35,15 +35,15 @@ struct MesRouesView: View {
                                 Button {
                                     dupliquer(roue)
                                 } label: {
-                                    Label("Dupliquer", systemImage: "plus.square.on.square")
+                                    Label(tr("Dupliquer"), systemImage: "plus.square.on.square")
                                 }
                                 ShareLink(item: roue.texteDePartage) {
-                                    Label("Partager", systemImage: "square.and.arrow.up")
+                                    Label(tr("Partager"), systemImage: "square.and.arrow.up")
                                 }
                                 Button(role: .destructive) {
                                     roueAsupprimer = roue
                                 } label: {
-                                    Label("Supprimer", systemImage: "trash")
+                                    Label(tr("Supprimer"), systemImage: "trash")
                                 }
                             }
                     }
@@ -54,7 +54,7 @@ struct MesRouesView: View {
                 Button {
                     importAffiche = true
                 } label: {
-                    Label("Coller une liste pour créer une roue", systemImage: "doc.on.clipboard")
+                    Label(tr("Coller une liste pour créer une roue"), systemImage: "doc.on.clipboard")
                         .font(.system(.subheadline, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.85))
                         .frame(maxWidth: .infinity)
@@ -80,17 +80,17 @@ struct MesRouesView: View {
             }
         }
         .confirmationDialog(
-            Text("Supprimer cette roue ?"),
+            Text(tr("Supprimer cette roue ?")),
             isPresented: .init(get: { roueAsupprimer != nil }, set: { if !$0 { roueAsupprimer = nil } }),
             titleVisibility: .visible
         ) {
-            Button(String(localized: "Supprimer"), role: .destructive) {
+            Button(tr("Supprimer"), role: .destructive) {
                 if let roueAsupprimer { supprimer(roueAsupprimer) }
                 roueAsupprimer = nil
             }
-            Button(String(localized: "Annuler"), role: .cancel) { roueAsupprimer = nil }
+            Button(tr("Annuler"), role: .cancel) { roueAsupprimer = nil }
         } message: {
-            Text("Ses options et son historique seront effacés.")
+            Text(tr("Ses options et son historique seront effacés."))
         }
     }
 
@@ -105,7 +105,7 @@ struct MesRouesView: View {
 
     private func dupliquer(_ roue: Roue) {
         let copie = Roue(
-            titre: String(localized: "\(roue.titre) (copie)"),
+            titre: tr("\(roue.titre) (copie)"),
             options: roue.optionsOrdonnees.enumerated().map {
                 OptionRoue(label: $0.element.label, poids: $0.element.poidsValide, ordre: $0.offset)
             },
@@ -128,7 +128,7 @@ struct MesRouesView: View {
     private func importer(titre: String, libelles: [String]) {
         guard !libelles.isEmpty else { return }
         let roue = Roue(
-            titre: titre.isEmpty ? String(localized: "Nouvelle roue") : titre,
+            titre: titre.isEmpty ? tr("Nouvelle roue") : titre,
             options: libelles.enumerated().map { OptionRoue(label: $0.element, ordre: $0.offset) },
             paletteID: Reglages.paletteParDefaut
         )
@@ -160,7 +160,7 @@ struct VignetteRoue: View {
             .frame(width: 84, height: 84)
 
             VStack(spacing: 2) {
-                Text(roue.titre.isEmpty ? String(localized: "Sans titre") : roue.titre)
+                Text(roue.titre.isEmpty ? tr("Sans titre") : roue.titre)
                     .font(.system(.subheadline, design: .rounded, weight: .semibold))
                     .foregroundStyle(.white)
                     .lineLimit(1)
@@ -193,7 +193,7 @@ struct BoutonNouvelleRoue: View {
                     .foregroundStyle(.white)
                     .frame(width: 84, height: 84)
                     .background(.white.opacity(0.12), in: .circle)
-                Text("Nouvelle roue")
+                Text(tr("Nouvelle roue"))
                     .font(.system(.subheadline, design: .rounded, weight: .semibold))
                     .foregroundStyle(.white)
                 Text(verbatim: " ")

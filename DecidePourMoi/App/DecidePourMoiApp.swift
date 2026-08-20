@@ -4,6 +4,9 @@ import SwiftUI
 @main
 struct DecidePourMoiApp: App {
 
+    /// Relit la langue choisie : en changer reconstruit toute l'interface.
+    @AppStorage(CleReglage.langue) private var langue = Langue.systeme.rawValue
+
     private let conteneur: ModelContainer
 
     init() {
@@ -27,6 +30,8 @@ struct DecidePourMoiApp: App {
             RacineView()
                 .preferredColorScheme(.dark)
                 .tint(.white)
+                .environment(\.locale, Langues.locale)
+                .id(langue)
         }
         .modelContainer(conteneur)
     }

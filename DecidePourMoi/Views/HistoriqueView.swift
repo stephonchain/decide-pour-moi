@@ -11,13 +11,13 @@ struct HistoriqueView: View {
     @State private var effacementDemande = false
 
     var body: some View {
-        FeuilleSombre(titre: "Historique") {
+        FeuilleSombre(titre: tr("Historique")) {
             Group {
                 if roue.historiqueRecent.isEmpty {
                     ContentUnavailableView {
-                        Label("Aucun tirage", systemImage: "clock")
+                        Label(tr("Aucun tirage"), systemImage: "clock")
                     } description: {
-                        Text("Les résultats de cette roue s'afficheront ici.")
+                        Text(tr("Les résultats de cette roue s'afficheront ici."))
                     }
                     .foregroundStyle(.white)
                 } else {
@@ -35,7 +35,7 @@ struct HistoriqueView: View {
                                 .listRowBackground(Fond.carte)
                             }
                         } footer: {
-                            Text("Les 50 derniers tirages sont conservés sur l'appareil.")
+                            Text(tr("Les 50 derniers tirages sont conservés sur l'appareil."))
                                 .foregroundStyle(.white.opacity(0.5))
                         }
 
@@ -43,7 +43,7 @@ struct HistoriqueView: View {
                             Button(role: .destructive) {
                                 effacementDemande = true
                             } label: {
-                                Label("Effacer l'historique", systemImage: "trash")
+                                Label(tr("Effacer l'historique"), systemImage: "trash")
                             }
                             .listRowBackground(Fond.carte)
                         }
@@ -54,12 +54,12 @@ struct HistoriqueView: View {
             }
         }
         .confirmationDialog(
-            Text("Effacer l'historique ?"),
+            Text(tr("Effacer l'historique ?")),
             isPresented: $effacementDemande,
             titleVisibility: .visible
         ) {
-            Button(String(localized: "Effacer"), role: .destructive) { effacer() }
-            Button(String(localized: "Annuler"), role: .cancel) {}
+            Button(tr("Effacer"), role: .destructive) { effacer() }
+            Button(tr("Annuler"), role: .cancel) {}
         }
     }
 

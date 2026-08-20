@@ -28,7 +28,7 @@ struct ListeTexteView: View {
             ZStack {
                 FondApplication()
                 VStack(alignment: .leading, spacing: 10) {
-                    Text("Une ligne = une option. Collez votre liste, tout est créé d'un coup.")
+                    Text(tr("Une ligne = une option. Collez votre liste, tout est créé d'un coup."))
                         .font(.system(.footnote, design: .rounded))
                         .foregroundStyle(.white.opacity(0.6))
 
@@ -39,23 +39,23 @@ struct ListeTexteView: View {
                         .background(Fond.carte, in: .rect(cornerRadius: 16))
                         .focused($champActif)
 
-                    Text("\(lignes.count) options")
+                    Text(tr("\(lignes.count) options"))
                         .font(.system(.caption, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.5))
                 }
                 .padding(16)
             }
-            .navigationTitle(Text("Liste des options"))
+            .navigationTitle(Text(tr("Liste des options")))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Fond.sombre, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "Annuler")) { fermer() }
+                    Button(tr("Annuler")) { fermer() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "Valider")) { valider(lignes) }
+                    Button(tr("Valider")) { valider(lignes) }
                         .fontWeight(.semibold)
                         .disabled(lignes.count < 2)
                 }
@@ -87,13 +87,13 @@ struct ImportListeView: View {
             ZStack {
                 FondApplication()
                 VStack(alignment: .leading, spacing: 12) {
-                    TextField(String(localized: "Titre de la roue"), text: $titre)
+                    TextField(tr("Titre de la roue"), text: $titre)
                         .font(.system(.body, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white)
                         .padding(14)
                         .background(Fond.carte, in: .rect(cornerRadius: 14))
 
-                    Text("Une ligne = une option.")
+                    Text(tr("Une ligne = une option."))
                         .font(.system(.footnote, design: .rounded))
                         .foregroundStyle(.white.opacity(0.6))
 
@@ -103,23 +103,23 @@ struct ImportListeView: View {
                         .scrollContentBackground(.hidden)
                         .background(Fond.carte, in: .rect(cornerRadius: 16))
 
-                    Text("\(lignes.count) options")
+                    Text(tr("\(lignes.count) options"))
                         .font(.system(.caption, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.5))
                 }
                 .padding(16)
             }
-            .navigationTitle(Text("Coller une liste"))
+            .navigationTitle(Text(tr("Coller une liste")))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(Fond.sombre, for: .navigationBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(String(localized: "Annuler")) { fermer() }
+                    Button(tr("Annuler")) { fermer() }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "Créer")) {
+                    Button(tr("Créer")) {
                         creer(titre.trimmingCharacters(in: .whitespaces), lignes)
                     }
                     .fontWeight(.semibold)

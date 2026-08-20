@@ -50,7 +50,8 @@ extension View {
 
 /// Feuille modale à l'identité de l'app : fond sombre, titre arrondi.
 struct FeuilleSombre<Contenu: View>: View {
-    let titre: LocalizedStringKey
+    /// Titre déjà traduit, via `tr(_:)`.
+    let titre: String
     @ViewBuilder var contenu: Contenu
 
     @Environment(\.dismiss) private var fermer
@@ -68,7 +69,7 @@ struct FeuilleSombre<Contenu: View>: View {
             .toolbarColorScheme(.dark, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(String(localized: "Terminé")) { fermer() }
+                    Button(tr("Terminé")) { fermer() }
                         .fontWeight(.semibold)
                 }
             }

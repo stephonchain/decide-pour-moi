@@ -10,12 +10,18 @@ struct AppPromue: Identifiable, Hashable, Sendable {
 
     let id: String
     let nom: String
-    let accroche: String
+    /// Accroches par code de langue, telles qu'elles sont dans le catalogue.
+    let accroches: [String: String]
     let url: URL
     let audience: Audience
     let poids: Int
     let symbole: String
     let couleur: Color
+
+    /// Accroche dans la langue choisie dans l'app, français par défaut.
+    var accroche: String {
+        accroches[Langues.codeEffectif] ?? accroches["fr"] ?? accroches["en"] ?? ""
+    }
 }
 
 /// Catalogue interne : nos propres apps, jamais de régie publicitaire tierce.
@@ -78,14 +84,12 @@ final class CataloguePromo {
             return []
         }
 
-        let langue = Locale.current.language.languageCode?.identifier ?? "fr"
         return fichier.apps.compactMap { entree -> AppPromue? in
             guard let url = URL(string: entree.url) else { return nil }
-            let accroche = entree.accroche[langue] ?? entree.accroche["fr"] ?? entree.accroche["en"] ?? ""
             return AppPromue(
                 id: entree.id,
                 nom: entree.nom,
-                accroche: accroche,
+                accroches: entree.accroche,
                 url: url,
                 audience: entree.audience,
                 poids: entree.poids,

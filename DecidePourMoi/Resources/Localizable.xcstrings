@@ -222,6 +222,23 @@
         }
       }
     },
+    "Ce réglage ne concerne que cette app. Vos roues gardent le texte que vous avez saisi.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This setting only affects this app. Your wheels keep the text you typed."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce réglage ne concerne que cette app. Vos roues gardent le texte que vous avez saisi."
+          }
+        }
+      }
+    },
     "Ce soir on mange…": {
       "extractionState": "manual",
       "localizations": {
@@ -694,6 +711,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lance un tirage au sort parmi %lld options"
+          }
+        }
+      }
+    },
+    "Langue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Language"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue"
+          }
+        }
+      }
+    },
+    "Langue du système": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "System language"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Langue du système"
           }
         }
       }

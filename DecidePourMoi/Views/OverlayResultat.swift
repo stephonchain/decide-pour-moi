@@ -45,27 +45,27 @@ struct OverlayResultat: View {
                     .opacity(apparu ? 1 : 0)
 
                 if roue.mode == .ordreDePassage {
-                    Text("Position \(roue.ordreDePassage.count) sur \(roue.optionsOrdonnees.count)")
+                    Text(tr("Position \(roue.ordreDePassage.count) sur \(roue.optionsOrdonnees.count)"))
                         .font(.system(.subheadline, design: .rounded, weight: .medium))
                         .foregroundStyle(.white.opacity(0.7))
                 }
 
                 VStack(spacing: 12) {
                     Button(action: relancer) {
-                        Label("Relancer", systemImage: "arrow.clockwise")
+                        Label(tr("Relancer"), systemImage: "arrow.clockwise")
                             .boutonPrincipal()
                     }
                     .disabled(!roue.peutTourner)
 
                     if roue.mode == .avecRemise {
                         Button(action: retirer) {
-                            Label("Retirer cette option", systemImage: "minus.circle")
+                            Label(tr("Retirer cette option"), systemImage: "minus.circle")
                                 .boutonSecondaire()
                         }
                     }
 
                     Button(action: fermer) {
-                        Text("Fermer")
+                        Text(tr("Fermer"))
                             .font(.system(.subheadline, design: .rounded, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.7))
                             .padding(.vertical, 8)
@@ -86,8 +86,8 @@ struct OverlayResultat: View {
 
     private var intitule: String {
         switch roue.mode {
-        case .avecRemise, .sansRemise: String(localized: "Résultat")
-        case .ordreDePassage: String(localized: "Suivant")
+        case .avecRemise, .sansRemise: tr("Résultat")
+        case .ordreDePassage: tr("Suivant")
         }
     }
 }

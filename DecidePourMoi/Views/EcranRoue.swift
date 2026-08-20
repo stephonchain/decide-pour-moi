@@ -81,10 +81,10 @@ struct EcranRoue: View {
                 Image(systemName: "square.grid.2x2.fill")
                     .boutonRond()
             }
-            .accessibilityLabel(Text("Mes roues"))
+            .accessibilityLabel(Text(tr("Mes roues")))
 
             VStack(spacing: 2) {
-                Text(roue.titre.isEmpty ? String(localized: "Sans titre") : roue.titre)
+                Text(roue.titre.isEmpty ? tr("Sans titre") : roue.titre)
                     .font(.system(.headline, design: .rounded, weight: .bold))
                     .foregroundStyle(.white)
                     .lineLimit(1)
@@ -101,7 +101,7 @@ struct EcranRoue: View {
                 Image(systemName: "slider.horizontal.3")
                     .boutonRond()
             }
-            .accessibilityLabel(Text("Modifier la roue"))
+            .accessibilityLabel(Text(tr("Modifier la roue")))
         }
         .padding(.top, 4)
     }
@@ -136,8 +136,8 @@ struct EcranRoue: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(controleur.enRotation || !roue.peutTourner)
-                    .accessibilityLabel(Text("Tourner la roue"))
-                    .accessibilityHint(Text("Lance un tirage au sort parmi \(roue.optionsActives.count) options"))
+                    .accessibilityLabel(Text(tr("Tourner la roue")))
+                    .accessibilityHint(Text(tr("Lance un tirage au sort parmi \(roue.optionsActives.count) options")))
                 }
             }
             .frame(width: geometrie.size.width, height: geometrie.size.height)
@@ -176,7 +176,7 @@ struct EcranRoue: View {
                     Haptiques.shared.selection()
                     historiqueAffiche = true
                 } label: {
-                    Label("Historique", systemImage: "clock.arrow.circlepath")
+                    Label(tr("Historique"), systemImage: "clock.arrow.circlepath")
                         .boutonSecondaire()
                 }
 
@@ -184,7 +184,7 @@ struct EcranRoue: View {
                     Button {
                         reinitialiser()
                     } label: {
-                        Label("Réinitialiser", systemImage: "arrow.counterclockwise")
+                        Label(tr("Réinitialiser"), systemImage: "arrow.counterclockwise")
                             .boutonSecondaire()
                     }
                     .disabled(roue.optionsActives.count == roue.optionsOrdonnees.count)
@@ -197,7 +197,7 @@ struct EcranRoue: View {
                     Image(systemName: "gearshape.fill")
                         .boutonSecondaireCompact()
                 }
-                .accessibilityLabel(Text("Réglages"))
+                .accessibilityLabel(Text(tr("Réglages")))
             }
             .font(.system(.subheadline, design: .rounded, weight: .semibold))
         }
@@ -288,12 +288,12 @@ struct RoueEpuisee: View {
             Image(systemName: "checkmark.circle.fill")
                 .font(.system(size: 56))
                 .foregroundStyle(.white.opacity(0.9))
-            Text("Toutes les options sont sorties.")
+            Text(tr("Toutes les options sont sorties."))
                 .font(.system(.title3, design: .rounded, weight: .semibold))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
             Button(action: reinitialiser) {
-                Label("Tout remettre en jeu", systemImage: "arrow.counterclockwise")
+                Label(tr("Tout remettre en jeu"), systemImage: "arrow.counterclockwise")
                     .boutonPrincipal()
             }
         }

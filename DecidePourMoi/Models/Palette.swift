@@ -11,7 +11,7 @@ struct Palette: Identifiable {
     let nomCle: String.LocalizationValue
     let teintes: [Color]
 
-    var nom: String { String(localized: nomCle) }
+    var nom: String { tr(nomCle) }
 
     /// Couleur du segment `index`, en évitant que le premier et le dernier
     /// segment soient identiques quand le nombre d'options est un multiple

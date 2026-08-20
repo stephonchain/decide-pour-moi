@@ -13,7 +13,7 @@ struct BandeauOrdreDePassage: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("Ordre de passage")
+                Text(tr("Ordre de passage"))
                     .font(.system(.caption, design: .rounded, weight: .bold))
                     .foregroundStyle(.white.opacity(0.6))
                     .textCase(.uppercase)
@@ -21,7 +21,7 @@ struct BandeauOrdreDePassage: View {
                 Button {
                     listeAffichee = true
                 } label: {
-                    Text("Voir tout")
+                    Text(tr("Voir tout"))
                         .font(.system(.caption, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.8))
                 }
@@ -64,7 +64,7 @@ struct ListeOrdreDePassage: View {
     @Environment(\.dismiss) private var fermer
 
     var body: some View {
-        FeuilleSombre(titre: "Ordre de passage") {
+        FeuilleSombre(titre: tr("Ordre de passage")) {
             List {
                 Section {
                     ForEach(Array(roue.ordreDePassage.enumerated()), id: \.element.id) { position, tirage in
@@ -80,13 +80,13 @@ struct ListeOrdreDePassage: View {
                         .listRowBackground(Fond.carte)
                     }
                 } footer: {
-                    Text("\(roue.optionsActives.count) options encore en jeu.")
+                    Text(tr("\(roue.optionsActives.count) options encore en jeu."))
                         .foregroundStyle(.white.opacity(0.5))
                 }
 
                 Section {
                     ShareLink(item: roue.texteOrdreDePassage) {
-                        Label("Partager la liste", systemImage: "square.and.arrow.up")
+                        Label(tr("Partager la liste"), systemImage: "square.and.arrow.up")
                     }
                     .listRowBackground(Fond.carte)
 
@@ -94,7 +94,7 @@ struct ListeOrdreDePassage: View {
                         reinitialiser()
                         fermer()
                     } label: {
-                        Label("Recommencer un ordre", systemImage: "arrow.counterclockwise")
+                        Label(tr("Recommencer un ordre"), systemImage: "arrow.counterclockwise")
                     }
                     .listRowBackground(Fond.carte)
                 }

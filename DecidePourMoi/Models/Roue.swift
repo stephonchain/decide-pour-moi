@@ -14,17 +14,17 @@ enum ModeTirage: String, Codable, CaseIterable, Identifiable, Sendable {
 
     var titre: String {
         switch self {
-        case .avecRemise: String(localized: "Avec remise")
-        case .sansRemise: String(localized: "Sans remise")
-        case .ordreDePassage: String(localized: "Ordre de passage")
+        case .avecRemise: tr("Avec remise")
+        case .sansRemise: tr("Sans remise")
+        case .ordreDePassage: tr("Ordre de passage")
         }
     }
 
     var explication: String {
         switch self {
-        case .avecRemise: String(localized: "L'option tirée reste dans la roue.")
-        case .sansRemise: String(localized: "L'option tirée sort de la roue jusqu'à réinitialisation.")
-        case .ordreDePassage: String(localized: "Les tirages s'enchaînent sans remise et forment une liste ordonnée.")
+        case .avecRemise: tr("L'option tirée reste dans la roue.")
+        case .sansRemise: tr("L'option tirée sort de la roue jusqu'à réinitialisation.")
+        case .ordreDePassage: tr("Les tirages s'enchaînent sans remise et forment une liste ordonnée.")
         }
     }
 
@@ -108,9 +108,9 @@ final class Roue {
     var resume: String {
         let total = optionsOrdonnees.count
         if mode.retireLOptionTiree {
-            return String(localized: "\(optionsActives.count) sur \(total) restantes")
+            return tr("\(optionsActives.count) sur \(total) restantes")
         }
-        return String(localized: "\(total) options")
+        return tr("\(total) options")
     }
 
     // MARK: Édition

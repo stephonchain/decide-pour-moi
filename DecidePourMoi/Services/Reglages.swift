@@ -7,6 +7,7 @@ enum CleReglage {
     static let son = "reglage.son"
     static let confettis = "reglage.confettis"
     static let paletteParDefaut = "reglage.paletteParDefaut"
+    static let langue = "reglage.langue"
 }
 
 /// Réglages et compteurs de l'app. Tout tient dans `UserDefaults` : aucune

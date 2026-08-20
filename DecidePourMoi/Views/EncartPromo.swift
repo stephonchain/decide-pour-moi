@@ -33,7 +33,7 @@ struct EncartPromo: View {
     private func carte(_ app: AppPromue) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack {
-                Text("Une autre app du studio")
+                Text(tr("Une autre app du studio"))
                     .font(.system(.caption2, design: .rounded, weight: .bold))
                     .foregroundStyle(.white.opacity(0.5))
                     .textCase(.uppercase)
@@ -49,7 +49,7 @@ struct EncartPromo: View {
                         .frame(width: 26, height: 26)
                         .contentShape(.rect)
                 }
-                .accessibilityLabel(Text("Masquer cette suggestion"))
+                .accessibilityLabel(Text(tr("Masquer cette suggestion")))
             }
 
             Link(destination: app.url) {
@@ -80,7 +80,7 @@ struct EncartPromo: View {
                 .padding(.top, 10)
             }
             .buttonStyle(.plain)
-            .accessibilityHint(Text("Ouvre la fiche App Store"))
+            .accessibilityHint(Text(tr("Ouvre la fiche App Store")))
         }
         .padding(14)
         .background(.white.opacity(0.07), in: .rect(cornerRadius: 18))
@@ -101,7 +101,7 @@ struct SectionsNosApps: View {
                             .listRowBackground(Fond.carte)
                     }
                 } header: {
-                    Text("Nos autres apps")
+                    Text(tr("Nos autres apps"))
                 }
             }
 
@@ -112,9 +112,9 @@ struct SectionsNosApps: View {
                             .listRowBackground(Fond.carte)
                     }
                 } header: {
-                    Text("Pour les soignants")
+                    Text(tr("Pour les soignants"))
                 } footer: {
-                    Text("Aucune publicité tierce dans cette app. Ces liens mènent uniquement à nos propres applications.")
+                    Text(tr("Aucune publicité tierce dans cette app. Ces liens mènent uniquement à nos propres applications."))
                         .foregroundStyle(.white.opacity(0.5))
                 }
             }
