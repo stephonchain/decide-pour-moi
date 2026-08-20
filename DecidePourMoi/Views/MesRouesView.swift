@@ -16,6 +16,8 @@ struct MesRouesView: View {
     @State private var roueEnCreation: Roue? = nil
     @State private var roueAsupprimer: Roue? = nil
     @State private var importAffiche = false
+    @State private var premium = PremiumManager.shared
+    @State private var contextePaywall: ContextePaywall? = nil
 
     private let colonnes = [GridItem(.adaptive(minimum: 150), spacing: 14)]
 
@@ -26,19 +28,26 @@ struct MesRouesView: View {
                     BoutonNouvelleRoue { creer() }
 
                     ForEach(roues) { roue in
-                        VignetteRoue(roue: roue, estCourante: roue.id == roueCourante.id)
+                        let ouvrable = premium.acces.peutOuvrir(roue)
+                        VignetteRoue(roue: roue, estCourante: roue.id == roueCourante.id, verrouillee: !ouvrable)
                             .onTapGesture {
-                                Haptiques.shared.selection()
-                                ouvrir(roue)
+                                if ouvrable {
+                                    Haptiques.shared.selection()
+                                    ouvrir(roue)
+                                } else {
+                                    presenterPaywall(.roueVerrouillee)
+                                }
                             }
                             .contextMenu {
-                                Button {
-                                    dupliquer(roue)
-                                } label: {
-                                    Label(tr("Dupliquer"), systemImage: "plus.square.on.square")
-                                }
-                                ShareLink(item: roue.texteDePartage) {
-                                    Label(tr("Partager"), systemImage: "square.and.arrow.up")
+                                if ouvrable {
+                                    Button {
+                                        dupliquer(roue)
+                                    } label: {
+                                        Label(tr("Dupliquer"), systemImage: "plus.square.on.square")
+                                    }
+                                    ShareLink(item: roue.texteDePartage) {
+                                        Label(tr("Partager"), systemImage: "square.and.arrow.up")
+                                    }
                                 }
                                 Button(role: .destructive) {
                                     roueAsupprimer = roue
@@ -52,7 +61,11 @@ struct MesRouesView: View {
                 .padding(.top, 12)
 
                 Button {
-                    importAffiche = true
+                    if peutCreer {
+                        importAffiche = true
+                    } else {
+                        presenterPaywall(.creationDeRoue)
+                    }
                 } label: {
                     Label(tr("Coller une liste pour créer une roue"), systemImage: "doc.on.clipboard")
                         .font(.system(.subheadline, design: .rounded, weight: .semibold))
@@ -68,6 +81,9 @@ struct MesRouesView: View {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 20)
             }
+        }
+        .sheet(item: $contextePaywall) { contexte in
+            PaywallView(contexte: contexte)
         }
         .sheet(item: $roueEnCreation) { roue in
             EditionRoueView(roue: roue, estUneCreation: true) { creee in
@@ -94,9 +110,32 @@ struct MesRouesView: View {
         }
     }
 
+    // MARK: Accès
+
+    /// Seules les roues déverrouillées comptent contre la limite gratuite :
+    /// les teasers préinstallés n'ont jamais été à l'utilisateur.
+    private var peutCreer: Bool {
+        premium.acces.peutCreerRoue(rouesDeverrouillees: roues.filter { !$0.verrouillee }.count)
+    }
+
+    /// L'utilisateur historique découvre le passage en freemium par le
+    /// message « Décide pour moi évolue », une seule fois.
+    private func presenterPaywall(_ contexte: ContextePaywall) {
+        if Reglages.utilisateurHistorique && !Reglages.evolutionAnnoncee {
+            Reglages.evolutionAnnoncee = true
+            contextePaywall = .evolution
+        } else {
+            contextePaywall = contexte
+        }
+    }
+
     // MARK: Actions
 
     private func creer() {
+        guard peutCreer else {
+            presenterPaywall(.creationDeRoue)
+            return
+        }
         Haptiques.shared.selection()
         let roue = RouesParDefaut.nouvelleRoue(paletteParDefaut: Reglages.paletteParDefaut)
         contexte.insert(roue)
@@ -104,6 +143,10 @@ struct MesRouesView: View {
     }
 
     private func dupliquer(_ roue: Roue) {
+        guard peutCreer else {
+            presenterPaywall(.creationDeRoue)
+            return
+        }
         let copie = Roue(
             titre: tr("\(roue.titre) (copie)"),
             options: roue.optionsOrdonnees.enumerated().map {
@@ -126,7 +169,7 @@ struct MesRouesView: View {
     }
 
     private func importer(titre: String, libelles: [String]) {
-        guard !libelles.isEmpty else { return }
+        guard !libelles.isEmpty, peutCreer else { return }
         let roue = Roue(
             titre: titre.isEmpty ? tr("Nouvelle roue") : titre,
             options: libelles.enumerated().map { OptionRoue(label: $0.element, ordre: $0.offset) },
@@ -143,6 +186,7 @@ struct VignetteRoue: View {
 
     let roue: Roue
     let estCourante: Bool
+    var verrouillee = false
 
     var body: some View {
         VStack(spacing: 10) {
@@ -153,9 +197,16 @@ struct VignetteRoue: View {
                     },
                     palette: roue.palette
                 )
-                Circle()
-                    .fill(.white)
-                    .frame(width: 16, height: 16)
+                .opacity(verrouillee ? 0.45 : 1)
+                if verrouillee {
+                    Image(systemName: "lock.fill")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundStyle(.white.opacity(0.85))
+                } else {
+                    Circle()
+                        .fill(.white)
+                        .frame(width: 16, height: 16)
+                }
             }
             .frame(width: 84, height: 84)
 

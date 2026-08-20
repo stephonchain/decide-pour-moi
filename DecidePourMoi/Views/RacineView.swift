@@ -10,8 +10,14 @@ struct RacineView: View {
     @Query(sort: \Roue.utiliseeLe, order: .reverse) private var roues: [Roue]
 
     @State private var amorcageTente = false
+    @State private var onboardingVisible = false
+    @State private var premium = PremiumManager.shared
 
-    private var roueCourante: Roue? { roues.first }
+    /// La dernière roue utilisée *que l'utilisateur a le droit d'ouvrir* :
+    /// une roue teaser verrouillée ne doit jamais devenir l'écran d'accueil.
+    private var roueCourante: Roue? {
+        roues.first { premium.acces.peutOuvrir($0) } ?? roues.first
+    }
 
     var body: some View {
         ZStack {
@@ -30,19 +36,41 @@ struct RacineView: View {
         }
         .animation(.easeInOut(duration: 0.2), value: roueCourante?.id)
         .task { amorcer() }
+        .fullScreenCover(isPresented: $onboardingVisible) {
+            OnboardingFlow {
+                Reglages.onboardingFait = true
+                onboardingVisible = false
+            }
+        }
     }
 
     private func amorcer() {
         guard !amorcageTente else { return }
         amorcageTente = true
-        guard roues.isEmpty, !Reglages.amorcageFait else { return }
-        RouesParDefaut.creer(dans: contexte)
-        try? contexte.save()
-        Reglages.amorcageFait = true
+
+        if !Reglages.amorcageFait {
+            // Installation neuve : les roues secondaires sont des teasers
+            // verrouillés, et l'onboarding s'ouvre par-dessus.
+            if roues.isEmpty {
+                RouesParDefaut.creer(dans: contexte, verrouillerSecondaires: true)
+                try? contexte.save()
+            }
+            Reglages.amorcageFait = true
+        } else if !Reglages.onboardingFait && !Reglages.utilisateurHistorique {
+            // Installation antérieure au freemium : tout ce qui a été donné
+            // reste acquis, et ces utilisateurs ne voient pas l'onboarding.
+            // Ils découvriront l'évolution via le paywall contextuel.
+            Reglages.utilisateurHistorique = true
+            Reglages.onboardingFait = true
+        }
+
+        if !Reglages.onboardingFait {
+            onboardingVisible = true
+        }
     }
 
     private func creerUneRoueDeSecours() {
-        RouesParDefaut.creer(dans: contexte)
+        RouesParDefaut.creer(dans: contexte, verrouillerSecondaires: !premium.acces.estPremium && !premium.acces.estHistorique)
         try? contexte.save()
     }
 }

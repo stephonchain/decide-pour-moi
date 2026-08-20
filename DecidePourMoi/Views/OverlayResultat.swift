@@ -9,6 +9,7 @@ struct OverlayResultat: View {
     let roue: Roue
     let compteur: Int
     let confettisActifs: Bool
+    let retraitAutorise: Bool
     let relancer: () -> Void
     let retirer: () -> Void
     let fermer: () -> Void
@@ -59,8 +60,11 @@ struct OverlayResultat: View {
 
                     if roue.mode == .avecRemise {
                         Button(action: retirer) {
-                            Label(tr("Retirer cette option"), systemImage: "minus.circle")
-                                .boutonSecondaire()
+                            HStack(spacing: 6) {
+                                Label(tr("Retirer cette option"), systemImage: "minus.circle")
+                                if !retraitAutorise { Cadenas() }
+                            }
+                            .boutonSecondaire()
                         }
                     }
 

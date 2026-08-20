@@ -32,6 +32,7 @@ struct DecidePourMoiApp: App {
                 .tint(.white)
                 .environment(\.locale, Langues.locale)
                 .id(langue)
+                .task { PremiumManager.shared.configurer() }
         }
         .modelContainer(conteneur)
     }

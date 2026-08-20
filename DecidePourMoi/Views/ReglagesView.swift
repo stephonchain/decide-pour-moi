@@ -8,10 +8,72 @@ struct ReglagesView: View {
     @AppStorage(CleReglage.paletteParDefaut) private var paletteParDefaut = 0
     @AppStorage(CleReglage.langue) private var langue = Langue.systeme.rawValue
     @State private var confidentialiteAffichee = false
+    @State private var premium = PremiumManager.shared
+    @State private var paywallAffiche = false
+    @State private var onboardingRevisite = false
+    @State private var messageRestauration: String? = nil
+    #if DEBUG
+    @AppStorage(CleReglage.debugPremium) private var debugPremium = false
+    #endif
 
     var body: some View {
         FeuilleSombre(titre: tr("Réglages")) {
             List {
+                Section {
+                    if premium.estPremiumEffectif {
+                        HStack(spacing: 12) {
+                            Image(systemName: "crown.fill")
+                                .foregroundStyle(Color(hex: 0xFFD53E))
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(tr("Premium actif"))
+                                    .font(.system(.body, design: .rounded, weight: .bold))
+                                Text(tr("Merci de soutenir une app sans pub."))
+                                    .font(.caption)
+                                    .foregroundStyle(.white.opacity(0.6))
+                            }
+                        }
+                        .listRowBackground(Fond.carte)
+                    } else {
+                        Button {
+                            paywallAffiche = true
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: "crown.fill")
+                                    .foregroundStyle(Color(hex: 0xFFD53E))
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(tr("Passer en premium"))
+                                        .font(.system(.body, design: .rounded, weight: .bold))
+                                    Text(tr("Roues illimitées, tous les modes, historique."))
+                                        .font(.caption)
+                                        .foregroundStyle(.white.opacity(0.6))
+                                }
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .font(.system(size: 12, weight: .bold))
+                                    .foregroundStyle(.white.opacity(0.4))
+                            }
+                        }
+                        .listRowBackground(Fond.carte)
+
+                        Button {
+                            restaurer()
+                        } label: {
+                            Label(tr("Restaurer mes achats"), systemImage: "arrow.clockwise.circle")
+                        }
+                        .disabled(!premium.configure)
+                        .listRowBackground(Fond.carte)
+                    }
+
+                    if let messageRestauration {
+                        Text(messageRestauration)
+                            .font(.caption)
+                            .foregroundStyle(.white.opacity(0.6))
+                            .listRowBackground(Fond.carte)
+                    }
+                } header: {
+                    Text(verbatim: "Premium")
+                }
+
                 Section {
                     Toggle(isOn: $son) {
                         Label(tr("Son des tics"), systemImage: "speaker.wave.2.fill")
@@ -66,6 +128,13 @@ struct ReglagesView: View {
 
                 Section {
                     Button {
+                        onboardingRevisite = true
+                    } label: {
+                        Label(tr("Revoir la présentation"), systemImage: "play.rectangle.fill")
+                    }
+                    .listRowBackground(Fond.carte)
+
+                    Button {
                         confidentialiteAffichee = true
                     } label: {
                         Label(tr("Confidentialité"), systemImage: "hand.raised.fill")
@@ -90,9 +159,23 @@ struct ReglagesView: View {
                 } header: {
                     Text(tr("À propos"))
                 } footer: {
-                    Text(tr("Décide pour moi fonctionne entièrement hors ligne. Aucune donnée n'est collectée, aucun compte n'est nécessaire."))
+                    Text(tr("Décide pour moi fonctionne sans compte et sans publicité tierce. Vos roues et vos tirages restent sur votre iPhone."))
                         .foregroundStyle(.white.opacity(0.5))
                 }
+
+                #if DEBUG
+                Section {
+                    Toggle(isOn: $debugPremium) {
+                        Label(verbatim: "Simuler premium", systemImage: "wrench.and.screwdriver")
+                    }
+                    .listRowBackground(Fond.carte)
+                } header: {
+                    Text(verbatim: "Debug")
+                } footer: {
+                    Text(verbatim: "Visible uniquement en build de développement.")
+                        .foregroundStyle(.white.opacity(0.5))
+                }
+                #endif
             }
             .scrollContentBackground(.hidden)
             .foregroundStyle(.white)
@@ -100,6 +183,27 @@ struct ReglagesView: View {
         }
         .sheet(isPresented: $confidentialiteAffichee) {
             ConfidentialiteView()
+        }
+        .sheet(isPresented: $paywallAffiche) {
+            PaywallView(contexte: .reglages)
+        }
+        .fullScreenCover(isPresented: $onboardingRevisite) {
+            OnboardingFlow(estUneRevisite: true) {
+                onboardingRevisite = false
+            }
+        }
+    }
+
+    private func restaurer() {
+        messageRestauration = nil
+        Task {
+            do {
+                messageRestauration = try await premium.restaurer()
+                    ? tr("Premium restauré. Merci !")
+                    : tr("Aucun achat à restaurer sur ce compte.")
+            } catch {
+                messageRestauration = error.localizedDescription
+            }
         }
     }
 }
@@ -111,7 +215,7 @@ struct ConfidentialiteView: View {
         FeuilleSombre(titre: tr("Confidentialité")) {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
-                    Text(tr("Aucune donnée collectée"))
+                    Text(tr("Vos données restent chez vous"))
                         .font(.system(.title3, design: .rounded, weight: .bold))
 
                     Text(tr("Vos roues, vos options et votre historique de tirages restent sur votre iPhone. Ils ne sont envoyés nulle part et ne sont accessibles à personne d'autre que vous."))
@@ -119,6 +223,10 @@ struct ConfidentialiteView: View {
                     Text(tr("Pas de compte, pas de traceur"))
                         .font(.system(.headline, design: .rounded, weight: .bold))
                     Text(tr("L'app ne demande aucune inscription, n'utilise aucun outil de mesure d'audience et n'intègre aucune régie publicitaire tierce."))
+
+                    Text(tr("Les achats"))
+                        .font(.system(.headline, design: .rounded, weight: .bold))
+                    Text(tr("Les achats passent par l'App Store et par RevenueCat, notre prestataire de gestion des reçus. Il traite un identifiant anonyme et l'historique d'achat de l'app, sans lien avec votre identité. Aucune autre donnée ne lui est transmise."))
 
                     Text(tr("Les liens vers nos autres apps"))
                         .font(.system(.headline, design: .rounded, weight: .bold))

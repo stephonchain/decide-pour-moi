@@ -20,6 +20,8 @@ struct EcranRoue: View {
     @State private var angleDuDoigt: Double? = nil
 
     @AppStorage(CleReglage.confettis) private var confettis = Reglages.confettisParDefaut
+    @State private var premium = PremiumManager.shared
+    @State private var contextePaywall: ContextePaywall? = nil
 
     var body: some View {
         ZStack {
@@ -41,6 +43,7 @@ struct EcranRoue: View {
                     roue: roue,
                     compteur: controleur.compteurResultats,
                     confettisActifs: confettis && !mouvementReduit,
+                    retraitAutorise: premium.acces.retraitAutorise,
                     relancer: { controleur.relancer(roue: roue, contexte: contexte, apresLeTirage: apresLeTirage) },
                     retirer: { retirer(gagnante) },
                     fermer: { controleur.resultat = nil }
@@ -62,6 +65,9 @@ struct EcranRoue: View {
         }
         .sheet(isPresented: $historiqueAffiche) {
             HistoriqueView(roue: roue)
+        }
+        .sheet(item: $contextePaywall) { contextePaywall in
+            PaywallView(contexte: contextePaywall)
         }
         .task {
             Haptiques.shared.preparer()
@@ -174,10 +180,17 @@ struct EcranRoue: View {
             HStack(spacing: 10) {
                 Button {
                     Haptiques.shared.selection()
-                    historiqueAffiche = true
+                    if premium.acces.historiqueAutorise {
+                        historiqueAffiche = true
+                    } else {
+                        contextePaywall = .historique
+                    }
                 } label: {
-                    Label(tr("Historique"), systemImage: "clock.arrow.circlepath")
-                        .boutonSecondaire()
+                    HStack(spacing: 6) {
+                        Label(tr("Historique"), systemImage: "clock.arrow.circlepath")
+                        if !premium.acces.historiqueAutorise { Cadenas() }
+                    }
+                    .boutonSecondaire()
                 }
 
                 if roue.mode.retireLOptionTiree {
@@ -257,7 +270,13 @@ struct EcranRoue: View {
     }
 
     private func retirer(_ option: OptionRoue) {
-        // Retirer une option à la volée bascule la roue en mode sans remise.
+        // Retirer une option à la volée bascule la roue en mode sans remise :
+        // c'est donc une fonction premium comme le mode lui-même.
+        guard premium.acces.retraitAutorise else {
+            controleur.resultat = nil
+            contextePaywall = .modeDeTirage
+            return
+        }
         if roue.mode == .avecRemise { roue.mode = .sansRemise }
         option.retiree = true
         roue.modifieeLe = .now

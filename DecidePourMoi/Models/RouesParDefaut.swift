@@ -9,7 +9,10 @@ enum RouesParDefaut {
     /// expérience est un tirage, pas un formulaire.
     static let titrePremiereRoue = tr("Ce soir on mange…")
 
-    static func creer(dans contexte: ModelContext) {
+    /// - Parameter verrouillerSecondaires: vrai pour une installation neuve
+    ///   en freemium — la première roue reste la roue gratuite, les autres
+    ///   sont des teasers verrouillés jusqu'au premium.
+    static func creer(dans contexte: ModelContext, verrouillerSecondaires: Bool = false) {
         let modeles: [(String, [String], Int)] = [
             (
                 titrePremiereRoue,
@@ -49,6 +52,7 @@ enum RouesParDefaut {
             let (titre, libelles, palette) = modele
             let options = libelles.enumerated().map { OptionRoue(label: $0.element, ordre: $0.offset) }
             let roue = Roue(titre: titre, options: options, paletteID: palette)
+            roue.verrouillee = verrouillerSecondaires && index > 0
             // La première roue de la liste doit être celle qui s'ouvre au lancement.
             roue.utiliseeLe = Date(timeIntervalSinceNow: -Double(index))
             roue.creeeLe = roue.utiliseeLe

@@ -8,6 +8,7 @@ enum CleReglage {
     static let confettis = "reglage.confettis"
     static let paletteParDefaut = "reglage.paletteParDefaut"
     static let langue = "reglage.langue"
+    static let debugPremium = "debug.premium"
 }
 
 /// Réglages et compteurs de l'app. Tout tient dans `UserDefaults` : aucune
@@ -16,6 +17,9 @@ enum Reglages {
 
     private enum Cle {
         static let amorcageFait = "reglage.amorcageFait"
+        static let onboardingFait = "onboarding.fait"
+        static let utilisateurHistorique = "migration.utilisateurHistorique"
+        static let evolutionAnnoncee = "migration.evolutionAnnoncee"
         static let promoMasqueeJusquA = "promo.masqueeJusquA"
         static let promoDerniereApp = "promo.derniereApp"
         static let avisNombreTirages = "avis.nombreTirages"
@@ -48,6 +52,28 @@ enum Reglages {
     static var amorcageFait: Bool {
         get { defaults.bool(forKey: Cle.amorcageFait) }
         set { defaults.set(newValue, forKey: Cle.amorcageFait) }
+    }
+
+    // MARK: Onboarding et migration freemium
+
+    /// Vrai une fois l'onboarding parcouru (ou l'app détectée comme
+    /// installation antérieure : ces utilisateurs ne le voient jamais).
+    static var onboardingFait: Bool {
+        get { defaults.bool(forKey: Cle.onboardingFait) }
+        set { defaults.set(newValue, forKey: Cle.onboardingFait) }
+    }
+
+    /// Installation antérieure au passage en freemium : tout ce qui a été
+    /// donné reste acquis.
+    static var utilisateurHistorique: Bool {
+        get { defaults.bool(forKey: Cle.utilisateurHistorique) }
+        set { defaults.set(newValue, forKey: Cle.utilisateurHistorique) }
+    }
+
+    /// Le message « Décide pour moi évolue » ne se montre qu'une fois.
+    static var evolutionAnnoncee: Bool {
+        get { defaults.bool(forKey: Cle.evolutionAnnoncee) }
+        set { defaults.set(newValue, forKey: Cle.evolutionAnnoncee) }
     }
 
     // MARK: Encart promo

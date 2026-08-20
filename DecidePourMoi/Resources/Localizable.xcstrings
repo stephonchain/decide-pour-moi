@@ -18,6 +18,74 @@
         }
       }
     },
+    "%@ une fois, à vie": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ once, forever"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ une fois, à vie"
+          }
+        }
+      }
+    },
+    "%@/mois": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/month"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/mois"
+          }
+        }
+      }
+    },
+    "%@/mois après l'essai": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/month after the trial"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/mois après l'essai"
+          }
+        }
+      }
+    },
+    "%@/semaine": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/week"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@/semaine"
+          }
+        }
+      }
+    },
     "%lld options": {
       "extractionState": "manual",
       "localizations": {
@@ -65,6 +133,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld sur %lld restantes"
+          }
+        }
+      }
+    },
+    "10 à 30 minutes": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 to 30 minutes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "10 à 30 minutes"
+          }
+        }
+      }
+    },
+    "3 JOURS GRATUITS": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 DAYS FREE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 JOURS GRATUITS"
+          }
+        }
+      }
+    },
+    "Abonnement de %@ par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per month subscription, automatically renewed. Cancel anytime in your App Store account settings."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnement de %@ par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store."
+          }
+        }
+      }
+    },
+    "Abonnement de %@ par semaine, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ per week subscription, automatically renewed. Cancel anytime in your App Store account settings."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abonnement de %@ par semaine, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store."
           }
         }
       }
@@ -120,6 +256,74 @@
         }
       }
     },
+    "Après 3 jours d'essai gratuit, abonnement de %@ par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "After a 3-day free trial, %@ per month subscription, automatically renewed. Cancel anytime in your App Store account settings."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Après 3 jours d'essai gratuit, abonnement de %@ par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store."
+          }
+        }
+      }
+    },
+    "Arrêtez d'hésiter. Laissez la roue trancher.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop hesitating. Let the wheel decide."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Arrêtez d'hésiter. Laissez la roue trancher."
+          }
+        }
+      }
+    },
+    "Aspirateur": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vacuuming"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aspirateur"
+          }
+        }
+      }
+    },
+    "Aucun achat à restaurer sur ce compte.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No purchase to restore on this account."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucun achat à restaurer sur ce compte."
+          }
+        }
+      }
+    },
     "Aucun tirage": {
       "extractionState": "manual",
       "localizations": {
@@ -150,6 +354,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune donnée collectée"
+          }
+        }
+      }
+    },
+    "Aucune offre disponible pour le moment.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No offer available right now."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aucune offre disponible pour le moment."
           }
         }
       }
@@ -205,6 +426,23 @@
         }
       }
     },
+    "Aïcha": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aïcha"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aïcha"
+          }
+        }
+      }
+    },
     "Burger": {
       "extractionState": "manual",
       "localizations": {
@@ -218,6 +456,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Burger"
+          }
+        }
+      }
+    },
+    "C'est le temps que l'hésitation vous prend chaque mois, à ce rythme.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "That's what hesitation costs you every month, at this pace."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "C'est le temps que l'hésitation vous prend chaque mois, à ce rythme."
+          }
+        }
+      }
+    },
+    "Ce que la roue change": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What the wheel changes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce que la roue change"
           }
         }
       }
@@ -256,6 +528,57 @@
         }
       }
     },
+    "Ce soir on regarde…": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonight we watch…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ce soir on regarde…"
+          }
+        }
+      }
+    },
+    "Celle-ci est pour vous. Lancez-la.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This one is for you. Spin it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Celle-ci est pour vous. Lancez-la."
+          }
+        }
+      }
+    },
+    "Chargement des offres…": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loading offers…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chargement des offres…"
+          }
+        }
+      }
+    },
     "Chiffres 1 à 10": {
       "extractionState": "manual",
       "localizations": {
@@ -269,6 +592,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "Chiffres 1 à 10"
+          }
+        }
+      }
+    },
+    "Cinéma": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movie theater"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cinéma"
+          }
+        }
+      }
+    },
+    "Classique": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classic"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Classique"
           }
         }
       }
@@ -324,6 +681,91 @@
         }
       }
     },
+    "Combien de temps perdez-vous par jour à hésiter ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How much time do you lose each day hesitating?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Combien de temps perdez-vous par jour à hésiter ?"
+          }
+        }
+      }
+    },
+    "Commencer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Get started"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer"
+          }
+        }
+      }
+    },
+    "Commencer mes 3 jours gratuits": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start my 3 free days"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Commencer mes 3 jours gratuits"
+          }
+        }
+      }
+    },
+    "Comédie": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comedy"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comédie"
+          }
+        }
+      }
+    },
+    "Conditions": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terms"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Conditions"
+          }
+        }
+      }
+    },
     "Confettis au résultat": {
       "extractionState": "manual",
       "localizations": {
@@ -358,6 +800,23 @@
         }
       }
     },
+    "Continuer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continuer"
+          }
+        }
+      }
+    },
     "Couleurs": {
       "extractionState": "manual",
       "localizations": {
@@ -371,6 +830,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Couleurs"
+          }
+        }
+      }
+    },
+    "Courses": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Groceries"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Courses"
           }
         }
       }
@@ -392,6 +868,23 @@
         }
       }
     },
+    "Créez autant de roues que vous voulez": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Create as many wheels as you want"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Créez autant de roues que vous voulez"
+          }
+        }
+      }
+    },
     "Crépuscule": {
       "extractionState": "manual",
       "localizations": {
@@ -405,6 +898,125 @@
           "stringUnit": {
             "state": "translated",
             "value": "Crépuscule"
+          }
+        }
+      }
+    },
+    "Cuisine": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cooking"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuisine"
+          }
+        }
+      }
+    },
+    "Des roues illimitées": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited wheels"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des roues illimitées"
+          }
+        }
+      }
+    },
+    "Des roues pour %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wheels for %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des roues pour %@"
+          }
+        }
+      }
+    },
+    "Des roues pour toutes vos décisions": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wheels for all your decisions"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des roues pour toutes vos décisions"
+          }
+        }
+      }
+    },
+    "Des tirages illimités, vraiment aléatoires": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited, truly random draws"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Des tirages illimités, vraiment aléatoires"
+          }
+        }
+      }
+    },
+    "Documentaire": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Documentary"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Documentaire"
+          }
+        }
+      }
+    },
+    "Donnez plus de chances à vos envies : une option ×3 occupe trois parts et sort trois fois plus souvent.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Give your cravings better odds: a ×3 option takes three slices and wins three times as often."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Donnez plus de chances à vos envies : une option ×3 occupe trois parts et sort trois fois plus souvent."
           }
         }
       }
@@ -426,6 +1038,91 @@
         }
       }
     },
+    "Débloquer à vie": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock forever"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Débloquer à vie"
+          }
+        }
+      }
+    },
+    "Débloquez tous les modes de tirage": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock every draw mode"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Débloquez tous les modes de tirage"
+          }
+        }
+      }
+    },
+    "Débloquez tout Décide pour moi": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock all of Decide for Me"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Débloquez tout Décide pour moi"
+          }
+        }
+      }
+    },
+    "Débloquez toutes les roues": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlock every wheel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Débloquez toutes les roues"
+          }
+        }
+      }
+    },
+    "Décide pour moi": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Decide for Me"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décide pour moi"
+          }
+        }
+      }
+    },
     "Décide pour moi fonctionne entièrement hors ligne. Aucune donnée n'est collectée, aucun compte n'est nécessaire.": {
       "extractionState": "manual",
       "localizations": {
@@ -439,6 +1136,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Décide pour moi fonctionne entièrement hors ligne. Aucune donnée n'est collectée, aucun compte n'est nécessaire."
+          }
+        }
+      }
+    },
+    "Décide pour moi fonctionne sans compte et sans publicité tierce. Vos roues et vos tirages restent sur votre iPhone.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Decide for Me works without an account and without third-party ads. Your wheels and draws stay on your iPhone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décide pour moi fonctionne sans compte et sans publicité tierce. Vos roues et vos tirages restent sur votre iPhone."
+          }
+        }
+      }
+    },
+    "Décide pour moi tranche en 5 secondes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Decide for Me settles it in 5 seconds."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décide pour moi tranche en 5 secondes."
+          }
+        }
+      }
+    },
+    "Décide pour moi évolue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Decide for Me is evolving"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Décide pour moi évolue"
+          }
+        }
+      }
+    },
+    "Découvrir mon offre": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "See my offer"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Découvrir mon offre"
           }
         }
       }
@@ -494,6 +1259,57 @@
         }
       }
     },
+    "En classe ou au travail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In class or at work"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En classe ou au travail"
+          }
+        }
+      }
+    },
+    "En classe, l'ordre de passage se tire au sort : plus de débat, plus de favoritisme.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In class, the running order is drawn at random: no more debate, no more favoritism."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En classe, l'ordre de passage se tire au sort : plus de débat, plus de favoritisme."
+          }
+        }
+      }
+    },
+    "En soirée, la roue devient le jeu : c'est elle qu'on accuse, jamais vous.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At parties, the wheel becomes the game: it takes the blame, never you."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En soirée, la roue devient le jeu : c'est elle qu'on accuse, jamais vous."
+          }
+        }
+      }
+    },
     "Encre": {
       "extractionState": "manual",
       "localizations": {
@@ -507,6 +1323,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Encre"
+          }
+        }
+      }
+    },
+    "Entre amis": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With friends"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entre amis"
+          }
+        }
+      }
+    },
+    "Essayez, lancez-la : touchez le centre.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try it, spin it: tap the center."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Essayez, lancez-la : touchez le centre."
+          }
+        }
+      }
+    },
+    "Et voilà : décidé.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "And that's that: decided."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Et voilà : décidé."
           }
         }
       }
@@ -545,6 +1412,57 @@
         }
       }
     },
+    "Films et sorties": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Movies and outings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Films et sorties"
+          }
+        }
+      }
+    },
+    "Fini les « je sais pas, et toi ? » : le dîner se décide en un geste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No more “I don't know, you pick”: dinner is decided in one flick."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fini les « je sais pas, et toi ? » : le dîner se décide en un geste."
+          }
+        }
+      }
+    },
+    "Fonction premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium feature"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fonction premium"
+          }
+        }
+      }
+    },
     "Forêt": {
       "extractionState": "manual",
       "localizations": {
@@ -579,6 +1497,23 @@
         }
       }
     },
+    "Hebdomadaire": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weekly"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hebdomadaire"
+          }
+        }
+      }
+    },
     "Historique": {
       "extractionState": "manual",
       "localizations": {
@@ -592,6 +1527,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historique"
+          }
+        }
+      }
+    },
+    "Je suis prêt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I'm ready"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je suis prêt"
           }
         }
       }
@@ -613,6 +1565,91 @@
         }
       }
     },
+    "Joueur 1": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Player 1"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joueur 1"
+          }
+        }
+      }
+    },
+    "Joueur 2": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Player 2"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joueur 2"
+          }
+        }
+      }
+    },
+    "Joueur 3": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Player 3"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joueur 3"
+          }
+        }
+      }
+    },
+    "Joueur 4": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Player 4"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Joueur 4"
+          }
+        }
+      }
+    },
+    "Juste moi": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Just me"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Juste moi"
+          }
+        }
+      }
+    },
     "L'app ne demande aucune inscription, n'utilise aucun outil de mesure d'audience et n'intègre aucune régie publicitaire tierce.": {
       "extractionState": "manual",
       "localizations": {
@@ -626,6 +1663,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'app ne demande aucune inscription, n'utilise aucun outil de mesure d'audience et n'intègre aucune régie publicitaire tierce."
+          }
+        }
+      }
+    },
+    "L'historique de vos tirages": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your draw history"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "L'historique de vos tirages"
           }
         }
       }
@@ -660,6 +1714,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "L'option tirée sort de la roue jusqu'à réinitialisation."
+          }
+        }
+      }
+    },
+    "La pondération": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weighting"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pondération"
+          }
+        }
+      }
+    },
+    "La pondération de vos envies": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weighting for your cravings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pondération de vos envies"
+          }
+        }
+      }
+    },
+    "La pondération des options": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Option weighting"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La pondération des options"
+          }
+        }
+      }
+    },
+    "La roue enchaîne les tirages et construit la liste toute seule. Parfait pour les profs et les tournois.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The wheel chains draws and builds the list by itself. Perfect for teachers and tournaments."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La roue enchaîne les tirages et construit la liste toute seule. Parfait pour les profs et les tournois."
           }
         }
       }
@@ -749,6 +1871,40 @@
         }
       }
     },
+    "Le mode ordre de passage": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The running order mode"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mode ordre de passage"
+          }
+        }
+      }
+    },
+    "Le mode « Ordre de passage »": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The “Running order” mode"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le mode « Ordre de passage »"
+          }
+        }
+      }
+    },
     "Le poids multiplie la taille de la part **et** ses chances de sortir.": {
       "extractionState": "manual",
       "localizations": {
@@ -779,6 +1935,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Les 50 derniers tirages sont conservés sur l'appareil."
+          }
+        }
+      }
+    },
+    "Les achats": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchases"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les achats"
+          }
+        }
+      }
+    },
+    "Les achats passent par l'App Store et par RevenueCat, notre prestataire de gestion des reçus. Il traite un identifiant anonyme et l'historique d'achat de l'app, sans lien avec votre identité. Aucune autre donnée ne lui est transmise.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchases go through the App Store and RevenueCat, our receipt management provider. It processes an anonymous identifier and the app's purchase history, with no link to your identity. No other data is sent to it."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les achats passent par l'App Store et par RevenueCat, notre prestataire de gestion des reçus. Il traite un identifiant anonyme et l'historique d'achat de l'app, sans lien avec votre identité. Aucune autre donnée ne lui est transmise."
+          }
+        }
+      }
+    },
+    "Les achats sont momentanément indisponibles. Réessayez plus tard — tout le reste de l'app fonctionne.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Purchases are temporarily unavailable. Try again later — everything else in the app works."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les achats sont momentanément indisponibles. Réessayez plus tard — tout le reste de l'app fonctionne."
           }
         }
       }
@@ -851,6 +2058,23 @@
         }
       }
     },
+    "Lessive": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laundry"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lessive"
+          }
+        }
+      }
+    },
     "Liste des options": {
       "extractionState": "manual",
       "localizations": {
@@ -864,6 +2088,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Liste des options"
+          }
+        }
+      }
+    },
+    "Léa": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Léa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Léa"
+          }
+        }
+      }
+    },
+    "MEILLEURE OFFRE": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "BEST VALUE"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "MEILLEURE OFFRE"
+          }
+        }
+      }
+    },
+    "Ma famille": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My family"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ma famille"
+          }
+        }
+      }
+    },
+    "Marco": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marco"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Marco"
           }
         }
       }
@@ -885,6 +2177,57 @@
         }
       }
     },
+    "Mensuel": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Monthly"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mensuel"
+          }
+        }
+      }
+    },
+    "Merci de soutenir une app sans pub.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thank you for supporting an ad-free app."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Merci de soutenir une app sans pub."
+          }
+        }
+      }
+    },
+    "Mes amis": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My friends"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes amis"
+          }
+        }
+      }
+    },
     "Mes roues": {
       "extractionState": "manual",
       "localizations": {
@@ -898,6 +2241,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mes roues"
+          }
+        }
+      }
+    },
+    "Mes élèves ou collègues": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "My students or coworkers"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mes élèves ou collègues"
           }
         }
       }
@@ -949,6 +2309,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Modifier la roue"
+          }
+        }
+      }
+    },
+    "Moins de 10 minutes": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Less than 10 minutes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Moins de 10 minutes"
+          }
+        }
+      }
+    },
+    "Même parfois, ça pèse.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Even sometimes, it adds up."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Même parfois, ça pèse."
+          }
+        }
+      }
+    },
+    "Nina": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nina"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nina"
           }
         }
       }
@@ -1017,6 +2428,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nouvelle roue"
+          }
+        }
+      }
+    },
+    "On prend environ 35 000 décisions par jour, et la fatigue décisionnelle est réelle : plus on tranche de petites choses, moins il reste d'énergie pour les grandes.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "We make about 35,000 decisions a day, and decision fatigue is real: the more small things you settle, the less energy is left for the big ones."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On prend environ 35 000 décisions par jour, et la fatigue décisionnelle est réelle : plus on tranche de petites choses, moins il reste d'énergie pour les grandes."
           }
         }
       }
@@ -1123,6 +2551,40 @@
         }
       }
     },
+    "Où hésitez-vous le plus ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Where do you hesitate the most?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Où hésitez-vous le plus ?"
+          }
+        }
+      }
+    },
+    "Page précédente": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Previous page"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Page précédente"
+          }
+        }
+      }
+    },
     "Palette des nouvelles roues": {
       "extractionState": "manual",
       "localizations": {
@@ -1136,6 +2598,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Palette des nouvelles roues"
+          }
+        }
+      }
+    },
+    "Parfois": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sometimes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Parfois"
           }
         }
       }
@@ -1191,6 +2670,40 @@
         }
       }
     },
+    "Passer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skip"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passer"
+          }
+        }
+      }
+    },
+    "Passer en premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Go premium"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passer en premium"
+          }
+        }
+      }
+    },
     "Pile": {
       "extractionState": "manual",
       "localizations": {
@@ -1242,6 +2755,40 @@
         }
       }
     },
+    "Plus de 30 minutes": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "More than 30 minutes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus de 30 minutes"
+          }
+        }
+      }
+    },
+    "Plusieurs réponses possibles.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose as many as you like."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plusieurs réponses possibles."
+          }
+        }
+      }
+    },
     "Poids": {
       "extractionState": "manual",
       "localizations": {
@@ -1276,6 +2823,23 @@
         }
       }
     },
+    "Pondérez vos options": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weight your options"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pondérez vos options"
+          }
+        }
+      }
+    },
     "Position %lld sur %lld": {
       "extractionState": "manual",
       "localizations": {
@@ -1293,6 +2857,40 @@
         }
       }
     },
+    "Poubelles": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trash duty"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Poubelles"
+          }
+        }
+      }
+    },
+    "Pour %@, et pour tout le reste.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "For %@, and for everything else."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour %@, et pour tout le reste."
+          }
+        }
+      }
+    },
     "Pour les soignants": {
       "extractionState": "manual",
       "localizations": {
@@ -1306,6 +2904,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pour les soignants"
+          }
+        }
+      }
+    },
+    "Premium actif": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium active"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium actif"
+          }
+        }
+      }
+    },
+    "Premium restauré. Merci !": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium restored. Thank you!"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium restauré. Merci !"
+          }
+        }
+      }
+    },
+    "Prêt à ne plus jamais bloquer sur une décision ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ready to never get stuck on a decision again?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prêt à ne plus jamais bloquer sur une décision ?"
           }
         }
       }
@@ -1340,6 +2989,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qui commence ?"
+          }
+        }
+      }
+    },
+    "Qui décidera avec vous ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who will decide with you?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui décidera avec vous ?"
+          }
+        }
+      }
+    },
+    "Qui fait quoi à la maison": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who does what at home"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui fait quoi à la maison"
+          }
+        }
+      }
+    },
+    "Qui passe au tableau ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who goes to the board?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui passe au tableau ?"
+          }
+        }
+      }
+    },
+    "Qui s'y colle ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who's on duty?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui s'y colle ?"
           }
         }
       }
@@ -1395,6 +3112,23 @@
         }
       }
     },
+    "Repas": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Meals"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Repas"
+          }
+        }
+      }
+    },
     "Restaurer les roues de départ": {
       "extractionState": "manual",
       "localizations": {
@@ -1408,6 +3142,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Restaurer les roues de départ"
+          }
+        }
+      }
+    },
+    "Restaurer mes achats": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore my purchases"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer mes achats"
           }
         }
       }
@@ -1442,6 +3193,74 @@
           "stringUnit": {
             "state": "translated",
             "value": "Retirer cette option"
+          }
+        }
+      }
+    },
+    "Retrouvez tous vos tirages": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Find all your past draws"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retrouvez tous vos tirages"
+          }
+        }
+      }
+    },
+    "Revoir la présentation": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Replay the introduction"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Revoir la présentation"
+          }
+        }
+      }
+    },
+    "Roues illimitées, tous les modes, historique.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited wheels, every mode, history."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roues illimitées, tous les modes, historique."
+          }
+        }
+      }
+    },
+    "Réessayer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Try again"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Réessayer"
           }
         }
       }
@@ -1510,6 +3329,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Résultat : %@"
+          }
+        }
+      }
+    },
+    "Sacha": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sacha"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sacha"
           }
         }
       }
@@ -1616,6 +3452,23 @@
         }
       }
     },
+    "Souvent": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Often"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Souvent"
+          }
+        }
+      }
+    },
     "Suivant": {
       "extractionState": "manual",
       "localizations": {
@@ -1718,6 +3571,23 @@
         }
       }
     },
+    "Série": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "TV show"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Série"
+          }
+        }
+      }
+    },
     "Terminé": {
       "extractionState": "manual",
       "localizations": {
@@ -1731,6 +3601,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Terminé"
+          }
+        }
+      }
+    },
+    "Thriller": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thriller"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thriller"
           }
         }
       }
@@ -1752,6 +3639,23 @@
         }
       }
     },
+    "Tom": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tom"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tom"
+          }
+        }
+      }
+    },
     "Tourner la roue": {
       "extractionState": "manual",
       "localizations": {
@@ -1765,6 +3669,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tourner la roue"
+          }
+        }
+      }
+    },
+    "Tous les modes : sans remise, ordre de passage": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every mode: without replacement, running order"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les modes : sans remise, ordre de passage"
+          }
+        }
+      }
+    },
+    "Tout le temps": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All the time"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout le temps"
+          }
+        }
+      }
+    },
+    "Tout le temps ? Vous n'êtes pas seul.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All the time? You're not alone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tout le temps ? Vous n'êtes pas seul."
           }
         }
       }
@@ -1799,6 +3754,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toutes les options sont sorties."
+          }
+        }
+      }
+    },
+    "Toutes les palettes de couleurs": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every color palette"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toutes les palettes de couleurs"
           }
         }
       }
@@ -1850,6 +3822,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Une ligne = une option. Collez votre liste, tout est créé d'un coup."
+          }
+        }
+      }
+    },
+    "Vaisselle": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dishes"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vaisselle"
           }
         }
       }
@@ -1922,6 +3911,40 @@
         }
       }
     },
+    "Vos données restent chez vous": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your data stays with you"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos données restent chez vous"
+          }
+        }
+      }
+    },
+    "Vos roues et tout ce que vous utilisiez restent à vous. Le premium débloque la création de nouvelles roues et tout le reste, pour toujours.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your wheels and everything you already used remain yours. Premium unlocks creating new wheels and everything else, forever."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vos roues et tout ce que vous utilisiez restent à vous. Le premium débloque la création de nouvelles roues et tout le reste, pour toujours."
+          }
+        }
+      }
+    },
     "Vos roues, vos options et votre historique de tirages restent sur votre iPhone. Ils ne sont envoyés nulle part et ne sont accessibles à personne d'autre que vous.": {
       "extractionState": "manual",
       "localizations": {
@@ -1939,6 +3962,159 @@
         }
       }
     },
+    "Votre plan": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your plan"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre plan"
+          }
+        }
+      }
+    },
+    "Vous arrive-t-il d'hésiter longtemps pour des petites décisions ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Do you ever hesitate for a long time over small decisions?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous arrive-t-il d'hésiter longtemps pour des petites décisions ?"
+          }
+        }
+      }
+    },
+    "Vous n'êtes pas seul.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You're not alone."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous n'êtes pas seul."
+          }
+        }
+      }
+    },
+    "Vous voyez l'idée.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "You get the idea."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vous voyez l'idée."
+          }
+        }
+      }
+    },
+    "la classe et le travail": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "class and work"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "la classe et le travail"
+          }
+        }
+      }
+    },
+    "le partage des corvées": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "sharing the chores"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "le partage des corvées"
+          }
+        }
+      }
+    },
+    "vos films et sorties": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your movies and outings"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vos films et sorties"
+          }
+        }
+      }
+    },
+    "vos repas": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your meals"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vos repas"
+          }
+        }
+      }
+    },
+    "vos soirées entre amis": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "your nights with friends"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "vos soirées entre amis"
+          }
+        }
+      }
+    },
     "À propos": {
       "extractionState": "manual",
       "localizations": {
@@ -1952,6 +4128,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "À propos"
+          }
+        }
+      }
+    },
+    "À vie": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lifetime"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À vie"
+          }
+        }
+      }
+    },
+    "≈ %lld h": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld h"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "≈ %lld h"
           }
         }
       }

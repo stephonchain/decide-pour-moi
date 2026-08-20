@@ -46,6 +46,9 @@ final class Roue {
     var titre: String = ""
     var modeBrut: String = ModeTirage.avecRemise.rawValue
     var paletteID: Int = 0
+    /// Roue préinstallée en teaser : visible dans la grille, ouvrable en
+    /// premium uniquement. Toujours faux pour une roue créée par l'utilisateur.
+    var verrouillee: Bool = false
     var creeeLe: Date = Date()
     var modifieeLe: Date = Date()
     /// Dernière ouverture, pour rouvrir la roue utilisée en dernier.

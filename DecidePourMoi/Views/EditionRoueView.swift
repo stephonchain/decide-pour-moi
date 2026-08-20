@@ -14,6 +14,8 @@ struct EditionRoueView: View {
     @Environment(\.dismiss) private var fermer
 
     @State private var listeTexteAffichee = false
+    @State private var premium = PremiumManager.shared
+    @State private var contextePaywall: ContextePaywall? = nil
 
     private var optionsValides: [OptionRoue] {
         roue.optionsOrdonnees.filter { !$0.label.trimmingCharacters(in: .whitespaces).isEmpty }
@@ -48,6 +50,9 @@ struct EditionRoueView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .sheet(item: $contextePaywall) { contexte in
+            PaywallView(contexte: contexte)
+        }
         .sheet(isPresented: $listeTexteAffichee) {
             ListeTexteView(texte: roue.optionsOrdonnees.map(\.label).joined(separator: "\n")) { lignes in
                 roue.remplacerOptions(par: lignes)
@@ -66,8 +71,10 @@ struct EditionRoueView: View {
 
             Section {
                 ForEach(roue.optionsOrdonnees) { option in
-                    LigneOption(option: option)
-                        .listRowBackground(Fond.carte)
+                    LigneOption(option: option, ponderationAutorisee: premium.acces.ponderationAutorisee) {
+                        contextePaywall = .ponderation
+                    }
+                    .listRowBackground(Fond.carte)
                 }
                 .onMove(perform: deplacer)
                 .onDelete(perform: supprimerIndices)
@@ -95,9 +102,14 @@ struct EditionRoueView: View {
 
             Section {
                 ForEach(ModeTirage.allCases) { mode in
+                    let verrouille = !premium.acces.modeAutorise(mode)
                     Button {
-                        roue.mode = mode
-                        Haptiques.shared.selection()
+                        if verrouille {
+                            contextePaywall = .modeDeTirage
+                        } else {
+                            roue.mode = mode
+                            Haptiques.shared.selection()
+                        }
                     } label: {
                         HStack(spacing: 12) {
                             Image(systemName: mode.symbole)
@@ -111,11 +123,14 @@ struct EditionRoueView: View {
                                     .foregroundStyle(.white.opacity(0.55))
                             }
                             Spacer()
-                            if roue.mode == mode {
+                            if verrouille {
+                                Cadenas()
+                            } else if roue.mode == mode {
                                 Image(systemName: "checkmark")
                                     .fontWeight(.bold)
                             }
                         }
+                        .opacity(verrouille ? 0.75 : 1)
                     }
                     .listRowBackground(Fond.carte)
                 }
@@ -124,8 +139,13 @@ struct EditionRoueView: View {
             }
 
             Section {
-                ChoixDePalette(paletteID: $roue.paletteID)
-                    .listRowBackground(Fond.carte)
+                ChoixDePalette(
+                    paletteID: $roue.paletteID,
+                    autorisees: premium.acces.palettesAutorisees
+                ) {
+                    contextePaywall = .palette
+                }
+                .listRowBackground(Fond.carte)
             } header: {
                 Text(tr("Couleurs"))
             }
@@ -193,6 +213,8 @@ struct EditionRoueView: View {
 struct LigneOption: View {
 
     @Bindable var option: OptionRoue
+    let ponderationAutorisee: Bool
+    let surVerrou: () -> Void
 
     var body: some View {
         HStack(spacing: 10) {
@@ -200,24 +222,40 @@ struct LigneOption: View {
                 .font(.system(.body, design: .rounded))
                 .submitLabel(.next)
 
-            Menu {
-                Picker(tr("Poids"), selection: $option.poids) {
-                    ForEach(1...3, id: \.self) { poids in
-                        Text(verbatim: "×\(poids)").tag(poids)
+            if ponderationAutorisee {
+                Menu {
+                    Picker(tr("Poids"), selection: $option.poids) {
+                        ForEach(1...3, id: \.self) { poids in
+                            Text(verbatim: "×\(poids)").tag(poids)
+                        }
+                    }
+                } label: {
+                    pastillePoids
+                }
+                .accessibilityLabel(Text(tr("Poids de l'option")))
+            } else {
+                Button(action: surVerrou) {
+                    HStack(spacing: 4) {
+                        Cadenas()
+                        pastillePoids
                     }
                 }
-            } label: {
-                Text(verbatim: "×\(option.poidsValide)")
-                    .font(.system(.footnote, design: .rounded, weight: .bold))
-                    .foregroundStyle(option.poidsValide > 1 ? Fond.sombreProfond : .white.opacity(0.7))
-                    .frame(width: 34, height: 26)
-                    .background(
-                        option.poidsValide > 1 ? Color.white : Color.white.opacity(0.12),
-                        in: .capsule
-                    )
+                .buttonStyle(.plain)
+                .accessibilityLabel(Text(tr("Poids de l'option")))
+                .accessibilityHint(Text(tr("Fonction premium")))
             }
-            .accessibilityLabel(Text(tr("Poids de l'option")))
         }
+    }
+
+    private var pastillePoids: some View {
+        Text(verbatim: "×\(option.poidsValide)")
+            .font(.system(.footnote, design: .rounded, weight: .bold))
+            .foregroundStyle(option.poidsValide > 1 ? Fond.sombreProfond : .white.opacity(0.7))
+            .frame(width: 34, height: 26)
+            .background(
+                option.poidsValide > 1 ? Color.white : Color.white.opacity(0.12),
+                in: .capsule
+            )
     }
 }
 
@@ -225,13 +263,22 @@ struct LigneOption: View {
 struct ChoixDePalette: View {
 
     @Binding var paletteID: Int
+    /// Palettes accessibles ; les autres portent un cadenas.
+    var autorisees: Set<Int> = Set(Palette.toutes.map(\.id))
+    /// Appelé au tap sur une palette verrouillée : route vers le paywall.
+    var surVerrou: () -> Void = {}
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             ForEach(Palette.toutes) { palette in
+                let verrouillee = !autorisees.contains(palette.id)
                 Button {
-                    paletteID = palette.id
-                    Haptiques.shared.selection()
+                    if verrouillee {
+                        surVerrou()
+                    } else {
+                        paletteID = palette.id
+                        Haptiques.shared.selection()
+                    }
                 } label: {
                     HStack(spacing: 12) {
                         HStack(spacing: 3) {
@@ -241,10 +288,14 @@ struct ChoixDePalette: View {
                                     .frame(width: 20, height: 22)
                             }
                         }
+                        .opacity(verrouillee ? 0.45 : 1)
                         Text(palette.nom)
                             .font(.system(.subheadline, design: .rounded, weight: .medium))
+                            .opacity(verrouillee ? 0.6 : 1)
                         Spacer()
-                        if paletteID == palette.id {
+                        if verrouillee {
+                            Cadenas()
+                        } else if paletteID == palette.id {
                             Image(systemName: "checkmark")
                                 .fontWeight(.bold)
                         }

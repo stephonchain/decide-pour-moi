@@ -11,6 +11,16 @@ enum Studio {
     /// Connect. Le texte intégral est également lisible hors ligne dans l'app.
     static let urlConfidentialite = URL(string: "https://decidepourmoi.app/confidentialite")!
 
+    /// Conditions d'utilisation : l'EULA standard d'Apple, obligatoire sur le
+    /// paywall. À remplacer si le studio publie ses propres conditions.
+    static let urlConditions = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
+
+    /// Clé API *publique* RevenueCat (App-specific, commence par "appl_").
+    /// À renseigner avant publication. Tant qu'elle ne l'est pas, l'app
+    /// fonctionne intégralement en gratuit et le paywall explique que les
+    /// achats sont momentanément indisponibles.
+    static let cleRevenueCat = "REMPLACER_PAR_LA_CLE_PUBLIQUE_REVENUECAT"
+
     static var versionAffichee: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
