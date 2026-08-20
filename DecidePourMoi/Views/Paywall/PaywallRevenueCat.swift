@@ -21,7 +21,9 @@ struct PaywallAdapte: View {
 
     var body: some View {
         Group {
-            if premium.outilsRevenueCatDisponibles, let offering = premium.offreRevenueCat {
+            if premium.outilsRevenueCatDisponibles,
+               let offering = premium.offreRevenueCat,
+               Self.aUnPaywallConfigure(offering) {
                 RevenueCatUI.PaywallView(offering: offering)
                     .onPurchaseCompleted { _ in fermer() }
                     .onRestoreCompleted { info in
@@ -42,6 +44,14 @@ struct PaywallAdapte: View {
         } else {
             fermerFeuille()
         }
+    }
+
+    /// Le paywall distant ne vaut que s'il a été dessiné dans le tableau de
+    /// bord. Sans cela, RevenueCatUI affiche son gabarit de secours — un
+    /// écran de debug qui ne doit jamais atteindre un utilisateur — alors que
+    /// le paywall maison, lui, est toujours prêt.
+    private static func aUnPaywallConfigure(_ offering: Offering) -> Bool {
+        offering.paywall != nil || offering.paywallComponents != nil
     }
 }
 

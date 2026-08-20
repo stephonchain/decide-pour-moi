@@ -256,3 +256,41 @@ sips -g pixelWidth -g pixelHeight paywall-revue.jpg
 
 `sips` est livré avec macOS, rien à installer. La dernière commande doit
 afficher exactement 640 et 920.
+
+
+---
+
+## Le fichier StoreKit n'est actif que lancé par Xcode
+
+C'est le piège du test local : la configuration StoreKit est un réglage du
+schéma, injecté par Xcode au lancement. Une app relancée depuis l'écran
+d'accueil tourne **sans** — `Product.products` revient vide et le paywall
+affiche « Aucune offre disponible », alors même que « Source active » dit
+StoreKit.
+
+La séquence correcte, après avoir changé la source dans Réglages → Debug :
+arrêter l'app depuis Xcode, puis ⌘R. Jamais de relance à la main depuis
+l'écran d'accueil pendant les tests StoreKit.
+
+## Le paywall distant exige d'être dessiné
+
+`RevenueCatUI.PaywallView` sans paywall conçu dans le tableau de bord
+affiche un gabarit de secours (« No Paywall configured », prix en dollars,
+lien vers le dashboard). L'app détecte désormais ce cas et retombe sur le
+paywall maison : le gabarit de secours ne peut plus atteindre un
+utilisateur. Pour utiliser le paywall distant, dessinez-le dans
+RevenueCat → Paywalls et attachez-le à l'offering `default`.
+
+## Aligner le tableau de bord RevenueCat sur le modèle
+
+Le paywall de test montrait Monthly / Yearly / Lifetime : l'offering du
+tableau de bord contient un package annuel, alors que le modèle retenu est
+hebdo / mensuel / à vie. À corriger dans RevenueCat → Offerings :
+
+1. supprimer le package Yearly (`$rc_annual`) de l'offering `default` ;
+2. ajouter le package Weekly (`$rc_weekly`) ;
+3. attacher à chaque package le produit `dpm_premium_*` correspondant.
+
+Les prix en dollars viennent du Test Store (clé `test_…`) : ce sont ses
+produits fictifs, pas ceux d'App Store Connect. Ils disparaîtront avec le
+passage à la clé `appl_…`.

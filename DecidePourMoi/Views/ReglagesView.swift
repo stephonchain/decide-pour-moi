@@ -215,7 +215,7 @@ struct ReglagesView: View {
                 } header: {
                     Text(verbatim: "Debug")
                 } footer: {
-                    Text(verbatim: "Visible uniquement en build de développement. Changer la source demande de relancer l'app : le SDK ne se configure qu'une fois au lancement.")
+                    Text(verbatim: "Visible uniquement en build de développement. Après un changement de source, relancez depuis Xcode (⌘R) : le fichier StoreKit local n'est actif que lancé par Xcode, et le SDK ne se configure qu'au lancement.")
                         .foregroundStyle(.white.opacity(0.5))
                 }
                 #endif
