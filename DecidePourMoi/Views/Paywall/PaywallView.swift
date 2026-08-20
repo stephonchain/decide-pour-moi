@@ -1,5 +1,4 @@
 import Foundation
-import RevenueCat
 import SwiftUI
 
 /// D'où vient l'utilisateur : le paywall adapte son titre au contexte,
@@ -64,13 +63,11 @@ struct PaywallView: View {
 
     @Environment(\.dismiss) private var fermerFeuille
     @State private var premium = PremiumManager.shared
-    @State private var selection: ChoixOffre = .mensuel
+    @State private var selection: OffrePremium.Sorte = .mensuel
     @State private var achatEnCours = false
     @State private var messageErreur: String? = nil
     @State private var croixVisible = false
     @State private var celebration = false
-
-    enum ChoixOffre { case hebdo, mensuel, aVie }
 
     var body: some View {
         ZStack {
@@ -140,62 +137,44 @@ struct PaywallView: View {
 
     @ViewBuilder
     private var offres: some View {
-        if !offresDisponibles.isEmpty {
+        if !premium.offres.isEmpty {
             VStack(spacing: 10) {
-                // Seules les offres réellement présentes dans l'offering
-                // s'affichent : pendant la configuration RevenueCat, une
-                // offre manquante ne doit pas produire une carte vide.
-                if offresDisponibles.contains(.mensuel) {
+                ForEach(premium.offres) { offre in
                     CarteOffre(
-                        choisie: selection == .mensuel,
-                        badge: premium.essaiDisponible ? tr("3 JOURS GRATUITS") : nil,
-                        titre: tr("Mensuel"),
-                        detail: libelleMensuel
-                    ) { choisir(.mensuel) }
-                }
-
-                if offresDisponibles.contains(.aVie) {
-                    CarteOffre(
-                        choisie: selection == .aVie,
-                        badge: tr("MEILLEURE OFFRE"),
-                        titre: tr("À vie"),
-                        detail: libelleAVie
-                    ) { choisir(.aVie) }
-                }
-
-                if offresDisponibles.contains(.hebdo) {
-                    CarteOffre(
-                        choisie: selection == .hebdo,
-                        badge: nil,
-                        titre: tr("Hebdomadaire"),
-                        detail: libelleHebdo
-                    ) { choisir(.hebdo) }
+                        choisie: selection == offre.sorte,
+                        badge: badge(pour: offre),
+                        titre: offre.sorte.titre,
+                        detail: offre.detail
+                    ) { choisir(offre.sorte) }
                 }
             }
         } else {
             VStack(spacing: 12) {
-                if premium.configure {
-                    ProgressView()
-                        .tint(.white)
-                    Text(premium.erreurOffre ?? tr("Chargement des offres…"))
-                        .font(.system(.footnote, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.65))
-                        .multilineTextAlignment(.center)
-                    Button {
-                        Task { await premium.chargerOffre() }
-                    } label: {
-                        Text(tr("Réessayer"))
-                            .font(.system(.subheadline, design: .rounded, weight: .semibold))
-                    }
-                } else {
-                    Text(tr("Les achats sont momentanément indisponibles. Réessayez plus tard — tout le reste de l'app fonctionne."))
-                        .font(.system(.footnote, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.65))
-                        .multilineTextAlignment(.center)
+                ProgressView()
+                    .tint(.white)
+                Text(premium.erreurOffre ?? tr("Chargement des offres…"))
+                    .font(.system(.footnote, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.65))
+                    .multilineTextAlignment(.center)
+                Button {
+                    Task { await premium.chargerOffre() }
+                } label: {
+                    Text(tr("Réessayer"))
+                        .font(.system(.subheadline, design: .rounded, weight: .semibold))
                 }
             }
             .frame(maxWidth: .infinity)
             .carte()
+        }
+    }
+
+    /// Le badge d'essai suit le produit ; « meilleure offre » revient à
+    /// l'achat unique, notre ancre de valeur.
+    private func badge(pour offre: OffrePremium) -> String? {
+        switch offre.sorte {
+        case .mensuel: offre.aUnEssai ? tr("3 JOURS GRATUITS") : nil
+        case .aVie: tr("MEILLEURE OFFRE")
+        case .hebdo: nil
         }
     }
 
@@ -217,8 +196,8 @@ struct PaywallView: View {
                 .padding(.vertical, 16)
                 .background(.white, in: .capsule)
             }
-            .disabled(achatEnCours || packageChoisi == nil)
-            .opacity(packageChoisi == nil ? 0.5 : 1)
+            .disabled(achatEnCours || offreChoisie == nil)
+            .opacity(offreChoisie == nil ? 0.5 : 1)
 
             if let messageErreur {
                 Text(messageErreur)
@@ -227,7 +206,7 @@ struct PaywallView: View {
                     .multilineTextAlignment(.center)
             }
 
-            if selection != .aVie, let mention = mentionRenouvellement {
+            if let mention = offreChoisie?.mentionRenouvellement {
                 Text(mention)
                     .font(.system(.caption2, design: .rounded))
                     .foregroundStyle(.white.opacity(0.55))
@@ -243,7 +222,7 @@ struct PaywallView: View {
             } label: {
                 Text(tr("Restaurer mes achats"))
             }
-            .disabled(achatEnCours || !premium.configure)
+            .disabled(achatEnCours)
 
             Link(destination: Studio.urlConditions) { Text(tr("Conditions")) }
             Link(destination: Studio.urlConfidentialite) { Text(tr("Confidentialité")) }
@@ -274,89 +253,40 @@ struct PaywallView: View {
         .padding(16)
     }
 
-    // MARK: Libellés dynamiques (jamais de prix en dur : ils viennent du store)
+    // MARK: Lecture de l'offre sélectionnée
 
-    private var packageChoisi: Package? {
-        package(pour: selection)
-    }
-
-    private func package(pour choix: ChoixOffre) -> Package? {
-        switch choix {
-        case .hebdo: premium.packageHebdo
-        case .mensuel: premium.packageMensuel
-        case .aVie: premium.packageAVie
-        }
-    }
-
-    /// Offres présentes dans l'offering, dans l'ordre d'affichage.
-    private var offresDisponibles: [ChoixOffre] {
-        [.mensuel, .aVie, .hebdo].filter { package(pour: $0) != nil }
-    }
-
-    /// Garde la sélection sur une offre qui existe vraiment.
-    private func recalerLaSelection() {
-        guard !offresDisponibles.isEmpty, !offresDisponibles.contains(selection) else { return }
-        selection = offresDisponibles[0]
-    }
-
-    private var libelleMensuel: String {
-        guard let prix = premium.packageMensuel?.storeProduct.localizedPriceString else { return "" }
-        return premium.essaiDisponible
-            ? tr("\(prix)/mois après l'essai")
-            : tr("\(prix)/mois")
-    }
-
-    private var libelleAVie: String {
-        guard let prix = premium.packageAVie?.storeProduct.localizedPriceString else { return "" }
-        return tr("\(prix) une fois, à vie")
-    }
-
-    private var libelleHebdo: String {
-        guard let prix = premium.packageHebdo?.storeProduct.localizedPriceString else { return "" }
-        return tr("\(prix)/semaine")
+    private var offreChoisie: OffrePremium? {
+        premium.offres.first { $0.sorte == selection }
     }
 
     private var texteCTA: String {
-        switch selection {
-        case .mensuel: premium.essaiDisponible ? tr("Commencer mes 3 jours gratuits") : tr("Continuer")
-        case .aVie: tr("Débloquer à vie")
-        case .hebdo: tr("Continuer")
-        }
+        offreChoisie?.texteCTA ?? tr("Continuer")
     }
 
-    /// Mention obligatoire : le prix réel après l'essai, le renouvellement
-    /// automatique et l'annulation, sans ambiguïté.
-    private var mentionRenouvellement: String? {
-        switch selection {
-        case .mensuel:
-            guard let prix = premium.packageMensuel?.storeProduct.localizedPriceString else { return nil }
-            return premium.essaiDisponible
-                ? tr("Après 3 jours d'essai gratuit, abonnement de \(prix) par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.")
-                : tr("Abonnement de \(prix) par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.")
-        case .hebdo:
-            guard let prix = premium.packageHebdo?.storeProduct.localizedPriceString else { return nil }
-            return tr("Abonnement de \(prix) par semaine, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.")
-        case .aVie:
-            return nil
+    /// Garde la sélection sur une offre qui existe vraiment : pendant la
+    /// configuration, l'offering peut n'en contenir qu'une partie.
+    private func recalerLaSelection() {
+        guard let premiere = premium.offres.first else { return }
+        if !premium.offres.contains(where: { $0.sorte == selection }) {
+            selection = premiere.sorte
         }
     }
 
     // MARK: Actions
 
-    private func choisir(_ choix: ChoixOffre) {
+    private func choisir(_ choix: OffrePremium.Sorte) {
         selection = choix
         Haptiques.shared.selection()
     }
 
     private func acheter() {
-        guard let package = packageChoisi, !achatEnCours else { return }
+        guard offreChoisie != nil, !achatEnCours else { return }
         achatEnCours = true
         messageErreur = nil
         Task {
             defer { achatEnCours = false }
             do {
-                let resultat = try await premium.acheter(package)
-                if resultat == .achete { feter() }
+                if try await premium.acheter(selection) == .achete { feter() }
             } catch {
                 messageErreur = error.localizedDescription
             }

@@ -21,6 +21,13 @@ enum Studio {
     /// achats sont momentanément indisponibles.
     static let cleRevenueCat = "REMPLACER_PAR_LA_CLE_PUBLIQUE_REVENUECAT"
 
+    /// Tant que la clé n'est pas renseignée, les achats passent par StoreKit
+    /// en direct : le paywall reste testable, seul le tableau de bord de
+    /// conversion manque.
+    static var revenueCatConfigure: Bool {
+        cleRevenueCat.hasPrefix("appl_")
+    }
+
     static var versionAffichee: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"

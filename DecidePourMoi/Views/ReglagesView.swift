@@ -60,7 +60,6 @@ struct ReglagesView: View {
                         } label: {
                             Label(tr("Restaurer mes achats"), systemImage: "arrow.clockwise.circle")
                         }
-                        .disabled(!premium.configure)
                         .listRowBackground(Fond.carte)
                     }
 

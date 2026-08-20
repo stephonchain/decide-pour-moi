@@ -6,14 +6,29 @@ est déjà prêt pour les trois.
 | Environnement | Ce qu'il teste | Ce qu'il exige |
 |---|---|---|
 | Interrupteur « Simuler premium » | Le gating : ce qui est verrouillé, où mène chaque cadenas | Rien, il est déjà là |
-| Fichier StoreKit local | Le paywall, les prix, l'achat, la restauration | RevenueCat configuré |
-| Sandbox App Store | La chaîne complète, reçus compris | RevenueCat + App Store Connect |
+| Fichier StoreKit local | Le paywall, les prix, l'achat, la restauration | Rien d'autre |
+| Sandbox App Store | La chaîne complète, reçus compris | Les produits dans App Store Connect |
 
-**Le fichier StoreKit local ne dispense pas de configurer RevenueCat.** Le SDK
-va chercher la composition de l'offre (quels packages, dans quel ordre) sur
-les serveurs RevenueCat ; seuls les prix et la transaction viennent de
-StoreKit. Sans clé API, le paywall affiche « achats momentanément
-indisponibles » et le reste de l'app fonctionne normalement.
+## RevenueCat n'est pas un prérequis
+
+Les achats ont deux implémentations, choisies automatiquement :
+
+- **StoreKit en direct**, tant que `Studio.cleRevenueCat` ne commence pas par
+  `appl_`. Le paywall, les prix, l'achat et la restauration fonctionnent
+  entièrement. C'est le mode dans lequel se trouve le dépôt aujourd'hui.
+- **RevenueCat**, dès que la clé est renseignée. Il prend alors le relais
+  sans rien changer d'autre : gestion des reçus, des essais, et surtout le
+  tableau de bord de conversion.
+
+Concrètement : vous pouvez faire toute la configuration Apple, tester le
+parcours d'achat de bout en bout, et n'ajouter RevenueCat qu'ensuite. Les
+identifiants de produits étant les mêmes, la bascule est un copier-coller de
+clé.
+
+Le seul écart entre les deux modes tient à la mesure : sans RevenueCat, pas
+de statistiques de conversion, et le suivi des abonnements dans le temps
+repose sur StoreKit seul. Pour une V1 qu'on veut piloter au chiffre, c'est
+une raison suffisante d'y passer avant le lancement.
 
 ---
 
@@ -74,6 +89,9 @@ Coller la clé dans `DecidePourMoi/Services/Studio.swift` :
 static let cleRevenueCat = "appl_VotreCleIci"
 ```
 
+L'étape 2 peut donc attendre. Passez directement à l'étape 3 pour tester ce
+que vous venez de créer.
+
 ## Étape 3. Tester en local avec le fichier StoreKit
 
 Le schéma partagé pointe déjà sur `DecidePourMoi.storekit`, à la racine du
@@ -121,8 +139,10 @@ dure environ 3 minutes. C'est voulu, cela permet de voir l'expiration.
 
 ## Pièges connus
 
-**Le paywall reste sur « Chargement des offres… »** — l'offering n'est pas
-marqué *current* dans RevenueCat, ou la clé API est celle d'un autre projet.
+**Le paywall reste sur « Chargement des offres… »** — en mode RevenueCat,
+l'offering n'est pas marqué *current* ou la clé appartient à un autre projet.
+En mode StoreKit direct, le fichier `.storekit` n'est pas sélectionné dans le
+schéma et les produits n'existent pas encore côté Apple.
 
 **Une carte d'offre manque** — l'identifiant du package n'est pas un type
 standard (voir étape 2), ou le produit n'est pas encore « Prêt à soumettre »
