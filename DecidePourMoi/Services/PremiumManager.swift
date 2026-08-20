@@ -31,6 +31,7 @@ final class PremiumManager {
     private(set) var estPremium = false
     private(set) var offres: [OffrePremium] = []
     private(set) var demarre = false
+    private(set) var chargementEnCours = false
     /// Dernière erreur de chargement des offres, affichée au paywall.
     private(set) var erreurOffre: String?
 
@@ -39,6 +40,21 @@ final class PremiumManager {
     private let storeKit = AchatsStoreKit()
 
     private init() {}
+
+    /// Source réellement utilisée. En développement, un réglage permet de la
+    /// forcer : c'est le seul moyen de tester le paywall avec le fichier
+    /// StoreKit local tant que les produits ne sont pas validés côté Apple
+    /// ni l'offering configuré côté RevenueCat.
+    private var sourceRetenue: Source {
+        #if DEBUG
+        switch UserDefaults.standard.string(forKey: CleReglage.debugSourceAchats) {
+        case "storekit": return .storeKit
+        case "revenuecat": return .revenueCat
+        default: break
+        }
+        #endif
+        return Studio.revenueCatConfigure ? .revenueCat : .storeKit
+    }
 
     /// Vrai quand les outils RevenueCat — paywall distant, Customer Center —
     /// sont utilisables.
@@ -65,7 +81,7 @@ final class PremiumManager {
         guard !demarre else { return }
         demarre = true
 
-        if Studio.revenueCatConfigure {
+        if sourceRetenue == .revenueCat {
             source = .revenueCat
             Purchases.logLevel = .warn
             Purchases.configure(withAPIKey: Studio.cleRevenueCat)
@@ -88,6 +104,8 @@ final class PremiumManager {
 
     func chargerOffre() async {
         erreurOffre = nil
+        chargementEnCours = true
+        defer { chargementEnCours = false }
         do {
             switch source {
             case .revenueCat:

@@ -40,9 +40,9 @@ D'abord le groupe d'abonnements, nommé `Premium`, puis dedans :
 
 | Produit | Type | ID EXACT | Prix | Rang |
 |---|---|---|---|---|
-| Premium mensuel | Abonnement auto-renouvelable | `monthly` | 3,99 € | 1 |
-| Premium hebdo | Abonnement auto-renouvelable | `weekly` | 1,99 € | 2 |
-| Premium à vie | Achat non consommable | `lifetime` | 9,99 € | — |
+| Premium mensuel | Abonnement auto-renouvelable | `dpm_premium_monthly` | 3,99 € | 1 |
+| Premium hebdo | Abonnement auto-renouvelable | `dpm_premium_weekly` | 1,99 € | 2 |
+| Premium à vie | Achat non consommable | `dpm_premium_lifetime` | 9,99 € | — |
 
 Les identifiants doivent être **exactement** ceux-là : ils sont repris dans
 `DecidePourMoi.storekit` et devront correspondre à RevenueCat.
@@ -71,9 +71,9 @@ types standards de RevenueCat :
 
 | Package | Identifiant à choisir | Produit rattaché |
 |---|---|---|
-| Monthly | `$rc_monthly` | `monthly` |
-| Weekly | `$rc_weekly` | `weekly` |
-| Lifetime | `$rc_lifetime` | `lifetime` |
+| Monthly | `$rc_monthly` | `dpm_premium_monthly` |
+| Weekly | `$rc_weekly` | `dpm_premium_weekly` |
+| Lifetime | `$rc_lifetime` | `dpm_premium_lifetime` |
 
 Avec un identifiant personnalisé, la carte correspondante ne s'affichera pas.
 Le paywall masque proprement toute offre absente, donc si une carte manque à
@@ -182,3 +182,36 @@ vérifier le tableau de bord et le paywall distant, mais deux limites :
 
 Le repli StoreKit reste donc utile : c'est lui qui teste la vraie chaîne
 Apple, en sandbox, avec les vrais reçus.
+
+
+---
+
+## « Aucune offre disponible » : les trois causes
+
+Le paywall n'invente rien : il affiche ce que la source lui donne. Quand il
+ne donne rien, c'est l'une de ces trois raisons.
+
+**Les produits App Store Connect ne sont pas complets.** Un produit en
+« Métadonnées manquantes » — capture d'écran de revue absente, description
+vide — n'est servi ni au sandbox, ni à RevenueCat. Il faut le faire passer
+en « Prêt à envoyer ». La capture demandée est une image de l'écran où
+l'achat est proposé : le paywall lui-même fait l'affaire.
+
+**L'offering RevenueCat n'est pas configuré.** Le SDK ne lit pas App Store
+Connect directement : il sert ce qui est déclaré dans son propre tableau de
+bord. Il faut y créer les trois produits, un offering marqué *current*, et y
+attacher les packages.
+
+**La propagation prend du temps.** Un produit tout juste complété met de
+quelques minutes à quelques heures à devenir visible.
+
+## Se débloquer sans attendre
+
+Le fichier `DecidePourMoi.storekit` ne dépend ni d'Apple ni de RevenueCat :
+il contient les trois produits en dur. Pour l'utiliser alors qu'une clé
+RevenueCat est configurée, forcez la source dans **Réglages → Debug →
+Source des achats → StoreKit local**, puis relancez l'app — le SDK ne se
+configure qu'une fois au lancement.
+
+La ligne « Source active » juste en dessous indique laquelle est réellement
+en service, ce qui évite de chercher longtemps.

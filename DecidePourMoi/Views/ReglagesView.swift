@@ -15,6 +15,7 @@ struct ReglagesView: View {
     @State private var messageRestauration: String? = nil
     #if DEBUG
     @AppStorage(CleReglage.debugPremium) private var debugPremium = false
+    @AppStorage(CleReglage.debugSourceAchats) private var debugSourceAchats = "auto"
     #endif
 
     var body: some View {
@@ -185,10 +186,36 @@ struct ReglagesView: View {
                         }
                     }
                     .listRowBackground(Fond.carte)
+
+                    Picker(selection: $debugSourceAchats) {
+                        Text(verbatim: "Automatique").tag("auto")
+                        Text(verbatim: "StoreKit local").tag("storekit")
+                        Text(verbatim: "RevenueCat").tag("revenuecat")
+                    } label: {
+                        Label {
+                            Text(verbatim: "Source des achats")
+                        } icon: {
+                            Image(systemName: "cart")
+                        }
+                    }
+                    .listRowBackground(Fond.carte)
+
+                    HStack {
+                        Label {
+                            Text(verbatim: "Source active")
+                        } icon: {
+                            Image(systemName: "info.circle")
+                        }
+                        Spacer()
+                        Text(verbatim: premium.source == .revenueCat ? "RevenueCat" : "StoreKit")
+                            .font(.system(.footnote, design: .monospaced))
+                            .foregroundStyle(.white.opacity(0.5))
+                    }
+                    .listRowBackground(Fond.carte)
                 } header: {
                     Text(verbatim: "Debug")
                 } footer: {
-                    Text(verbatim: "Visible uniquement en build de développement.")
+                    Text(verbatim: "Visible uniquement en build de développement. Changer la source demande de relancer l'app : le SDK ne se configure qu'une fois au lancement.")
                         .foregroundStyle(.white.opacity(0.5))
                 }
                 #endif

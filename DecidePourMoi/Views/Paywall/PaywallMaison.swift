@@ -155,17 +155,23 @@ struct PaywallMaison: View {
             }
         } else {
             VStack(spacing: 12) {
-                ProgressView()
-                    .tint(.white)
-                Text(premium.erreurOffre ?? tr("Chargement des offres…"))
-                    .font(.system(.footnote, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.65))
-                    .multilineTextAlignment(.center)
-                Button {
-                    Task { await premium.chargerOffre() }
-                } label: {
-                    Text(tr("Réessayer"))
-                        .font(.system(.subheadline, design: .rounded, weight: .semibold))
+                if premium.chargementEnCours {
+                    ProgressView()
+                        .tint(.white)
+                    Text(tr("Chargement des offres…"))
+                        .font(.system(.footnote, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.65))
+                } else {
+                    Text(premium.erreurOffre ?? tr("Aucune offre disponible pour le moment."))
+                        .font(.system(.footnote, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.65))
+                        .multilineTextAlignment(.center)
+                    Button {
+                        Task { await premium.chargerOffre() }
+                    } label: {
+                        Text(tr("Réessayer"))
+                            .font(.system(.subheadline, design: .rounded, weight: .semibold))
+                    }
                 }
             }
             .frame(maxWidth: .infinity)

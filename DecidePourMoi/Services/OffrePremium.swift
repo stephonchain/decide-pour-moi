@@ -20,9 +20,9 @@ struct OffrePremium: Identifiable, Equatable, Sendable {
         /// celui déclaré dans App Store Connect et dans RevenueCat.
         var identifiantProduit: String {
             switch self {
-            case .mensuel: "monthly"
-            case .aVie: "lifetime"
-            case .hebdo: "weekly"
+            case .mensuel: "dpm_premium_monthly"
+            case .aVie: "dpm_premium_lifetime"
+            case .hebdo: "dpm_premium_weekly"
             }
         }
 

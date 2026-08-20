@@ -18,7 +18,7 @@
           "locale" : "en_US"
         }
       ],
-      "productID" : "lifetime",
+      "productID" : "dpm_premium_lifetime",
       "referenceName" : "Lifetime",
       "type" : "NonConsumable"
     }
@@ -60,7 +60,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "monthly",
+          "productID" : "dpm_premium_monthly",
           "recurringSubscriptionPeriod" : "P1M",
           "referenceName" : "Monthly",
           "subscriptionGroupID" : "B1000001",
@@ -85,7 +85,7 @@
               "locale" : "en_US"
             }
           ],
-          "productID" : "weekly",
+          "productID" : "dpm_premium_weekly",
           "recurringSubscriptionPeriod" : "P1W",
           "referenceName" : "Weekly",
           "subscriptionGroupID" : "B1000001",

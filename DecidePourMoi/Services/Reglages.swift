@@ -9,6 +9,7 @@ enum CleReglage {
     static let paletteParDefaut = "reglage.paletteParDefaut"
     static let langue = "reglage.langue"
     static let debugPremium = "debug.premium"
+    static let debugSourceAchats = "debug.sourceAchats"
 }
 
 /// Réglages et compteurs de l'app. Tout tient dans `UserDefaults` : aucune
