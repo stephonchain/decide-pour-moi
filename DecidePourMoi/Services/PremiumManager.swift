@@ -29,6 +29,8 @@ final class PremiumManager {
 
     private(set) var source: Source = .storeKit
     private(set) var estPremium = false
+    /// Identifiant du produit qui accorde premium, quand il est connu.
+    private(set) var produitPremium: String?
     private(set) var offres: [OffrePremium] = []
     private(set) var demarre = false
     private(set) var chargementEnCours = false
@@ -95,6 +97,7 @@ final class PremiumManager {
             storeKit.surChangementDEtat = { [weak self] in
                 guard let self else { return }
                 self.estPremium = self.storeKit.estPremium
+                self.produitPremium = self.storeKit.produitPremium
             }
             storeKit.demarrer()
         }
@@ -122,6 +125,7 @@ final class PremiumManager {
                 try await storeKit.charger()
                 offres = storeKit.offres
                 estPremium = storeKit.estPremium
+                produitPremium = storeKit.produitPremium
             }
             if offres.isEmpty {
                 erreurOffre = tr("Aucune offre disponible pour le moment.")
@@ -148,6 +152,7 @@ final class PremiumManager {
         case .storeKit:
             let achete = try await storeKit.acheter(sorte)
             estPremium = storeKit.estPremium
+            produitPremium = storeKit.produitPremium
             return achete ? .achete : .annule
         }
     }
@@ -160,6 +165,7 @@ final class PremiumManager {
         case .storeKit:
             _ = try await storeKit.restaurer()
             estPremium = storeKit.estPremium
+            produitPremium = storeKit.produitPremium
         }
         return estPremium
     }
@@ -167,8 +173,17 @@ final class PremiumManager {
     // MARK: Interne
 
     private func appliquer(_ info: CustomerInfo) {
-        estPremium = info.entitlements[Self.entitlement]?.isActive == true
+        let droit = info.entitlements[Self.entitlement]
+        estPremium = droit?.isActive == true
+        produitPremium = droit?.isActive == true ? droit?.productIdentifier : nil
         journaliserLesEntitlements(info)
+    }
+
+    /// Vrai quand premium vient de l'achat à vie : plus rien à proposer.
+    /// Faux quand il vient d'un abonnement — le passage à l'achat à vie
+    /// reste alors pertinent.
+    var premiumEstAVie: Bool {
+        produitPremium == OffrePremium.Sorte.aVie.identifiantProduit
     }
 
     /// Un identifiant d'entitlement mal orthographié ne produit aucune erreur :

@@ -12,6 +12,9 @@ final class AchatsStoreKit {
 
     private(set) var produits: [OffrePremium.Sorte: Product] = [:]
     private(set) var estPremium = false
+    /// Identifiant du produit qui accorde premium ; l'achat à vie prime
+    /// quand plusieurs droits coexistent.
+    private(set) var produitPremium: String?
 
     /// Prévenu à chaque changement de droits, y compris ceux qui n'ont pas
     /// été déclenchés depuis le paywall : approbation parentale, achat fait
@@ -85,17 +88,21 @@ final class AchatsStoreKit {
     /// courants. StoreKit exclut déjà les abonnements expirés.
     private func rafraichirLEtat() async {
         let identifiants = Set(OffrePremium.Sorte.allCases.map(\.identifiantProduit))
-        var actif = false
+        var accordes: [String] = []
         for await resultat in Transaction.currentEntitlements {
             guard
                 let transaction = try? Self.verifier(resultat),
                 identifiants.contains(transaction.productID),
                 transaction.revocationDate == nil
             else { continue }
-            actif = true
+            accordes.append(transaction.productID)
         }
-        guard actif != estPremium else { return }
+        let aVie = OffrePremium.Sorte.aVie.identifiantProduit
+        let produit = accordes.contains(aVie) ? aVie : accordes.first
+        let actif = !accordes.isEmpty
+        guard actif != estPremium || produit != produitPremium else { return }
         estPremium = actif
+        produitPremium = produit
         surChangementDEtat?()
     }
 

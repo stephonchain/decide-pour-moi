@@ -2721,6 +2721,40 @@
         }
       }
     },
+    "Passer à l'achat à vie": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to the lifetime purchase"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passer à l'achat à vie"
+          }
+        }
+      }
+    },
+    "Passez à l'achat à vie": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Switch to the lifetime purchase"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Passez à l'achat à vie"
+          }
+        }
+      }
+    },
     "Pile": {
       "extractionState": "manual",
       "localizations": {
@@ -3788,6 +3822,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Toutes les palettes de couleurs"
+          }
+        }
+      }
+    },
+    "Un seul paiement, plus aucun renouvellement. Après l'achat, pensez à annuler votre abonnement en cours : il ne s'arrête pas de lui-même.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "One payment, no more renewals. After purchasing, remember to cancel your current subscription: it does not stop on its own."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un seul paiement, plus aucun renouvellement. Après l'achat, pensez à annuler votre abonnement en cours : il ne s'arrête pas de lui-même."
           }
         }
       }

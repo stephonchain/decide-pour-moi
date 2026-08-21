@@ -10,6 +10,7 @@ struct ReglagesView: View {
     @State private var confidentialiteAffichee = false
     @State private var premium = PremiumManager.shared
     @State private var paywallAffiche = false
+    @State private var passageAVieAffiche = false
     @State private var espaceClientAffiche = false
     @State private var onboardingRevisite = false
     @State private var messageRestauration: String? = nil
@@ -35,6 +36,19 @@ struct ReglagesView: View {
                             }
                         }
                         .listRowBackground(Fond.carte)
+
+                        // La feuille de gestion d'Apple ne propose que les
+                        // formules du même groupe d'abonnements : l'achat à
+                        // vie, produit unique, n'y figure jamais. Ce bouton
+                        // est donc le seul chemin d'un abonné vers lui.
+                        if premium.estPremium && !premium.premiumEstAVie {
+                            Button {
+                                passageAVieAffiche = true
+                            } label: {
+                                Label(tr("Passer à l'achat à vie"), systemImage: "infinity")
+                            }
+                            .listRowBackground(Fond.carte)
+                        }
 
                         // Changement de formule, annulation, remboursement,
                         // historique : RevenueCat sait tout faire ici, plutôt
@@ -229,6 +243,11 @@ struct ReglagesView: View {
         }
         .sheet(isPresented: $paywallAffiche) {
             PaywallAdapte(contexte: .reglages)
+        }
+        .sheet(isPresented: $passageAVieAffiche) {
+            // Directement le paywall maison : le paywall distant ne connaît
+            // pas ce contexte et présélectionnerait la mauvaise offre.
+            PaywallMaison(contexte: .passageAVie)
         }
         .sheet(isPresented: $espaceClientAffiche) {
             EspaceClient()

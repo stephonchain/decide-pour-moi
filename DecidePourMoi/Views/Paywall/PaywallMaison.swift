@@ -13,6 +13,8 @@ enum ContextePaywall: Equatable, Identifiable {
     case palette
     case roueVerrouillee
     case reglages
+    /// Abonné qui veut basculer sur l'achat unique.
+    case passageAVie
     /// Utilisateur historique découvrant le passage en freemium.
     case evolution
 
@@ -27,6 +29,7 @@ enum ContextePaywall: Equatable, Identifiable {
         case .historique: tr("Retrouvez tous vos tirages")
         case .palette: tr("Toutes les palettes de couleurs")
         case .roueVerrouillee: tr("Débloquez toutes les roues")
+        case .passageAVie: tr("Passez à l'achat à vie")
         case .evolution: tr("Décide pour moi évolue")
         }
     }
@@ -35,6 +38,8 @@ enum ContextePaywall: Equatable, Identifiable {
         switch self {
         case .onboarding:
             SousTitrePersonnalise.depuisLOnboarding()
+        case .passageAVie:
+            tr("Un seul paiement, plus aucun renouvellement. Après l'achat, pensez à annuler votre abonnement en cours : il ne s'arrête pas de lui-même.")
         case .evolution:
             tr("Vos roues et tout ce que vous utilisiez restent à vous. Le premium débloque la création de nouvelles roues et tout le reste, pour toujours.")
         default:
@@ -64,7 +69,15 @@ struct PaywallMaison: View {
 
     let contexte: ContextePaywall
     /// L'onboarding gère lui-même sa fermeture (dernier écran du flux).
-    var surFermeture: (() -> Void)? = nil
+    var surFermeture: (() -> Void)?
+
+    init(contexte: ContextePaywall, surFermeture: (() -> Void)? = nil) {
+        self.contexte = contexte
+        self.surFermeture = surFermeture
+        // Qui vient basculer vers l'achat à vie n'a pas à re-choisir le
+        // mensuel : la carte visée est présélectionnée.
+        _selection = State(initialValue: contexte == .passageAVie ? .aVie : .mensuel)
+    }
 
     @Environment(\.dismiss) private var fermerFeuille
     @State private var premium = PremiumManager.shared
