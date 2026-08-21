@@ -3,17 +3,20 @@ import Foundation
 /// Constantes d'édition. Tout ce qui doit être renseigné avant publication
 /// est regroupé ici, à un seul endroit.
 enum Studio {
-    /// Adresse affichée dans les réglages et sur la fiche App Store.
-    /// À remplacer par l'adresse de contact réelle avant publication.
-    static let adresseDeContact = "contact@decidepourmoi.app"
+    /// Adresse de contact du studio, affichée dans les réglages et sur la
+    /// fiche App Store.
+    static let adresseDeContact = "contact@steverover.com"
 
-    /// Page publique de politique de confidentialité, exigée par App Store
-    /// Connect. Le texte intégral est également lisible hors ligne dans l'app.
-    static let urlConfidentialite = URL(string: "https://decidepourmoi.app/confidentialite")!
+    /// Pages légales, hébergées dans le dépôt public stephonchain/legal et
+    /// servies par GitHub Pages. Le texte de confidentialité intégral reste
+    /// également lisible hors ligne dans l'app.
+    static let urlSupport = URL(string: "https://stephonchain.github.io/legal/decide-pour-moi/")!
+    static let urlConfidentialite = URL(string: "https://stephonchain.github.io/legal/decide-pour-moi/confidentialite.html")!
 
-    /// Conditions d'utilisation : l'EULA standard d'Apple, obligatoire sur le
-    /// paywall. À remplacer si le studio publie ses propres conditions.
-    static let urlConditions = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
+    /// Conditions d'utilisation propres à l'app : elles couvrent le freemium,
+    /// les abonnements et l'essai gratuit, ce que l'EULA générique d'Apple ne
+    /// fait pas.
+    static let urlConditions = URL(string: "https://stephonchain.github.io/legal/decide-pour-moi/conditions.html")!
 
     /// Clé API *publique* RevenueCat de l'app App Store. Elle est conçue
     /// pour être embarquée dans l'app — elle ne donne accès qu'aux
