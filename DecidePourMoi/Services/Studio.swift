@@ -15,11 +15,10 @@ enum Studio {
     /// paywall. À remplacer si le studio publie ses propres conditions.
     static let urlConditions = URL(string: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/")!
 
-    /// Clé API *publique* RevenueCat. Elle est conçue pour être embarquée
-    /// dans l'app — elle ne donne accès qu'aux opérations d'un client.
-    /// `test_…` cible le Test Store de RevenueCat, `appl_…` l'App Store réel :
-    /// c'est cette dernière qu'il faudra mettre avant publication.
-    static let cleRevenueCat = "test_zWemjqxYpBrGdZiONoJLedOaDtl"
+    /// Clé API *publique* RevenueCat de l'app App Store. Elle est conçue
+    /// pour être embarquée dans l'app — elle ne donne accès qu'aux
+    /// opérations d'un client, jamais au tableau de bord.
+    static let cleRevenueCat = "appl_QPowcpRxwADBAHoPphucbYpOmlK"
 
     /// Identifiant de l'entitlement dans le tableau de bord RevenueCat.
     ///
