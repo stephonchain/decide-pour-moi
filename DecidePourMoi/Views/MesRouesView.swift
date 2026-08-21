@@ -68,6 +68,7 @@ struct MesRouesView: View {
                     }
                 } label: {
                     Label(tr("Coller une liste pour créer une roue"), systemImage: "doc.on.clipboard")
+                        .accessibilityIdentifier("bouton.collerListe")
                         .font(.system(.subheadline, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.85))
                         .frame(maxWidth: .infinity)

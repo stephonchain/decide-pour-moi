@@ -83,6 +83,7 @@ struct ReglagesView: View {
                                     .foregroundStyle(.white.opacity(0.4))
                             }
                         }
+                        .accessibilityIdentifier("bouton.premium")
                         .listRowBackground(Fond.carte)
 
                         Button {

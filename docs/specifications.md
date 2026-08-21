@@ -106,7 +106,7 @@ Premier lancement : la roue "Ce soir on mange..." est affichée, prête à tourn
 
 ## 6. App Store et ASO
 
-- **Nom** : Décide pour moi (EN : Decide for Me)
+- **Nom** : Décide pour moi (EN : Chose For Me)
 - **Sous-titre** : Tirage au sort personnalisable / Custom random picker wheel
 - **Mots-clés FR** : roue, décision, hasard, tirage, sort, choix, aléatoire, fortune, gage, pioche
 - **Mots-clés EN** : wheel, spinner, random, picker, decide, choice, name, raffle, spin, chooser

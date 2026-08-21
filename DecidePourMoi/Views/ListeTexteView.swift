@@ -88,6 +88,7 @@ struct ImportListeView: View {
                 FondApplication()
                 VStack(alignment: .leading, spacing: 12) {
                     TextField(tr("Titre de la roue"), text: $titre)
+                        .accessibilityIdentifier("champ.titreListe")
                         .font(.system(.body, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white)
                         .padding(14)
@@ -98,6 +99,7 @@ struct ImportListeView: View {
                         .foregroundStyle(.white.opacity(0.6))
 
                     TextEditor(text: $texte)
+                        .accessibilityIdentifier("champ.listeOptions")
                         .font(.system(.body, design: .rounded))
                         .foregroundStyle(.white)
                         .scrollContentBackground(.hidden)
@@ -122,6 +124,7 @@ struct ImportListeView: View {
                     Button(tr("Créer")) {
                         creer(titre.trimmingCharacters(in: .whitespaces), lignes)
                     }
+                    .accessibilityIdentifier("bouton.creerListe")
                     .fontWeight(.semibold)
                     .disabled(lignes.count < 2)
                 }

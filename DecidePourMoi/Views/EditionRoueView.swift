@@ -44,6 +44,7 @@ struct EditionRoueView: View {
                     Button(estUneCreation ? tr("Créer") : tr("Terminé")) {
                         enregistrer()
                     }
+                    .accessibilityIdentifier("bouton.enregistrerRoue")
                     .fontWeight(.semibold)
                     .disabled(!enregistrementPossible)
                 }
@@ -132,6 +133,7 @@ struct EditionRoueView: View {
                         }
                         .opacity(verrouille ? 0.75 : 1)
                     }
+                    .accessibilityIdentifier("mode.\(mode.rawValue)")
                     .listRowBackground(Fond.carte)
                 }
             } header: {

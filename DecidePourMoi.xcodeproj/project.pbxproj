@@ -19,16 +19,25 @@
 			remoteGlobalIDString = DEC1DE000000000000000003;
 			remoteInfo = DecidePourMoi;
 		};
+		DEC1DEB00000000000000006 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DEC1DE000000000000000002 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DEC1DE000000000000000003;
+			remoteInfo = DecidePourMoi;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DEC1DE000000000000000004 /* DecidePourMoi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DecidePourMoi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DEC1DE000000000000000005 /* DecidePourMoiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DecidePourMoiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEC1DEB00000000000000001 /* DecidePourMoiUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DecidePourMoiUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		DEC1DE000000000000000006 /* DecidePourMoi */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DecidePourMoi; sourceTree = "<group>"; };
 		DEC1DE000000000000000007 /* DecidePourMoiTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DecidePourMoiTests; sourceTree = "<group>"; };
+		DEC1DEB00000000000000002 /* DecidePourMoiUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DecidePourMoiUITests; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +57,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DEC1DEB00000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -56,6 +72,7 @@
 			children = (
 				DEC1DE000000000000000006 /* DecidePourMoi */,
 				DEC1DE000000000000000007 /* DecidePourMoiTests */,
+				DEC1DEB00000000000000002 /* DecidePourMoiUITests */,
 				DEC1DE00000000000000000B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,6 +82,7 @@
 			children = (
 				DEC1DE000000000000000004 /* DecidePourMoi.app */,
 				DEC1DE000000000000000005 /* DecidePourMoiTests.xctest */,
+				DEC1DEB00000000000000001 /* DecidePourMoiUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +137,29 @@
 			productReference = DEC1DE000000000000000005 /* DecidePourMoiTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DEC1DEB00000000000000008 /* DecidePourMoiUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEC1DEB0000000000000000B /* Build configuration list for PBXNativeTarget "DecidePourMoiUITests" */;
+			buildPhases = (
+				DEC1DEB00000000000000004 /* Sources */,
+				DEC1DEB00000000000000003 /* Frameworks */,
+				DEC1DEB00000000000000005 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DEC1DEB00000000000000007 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DEC1DEB00000000000000002 /* DecidePourMoiUITests */,
+			);
+			name = DecidePourMoiUITests;
+			packageProductDependencies = (
+			);
+			productName = DecidePourMoiUITests;
+			productReference = DEC1DEB00000000000000001 /* DecidePourMoiUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -133,6 +174,10 @@
 						CreatedOnToolsVersion = 16.0;
 					};
 					DEC1DE00000000000000000F = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = DEC1DE000000000000000003;
+					};
+					DEC1DEB00000000000000008 = {
 						CreatedOnToolsVersion = 16.0;
 						TestTargetID = DEC1DE000000000000000003;
 					};
@@ -158,6 +203,7 @@
 			targets = (
 				DEC1DE000000000000000003 /* DecidePourMoi */,
 				DEC1DE00000000000000000F /* DecidePourMoiTests */,
+				DEC1DEB00000000000000008 /* DecidePourMoiUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -171,6 +217,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DEC1DE000000000000000012 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEC1DEB00000000000000005 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -194,6 +247,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DEC1DEB00000000000000004 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -201,6 +261,11 @@
 			isa = PBXTargetDependency;
 			target = DEC1DE000000000000000003 /* DecidePourMoi */;
 			targetProxy = DEC1DE000000000000000001 /* PBXContainerItemProxy */;
+		};
+		DEC1DEB00000000000000007 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DEC1DE000000000000000003 /* DecidePourMoi */;
+			targetProxy = DEC1DEB00000000000000006 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -394,6 +459,38 @@
 			};
 			name = Release;
 		};
+		DEC1DEB00000000000000009 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stephonchain.decidepourmoi.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = DecidePourMoi;
+			};
+			name = Debug;
+		};
+		DEC1DEB0000000000000000A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.stephonchain.decidepourmoi.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = DecidePourMoi;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -420,6 +517,15 @@
 			buildConfigurations = (
 				DEC1DE000000000000000019 /* Debug */,
 				DEC1DE00000000000000001A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEC1DEB0000000000000000B /* Build configuration list for PBXNativeTarget "DecidePourMoiUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEC1DEB00000000000000009 /* Debug */,
+				DEC1DEB0000000000000000A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

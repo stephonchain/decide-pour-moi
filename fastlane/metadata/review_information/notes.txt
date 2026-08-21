@@ -1,0 +1,27 @@
+Thank you for reviewing Chose For Me.
+
+WHAT THE APP IS
+A customizable decision wheel: the user types or pastes a list of options, spins the wheel, and one option is drawn at random. It is an entertainment / utility app. It is NOT a gambling app: there are no stakes, no real or virtual currency, no prizes — the wheel only picks among options the user typed themselves (e.g. what to eat tonight, which student goes to the board).
+
+NO ACCOUNT NEEDED
+There is no login and no demo account to provide. The app is fully usable on first launch. All data stays on the device.
+
+FIRST LAUNCH FLOW
+A 15-page onboarding (two interactive wheel demos + short questions) ends on the paywall. The paywall can be dismissed with the X button (top right); the user then lands on the free tier, which includes one fully functional wheel.
+
+IN-APP PURCHASES (3 products, attached to this version)
+- dpm_premium_weekly: auto-renewable subscription, weekly
+- dpm_premium_monthly: auto-renewable subscription, monthly, with a 3-day free intro trial
+- dpm_premium_lifetime: non-consumable, one-time
+All three unlock the same "premium" feature set: unlimited wheels, two extra draw modes, option weighting, draw history, extra color palettes. Prices, the post-trial price, auto-renewal terms, Restore Purchases, Terms and Privacy links are all shown on the paywall.
+
+HOW TO REACH THE PAYWALL AFTER ONBOARDING
+Settings (gear icon on the main screen) > "Go premium", or tap any feature marked with a lock icon (e.g. a locked pre-installed wheel in "My wheels", or the History button).
+
+RECEIPT HANDLING
+Purchases are processed by the App Store; receipt validation uses the RevenueCat SDK in anonymous mode (no personal data, no custom user ID).
+
+LOCALIZATION
+The app ships in French and English. The default follows the device language and can be changed inside the app (Settings > Language).
+
+Contact for any question: contact@steverover.com

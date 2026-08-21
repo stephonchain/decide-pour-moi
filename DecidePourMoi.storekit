@@ -14,7 +14,7 @@
         },
         {
           "description": "Every feature, once and for all.",
-          "displayName": "Decide for Me Pro — Lifetime",
+          "displayName": "Chose For Me Pro — Lifetime",
           "locale": "en_US"
         }
       ],
@@ -57,7 +57,7 @@
             },
             {
               "description": "Every feature, every month.",
-              "displayName": "Decide for Me Pro — Monthly",
+              "displayName": "Chose For Me Pro — Monthly",
               "locale": "en_US"
             }
           ],
@@ -82,7 +82,7 @@
             },
             {
               "description": "Every feature, weekly.",
-              "displayName": "Decide for Me Pro — Weekly",
+              "displayName": "Chose For Me Pro — Weekly",
               "locale": "en_US"
             }
           ],

@@ -1,0 +1,14 @@
+# Captures automatiques des deux localisations, sur le grand iPhone :
+# App Store Connect dérive lui-même les tailles plus petites du 6,9".
+devices(["iPhone 16 Pro Max"])
+languages(["fr-FR", "en-US"])
+
+scheme("DecidePourMoi")
+output_directory("./fastlane/screenshots")
+clear_previous_screenshots(true)
+
+# Barre d'état propre : 9:41, batterie pleine, réseau plein.
+override_status_bar(true)
+
+# La roue anime en continu : ne pas attendre l'inactivité de l'interface.
+stop_after_first_error(true)

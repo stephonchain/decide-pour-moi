@@ -16,3 +16,9 @@ xcuserdata/
 
 # macOS
 .DS_Store
+
+# fastlane
+fastlane/screenshots/
+fastlane/report.xml
+fastlane/README.md
+fastlane/test_output/

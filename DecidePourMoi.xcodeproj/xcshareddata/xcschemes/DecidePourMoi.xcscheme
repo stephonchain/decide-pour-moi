@@ -40,6 +40,16 @@
                ReferencedContainer = "container:DecidePourMoi.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DEC1DEB00000000000000008"
+               BuildableName = "DecidePourMoiUITests.xctest"
+               BlueprintName = "DecidePourMoiUITests"
+               ReferencedContainer = "container:DecidePourMoi.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

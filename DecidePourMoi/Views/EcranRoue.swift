@@ -88,6 +88,7 @@ struct EcranRoue: View {
                     .boutonRond()
             }
             .accessibilityLabel(Text(tr("Mes roues")))
+            .accessibilityIdentifier("bouton.mesRoues")
 
             VStack(spacing: 2) {
                 Text(roue.titre.isEmpty ? tr("Sans titre") : roue.titre)
@@ -108,6 +109,7 @@ struct EcranRoue: View {
                     .boutonRond()
             }
             .accessibilityLabel(Text(tr("Modifier la roue")))
+            .accessibilityIdentifier("bouton.edition")
         }
         .padding(.top, 4)
     }
@@ -142,6 +144,7 @@ struct EcranRoue: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(controleur.enRotation || !roue.peutTourner)
+                    .accessibilityIdentifier("bouton.moyeu")
                     .accessibilityLabel(Text(tr("Tourner la roue")))
                     .accessibilityHint(Text(tr("Lance un tirage au sort parmi \(roue.optionsActives.count) options")))
                 }
@@ -211,6 +214,7 @@ struct EcranRoue: View {
                         .boutonSecondaireCompact()
                 }
                 .accessibilityLabel(Text(tr("Réglages")))
+                .accessibilityIdentifier("bouton.reglages")
             }
             .font(.system(.subheadline, design: .rounded, weight: .semibold))
         }

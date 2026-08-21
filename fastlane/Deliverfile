@@ -1,0 +1,18 @@
+app_identifier("com.stephonchain.decidepourmoi")
+
+# On ne pousse que la fiche : le binaire part par Xcode (Archive).
+skip_binary_upload(true)
+skip_app_version_update(false)
+
+precheck_include_in_app_purchases(false)
+
+copyright("#{Time.now.year} Steve Rover")
+
+primary_category("UTILITIES")
+secondary_category("LIFESTYLE")
+
+submit_for_review(false)
+
+# Pas de question interactive en cas de différence : la vérité est ici.
+force(true)
+overwrite_screenshots(true)

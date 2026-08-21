@@ -103,7 +103,7 @@ Première version. Créez vos roues en collant une liste, lancez-les d'un geste,
 **Name** (13/30)
 
 ```
-Decide for Me
+Chose For Me
 ```
 
 **Subtitle** (26/30)
@@ -129,7 +129,7 @@ Who does the dishes? What's for dinner? Build your wheel, spin it: decided. Trul
 ```
 Stop hesitating. Build your wheel, spin it: decided.
 
-Who does the dishes tonight? Pizza or sushi? Which movie? Who goes to the board? Who plays first? Some decisions don't deserve a ten-minute debate. Decide for Me settles them in five seconds, with a smile.
+Who does the dishes tonight? Pizza or sushi? Which movie? Who goes to the board? Who plays first? Some decisions don't deserve a ten-minute debate. Chose For Me settles them in five seconds, with a smile.
 
 YOUR WHEEL IN THIRTY SECONDS
 Type or paste your list: one line becomes one option, that's it. Paste your class's twenty names or the six restaurants nearby — the wheel is ready. Reorder with a drag, duplicate a wheel, share it as plain text.
@@ -162,7 +162,7 @@ The free version gives you a real, fully editable wheel with the classic draw mo
 
 A question, a wheel idea we're missing? Write to us: contact@steverover.com — we read everything.
 
-Decide for Me. The wheel spins, you live.
+Chose For Me. The wheel spins, you live.
 ```
 
 **What's New (version 1.0)**
@@ -198,7 +198,7 @@ pas un jeu d'argent, pas de compte à fournir, paywall fermable, où trouver
 les achats, essai de 3 jours, RevenueCat en mode anonyme.
 
 ```
-Thank you for reviewing Decide for Me.
+Thank you for reviewing Chose For Me.
 
 WHAT THE APP IS
 A customizable decision wheel: the user types or pastes a list of options, spins the wheel, and one option is drawn at random. It is an entertainment / utility app. It is NOT a gambling app: there are no stakes, no real or virtual currency, no prizes — the wheel only picks among options the user typed themselves (e.g. what to eat tonight, which student goes to the board).

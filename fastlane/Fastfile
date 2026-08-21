@@ -1,0 +1,32 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Captures d'écran FR + EN sur simulateur (fastlane captures)"
+  lane :captures do
+    capture_screenshots
+  end
+
+  desc "Publie fiche + captures vers App Store Connect (fastlane publier)"
+  lane :publier do
+    cle_asc
+    deliver
+  end
+
+  desc "Publie uniquement les métadonnées, sans les captures"
+  lane :publier_textes do
+    cle_asc
+    deliver(skip_screenshots: true)
+  end
+
+  private_lane :cle_asc do
+    # Clé API App Store Connect (rôle App Manager suffit) :
+    #   ASC_KEY_ID       identifiant de la clé (ex. 2X9R4HXF34)
+    #   ASC_ISSUER_ID    issuer id de la page des clés
+    #   ASC_KEY_PATH     chemin du fichier .p8 téléchargé
+    app_store_connect_api_key(
+      key_id: ENV.fetch("ASC_KEY_ID"),
+      issuer_id: ENV.fetch("ASC_ISSUER_ID"),
+      key_filepath: ENV.fetch("ASC_KEY_PATH")
+    )
+  end
+end
