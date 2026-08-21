@@ -1,3 +1,80 @@
+# Marche à suivre complète, dans l'ordre
+
+État de départ : les trois produits existent dans App Store Connect, le
+paywall fonctionne en StoreKit local. Il reste quatre phases.
+
+## Phase A — Finir côté Apple
+
+1. **Accord des apps payantes.** App Store Connect → Accords, impôts et
+   opérations bancaires : l'accord « Applications payantes » doit être
+   actif, avec coordonnées bancaires et formulaires fiscaux. Sans lui, même
+   le sandbox refuse les achats. (Déjà fait si une de vos apps vend déjà
+   quelque chose ; jamais fait = à faire en premier, la validation peut
+   prendre quelques jours.)
+2. **La capture de revue** (640 × 920) sur chacun des trois produits.
+3. **L'essai de 3 jours sur le mensuel** : page du produit
+   `dpm_premium_monthly` → Prix de l'abonnement → Offres d'introduction →
+   Gratuit, 3 jours, tous les pays. C'est ici qu'il se configure, pas dans
+   le code.
+4. **Vérifier le groupe** : les deux abonnements dans le même groupe
+   « Premium », le mensuel en rang 1.
+5. Les trois produits doivent afficher **« Prêt à envoyer »**.
+6. **Créer un compte de test sandbox** : Utilisateurs et accès → Sandbox →
+   Testeurs. Une adresse e-mail jamais utilisée comme identifiant Apple.
+
+## Phase B — Créer le vrai projet RevenueCat
+
+Le projet actuel (clé `test_…`) est un bac à sable jetable. Il faut le vrai.
+
+1. **Nouveau projet** sur app.revenuecat.com (ou réutiliser l'existant s'il
+   permet d'ajouter une app App Store).
+2. **Ajouter l'app** : plateforme App Store, bundle ID
+   `com.stephonchain.decidepourmoi`.
+3. **Clé In-App Purchase** : RevenueCat la demande pour valider les achats.
+   App Store Connect → Utilisateurs et accès → Intégrations → clé In-App
+   Purchase (fichier `.p8`, à générer une seule fois, bien le conserver) ;
+   la téléverser dans RevenueCat avec son Issuer ID.
+4. **Produits** : en créer trois dans RevenueCat, avec les identifiants
+   exacts `dpm_premium_weekly`, `dpm_premium_monthly`,
+   `dpm_premium_lifetime`, rattachés à l'app App Store.
+5. **Entitlement** : en créer un dont l'**identifiant** est exactement
+   celui de `Studio.entitlementPremium` dans le code. Y attacher les trois
+   produits.
+6. **Offering** : `default`, marqué *current*, avec trois packages —
+   Monthly (`$rc_monthly`), Weekly (`$rc_weekly`), Lifetime
+   (`$rc_lifetime`) — chacun relié à son produit.
+7. **Récupérer la clé publique** `appl_…` (Réglages du projet → API keys)
+   et la mettre dans `Studio.cleRevenueCat` à la place de la clé `test_…`.
+
+## Phase C — Tester en sandbox sur l'iPhone
+
+1. Sur l'iPhone : Réglages → App Store → Compte sandbox → se connecter
+   avec le testeur créé en A6.
+2. Dans Xcode : Edit Scheme → Run → Options → StoreKit Configuration →
+   **None** (sinon le fichier local court-circuite le sandbox).
+3. Dans l'app : Réglages → Debug → Source des achats → **Automatique**,
+   puis relancer via ⌘R. « Source active » doit dire RevenueCat.
+4. Tester, dans cet ordre : achat du mensuel (la feuille Apple doit
+   annoncer les 3 jours gratuits) → tout se déverrouille → annulation
+   depuis la feuille de gestion → attendre l'expiration (en sandbox, un
+   mois dure 5 minutes) → tout se reverrouille → Restaurer mes achats →
+   achat du lifetime.
+5. Vérifier que les transactions apparaissent dans le tableau de bord
+   RevenueCat. C'est la preuve que la chaîne complète fonctionne.
+
+## Phase D — Avant soumission
+
+1. `Studio.swift` : adresse de contact et URL de confidentialité réelles.
+2. Fiche App Privacy : déclarer l'historique des achats (non lié à
+   l'identité).
+3. Les achats intégrés se soumettent **avec** la première version de
+   l'app : sur la page de la version, section « Achats intégrés », ajouter
+   les trois produits avant d'envoyer en revue.
+4. Optionnel : dessiner le paywall distant dans RevenueCat → Paywalls.
+   Sans lui, l'app sert le paywall maison, ce qui est très bien aussi.
+
+---
+
 # Activer les achats. Guide pas à pas
 
 Trois environnements existent, dans cet ordre de fidélité croissante. Le code
