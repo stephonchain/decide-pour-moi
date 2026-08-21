@@ -1,4 +1,5 @@
 import Foundation
+import StoreKit
 import SwiftUI
 
 struct ReglagesView: View {
@@ -11,6 +12,7 @@ struct ReglagesView: View {
     @State private var premium = PremiumManager.shared
     @State private var paywallAffiche = false
     @State private var passageAVieAffiche = false
+    @State private var annulationProposee = false
     @State private var espaceClientAffiche = false
     @State private var onboardingRevisite = false
     @State private var messageRestauration: String? = nil
@@ -244,11 +246,20 @@ struct ReglagesView: View {
         .sheet(isPresented: $paywallAffiche) {
             PaywallAdapte(contexte: .reglages)
         }
-        .sheet(isPresented: $passageAVieAffiche) {
+        .sheet(isPresented: $passageAVieAffiche, onDismiss: {
+            // L'achat à vie ne coupe pas l'abonnement en cours : Apple ne
+            // permet pas de l'annuler à la place de l'utilisateur. Le mieux
+            // qu'une app puisse faire, c'est lui tendre la feuille
+            // d'annulation au bon moment — celui-ci.
+            if premium.premiumEstAVie && premium.abonnementActif {
+                annulationProposee = true
+            }
+        }) {
             // Directement le paywall maison : le paywall distant ne connaît
             // pas ce contexte et présélectionnerait la mauvaise offre.
             PaywallMaison(contexte: .passageAVie)
         }
+        .manageSubscriptionsSheet(isPresented: $annulationProposee)
         .sheet(isPresented: $espaceClientAffiche) {
             EspaceClient()
         }

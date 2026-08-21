@@ -15,6 +15,8 @@ final class AchatsStoreKit {
     /// Identifiant du produit qui accorde premium ; l'achat à vie prime
     /// quand plusieurs droits coexistent.
     private(set) var produitPremium: String?
+    /// Vrai tant qu'un abonnement court, même si l'achat à vie le double.
+    private(set) var abonnementActif = false
 
     /// Prévenu à chaque changement de droits, y compris ceux qui n'ont pas
     /// été déclenchés depuis le paywall : approbation parentale, achat fait
@@ -100,9 +102,11 @@ final class AchatsStoreKit {
         let aVie = OffrePremium.Sorte.aVie.identifiantProduit
         let produit = accordes.contains(aVie) ? aVie : accordes.first
         let actif = !accordes.isEmpty
-        guard actif != estPremium || produit != produitPremium else { return }
+        let abonnement = accordes.contains { $0 != aVie }
+        guard actif != estPremium || produit != produitPremium || abonnement != abonnementActif else { return }
         estPremium = actif
         produitPremium = produit
+        abonnementActif = abonnement
         surChangementDEtat?()
     }
 

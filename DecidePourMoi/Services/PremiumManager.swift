@@ -31,6 +31,8 @@ final class PremiumManager {
     private(set) var estPremium = false
     /// Identifiant du produit qui accorde premium, quand il est connu.
     private(set) var produitPremium: String?
+    /// Vrai tant qu'un abonnement court — y compris doublé par l'achat à vie.
+    private(set) var abonnementActif = false
     private(set) var offres: [OffrePremium] = []
     private(set) var demarre = false
     private(set) var chargementEnCours = false
@@ -98,6 +100,7 @@ final class PremiumManager {
                 guard let self else { return }
                 self.estPremium = self.storeKit.estPremium
                 self.produitPremium = self.storeKit.produitPremium
+                self.abonnementActif = self.storeKit.abonnementActif
             }
             storeKit.demarrer()
         }
@@ -126,6 +129,7 @@ final class PremiumManager {
                 offres = storeKit.offres
                 estPremium = storeKit.estPremium
                 produitPremium = storeKit.produitPremium
+                abonnementActif = storeKit.abonnementActif
             }
             if offres.isEmpty {
                 erreurOffre = tr("Aucune offre disponible pour le moment.")
@@ -153,6 +157,7 @@ final class PremiumManager {
             let achete = try await storeKit.acheter(sorte)
             estPremium = storeKit.estPremium
             produitPremium = storeKit.produitPremium
+            abonnementActif = storeKit.abonnementActif
             return achete ? .achete : .annule
         }
     }
@@ -166,6 +171,7 @@ final class PremiumManager {
             _ = try await storeKit.restaurer()
             estPremium = storeKit.estPremium
             produitPremium = storeKit.produitPremium
+            abonnementActif = storeKit.abonnementActif
         }
         return estPremium
     }
@@ -176,6 +182,7 @@ final class PremiumManager {
         let droit = info.entitlements[Self.entitlement]
         estPremium = droit?.isActive == true
         produitPremium = droit?.isActive == true ? droit?.productIdentifier : nil
+        abonnementActif = !info.activeSubscriptions.isEmpty
         journaliserLesEntitlements(info)
     }
 
