@@ -88,6 +88,19 @@ enum Langues {
     }
 }
 
+extension Langues {
+    /// Chaîne résolue dans une langue précise, indépendamment du choix
+    /// courant. Sert à reconnaître les textes d'origine des roues
+    /// préinstallées, quelle que soit la langue où elles ont été créées.
+    static func dans(_ code: String, _ cle: String.LocalizationValue) -> String {
+        guard
+            let chemin = Bundle.main.path(forResource: code, ofType: "lproj"),
+            let bundle = Bundle(path: chemin)
+        else { return String(localized: cle) }
+        return String(localized: cle, bundle: bundle)
+    }
+}
+
 /// Chaîne traduite dans la langue choisie dans l'app.
 ///
 /// À utiliser partout où l'on écrirait `String(localized:)` : les vues lisent

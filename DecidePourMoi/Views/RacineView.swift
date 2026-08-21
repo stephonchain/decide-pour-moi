@@ -67,6 +67,10 @@ struct RacineView: View {
         if !Reglages.onboardingFait {
             onboardingVisible = true
         }
+
+        // Les roues préinstallées jamais modifiées suivent la langue de
+        // l'app ; celles que l'utilisateur a touchées lui appartiennent.
+        RouesParDefaut.retraduire(roues)
     }
 
     private func creerUneRoueDeSecours() {
