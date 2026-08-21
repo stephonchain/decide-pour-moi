@@ -14,7 +14,7 @@
         },
         {
           "description": "Every feature, once and for all.",
-          "displayName": "Chose For Me Pro — Lifetime",
+          "displayName": "Let the Wheel Decide Pro — Lifetime",
           "locale": "en_US"
         }
       ],
@@ -57,7 +57,7 @@
             },
             {
               "description": "Every feature, every month.",
-              "displayName": "Chose For Me Pro — Monthly",
+              "displayName": "Let the Wheel Decide Pro — Monthly",
               "locale": "en_US"
             }
           ],
@@ -82,7 +82,7 @@
             },
             {
               "description": "Every feature, weekly.",
-              "displayName": "Chose For Me Pro — Weekly",
+              "displayName": "Let the Wheel Decide Pro — Weekly",
               "locale": "en_US"
             }
           ],
