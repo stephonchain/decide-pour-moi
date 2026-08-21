@@ -22,3 +22,7 @@ fastlane/screenshots/
 fastlane/report.xml
 fastlane/README.md
 fastlane/test_output/
+# L'Appfile généré localement contient l'identifiant Apple personnel :
+# il reste sur la machine, jamais dans un dépôt public.
+fastlane/Appfile
+Gemfile.lock
