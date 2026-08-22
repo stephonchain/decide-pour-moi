@@ -89,5 +89,15 @@ dans App Store Connect.
   jour (`git pull`) ou qu'on n'est pas dans le bon dossier.
 - **Un écran manquant** : le parcours continue et va au bout des deux
   langues (`stop_after_first_error(false)`), puis liste ce qui a échoué
-  avec le nom de l'élément introuvable. M'envoyer cette ligne, c'est réglé
-  en un échange.
+  avec le nom de l'élément introuvable. Pour extraire la ligne utile du
+  log :
+
+  ```bash
+  grep -E "XCTAssertTrue|error:|Failed to|not idle|Crash"     ~/Library/Logs/snapshot/DecidePourMoi-DecidePourMoi.log | head -30
+  ```
+
+- **`Executed 0 tests`** : le test n'a pas échoué, il est mort en route —
+  l'app a planté ou s'est figée. La commande ci-dessus le dit ; la cause
+  classique est une animation qui ne s'arrête jamais, car le système ne
+  voit alors plus jamais l'app au repos et toute recherche d'élément
+  finit par expirer.

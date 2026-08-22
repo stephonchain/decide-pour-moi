@@ -13,8 +13,9 @@ import XCTest
 @MainActor
 final class CapturesTests: XCTestCase {
 
-    /// Attente longue : la roue tourne 3 à 5 secondes.
-    private let attenteRoue: TimeInterval = 15
+    /// Attente longue : la roue tourne 3 à 5 secondes, puis les confettis
+    /// tombent pendant 3 secondes de plus.
+    private let attenteRoue: TimeInterval = 20
 
     /// Rang de la roue « classe » dans la grille, fixé par `RouesDeDemo` :
     /// on la désigne par sa position, son titre changeant avec la langue.
@@ -34,19 +35,19 @@ final class CapturesTests: XCTestCase {
         app.launch()
 
         // 01 — La roue d'accueil, prête à tourner
-        let moyeu = element(app, "bouton.moyeu")
-        XCTAssertTrue(moyeu.waitForExistence(timeout: 25), "La roue d'accueil ne s'affiche pas.")
+        let moyeu = attendre(app, "bouton.moyeu", "La roue d'accueil ne s'affiche pas.", timeout: 40)
         snapshot("01-Roue")
 
         // 02 — Le résultat, confettis compris
-        tirer(app, moyeu: moyeu)
+        moyeu.tap()
+        let fermer = attendre(app, "bouton.fermerResultat", "Le résultat ne s'affiche pas.", timeout: attenteRoue)
         snapshot("02-Resultat")
-        fermerLeResultat(app)
+        fermer.tap()
+        sleep(1)
 
         // 03 — La grille des roues
         taper(app, "bouton.mesRoues", "Le bouton « Mes roues » est absent.")
-        let collerListe = element(app, "bouton.collerListe")
-        XCTAssertTrue(collerListe.waitForExistence(timeout: 10), "La grille des roues ne s'affiche pas.")
+        _ = attendre(app, "bouton.collerListe", "La grille des roues ne s'affiche pas.")
         sleep(1)                     // la feuille finit de monter
         snapshot("03-MesRoues")
 
@@ -56,8 +57,7 @@ final class CapturesTests: XCTestCase {
         sleep(1)                     // la feuille finit de se retirer
         taper(app, "bouton.edition", "Le bouton d'édition est absent.")
         taper(app, "bouton.listeTexte", "Le bouton de liste en texte est absent.")
-        let annulerListe = element(app, "bouton.annulerListe")
-        XCTAssertTrue(annulerListe.waitForExistence(timeout: 10), "La feuille de liste ne s'ouvre pas.")
+        let annulerListe = attendre(app, "bouton.annulerListe", "La feuille de liste ne s'ouvre pas.")
         sleep(1)
         snapshot("04-Liste")
 
@@ -68,46 +68,43 @@ final class CapturesTests: XCTestCase {
         sleep(1)
 
         // 05 — L'ordre de passage : trois tirages, le bandeau se remplit
-        XCTAssertTrue(moyeu.waitForExistence(timeout: 15), "Retour à la roue impossible.")
         for _ in 0..<3 {
-            tirer(app, moyeu: moyeu)
-            fermerLeResultat(app)
+            taper(app, "bouton.moyeu", "Retour à la roue impossible.")
+            attendre(app, "bouton.fermerResultat", "Le résultat ne s'affiche pas.", timeout: attenteRoue).tap()
+            sleep(1)
         }
         snapshot("05-OrdreDePassage")
     }
 
     // MARK: Outils
 
-    /// Recherche par identifiant sans présumer du type d'élément : selon
-    /// la vue, SwiftUI expose un bouton, un texte ou un simple groupe.
-    private func element(_ app: XCUIApplication, _ identifiant: String) -> XCUIElement {
-        app.descendants(matching: .any).matching(identifier: identifiant).firstMatch
+    /// Attend une cible du parcours. Ce sont toutes des boutons ; la
+    /// recherche large ne sert que de filet, au cas où SwiftUI exposerait
+    /// l'une d'elles autrement.
+    @discardableResult
+    private func attendre(
+        _ app: XCUIApplication,
+        _ identifiant: String,
+        _ description: String,
+        timeout: TimeInterval = 15
+    ) -> XCUIElement {
+        let bouton = app.buttons[identifiant]
+        if bouton.waitForExistence(timeout: timeout) { return bouton }
+
+        let large = app.descendants(matching: .any).matching(identifier: identifiant).firstMatch
+        XCTAssertTrue(large.waitForExistence(timeout: 5), description)
+        return large
     }
 
-    /// Tape sur un élément, en faisant défiler si besoin : une liste plus
+    /// Tape sur une cible, en faisant défiler si besoin : une liste plus
     /// longue que l'écran ne doit pas faire échouer le parcours.
     private func taper(_ app: XCUIApplication, _ identifiant: String, _ description: String) {
-        let cible = element(app, identifiant)
-        XCTAssertTrue(cible.waitForExistence(timeout: 15), description)
+        let cible = attendre(app, identifiant, description)
         var essais = 0
         while !cible.isHittable && essais < 3 {
             app.swipeUp()
             essais += 1
         }
         cible.tap()
-    }
-
-    /// Lance la roue et attend la fin de l'animation.
-    private func tirer(_ app: XCUIApplication, moyeu: XCUIElement) {
-        moyeu.tap()
-        let fermer = element(app, "bouton.fermerResultat")
-        XCTAssertTrue(fermer.waitForExistence(timeout: attenteRoue), "Le résultat ne s'affiche pas.")
-    }
-
-    /// Referme le résultat et laisse l'overlay disparaître avant la suite.
-    private func fermerLeResultat(_ app: XCUIApplication) {
-        let fermer = element(app, "bouton.fermerResultat")
-        if fermer.waitForExistence(timeout: attenteRoue) { fermer.tap() }
-        sleep(1)
     }
 }

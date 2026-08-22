@@ -49,10 +49,10 @@ struct RacineView: View {
         amorcageTente = true
 
 #if DEBUG
-        // Parcours de captures : contenu remis à neuf dans la langue du
-        // moment, onboarding sauté, aucune retraduction à faire.
+        // Parcours de captures : le contenu a déjà été remis à neuf au
+        // démarrage, dans la langue du moment. Ni onboarding, ni
+        // retraduction, ni amorçage à refaire.
         if RouesDeDemo.demandees {
-            RouesDeDemo.installer(dans: contexte, roues: roues)
             Reglages.amorcageFait = true
             Reglages.onboardingFait = true
             return

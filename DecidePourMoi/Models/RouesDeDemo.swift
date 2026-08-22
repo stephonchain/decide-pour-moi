@@ -23,8 +23,11 @@ enum RouesDeDemo {
     /// telle quelle, quelle que soit la langue de l'interface.
     private static let eleves = ["Léa", "Marco", "Aïcha", "Tom", "Nina", "Sacha"]
 
-    static func installer(dans contexte: ModelContext, roues: [Roue]) {
-        for roue in roues { contexte.delete(roue) }
+    /// À appeler **avant le premier affichage** : supprimer une roue déjà
+    /// à l'écran invaliderait le modèle que la vue tient encore.
+    /// Les options et l'historique suivent en cascade.
+    static func installer(dans contexte: ModelContext) {
+        try? contexte.delete(model: Roue.self)
         RouesParDefaut.creer(dans: contexte)
 
         let classe = Roue(

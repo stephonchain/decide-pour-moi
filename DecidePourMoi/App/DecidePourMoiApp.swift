@@ -23,6 +23,15 @@ struct DecidePourMoiApp: App {
                 configurations: ModelConfiguration(schema: schema, isStoredInMemoryOnly: true)
             )
         }
+
+#if DEBUG
+        // Parcours de captures : le jeu de roues est remis à neuf ici,
+        // avant que la moindre vue ne tienne un modèle — la même remise à
+        // neuf faite plus tard supprimerait la roue déjà affichée.
+        if RouesDeDemo.demandees {
+            RouesDeDemo.installer(dans: ModelContext(conteneur))
+        }
+#endif
     }
 
     var body: some Scene {

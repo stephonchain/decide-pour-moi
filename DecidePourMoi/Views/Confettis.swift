@@ -14,9 +14,14 @@ struct Confettis: View {
 
     @State private var salve: [Particule] = []
     @State private var debut = Date.now
+    /// L'horloge ne tourne que pendant la salve. Sans cela, `TimelineView`
+    /// continue de réveiller le rendu à chaque image pour dessiner du vide :
+    /// batterie gaspillée, et une app que le système ne voit plus jamais au
+    /// repos — ce qui bloque aussi les tests d'interface.
+    @State private var enCours = false
 
     var body: some View {
-        TimelineView(.animation) { contexte in
+        TimelineView(.animation(paused: !enCours)) { contexte in
             Canvas { dessin, taille in
                 let temps = contexte.date.timeIntervalSince(debut)
                 guard temps < Self.duree else { return }
@@ -25,13 +30,16 @@ struct Confettis: View {
                 }
             }
         }
-        .onAppear { relancer() }
-        .onChange(of: declencheur) { _, _ in relancer() }
-    }
-
-    private func relancer() {
-        debut = .now
-        salve = (0..<Self.nombre).map { _ in Particule.aleatoire(couleurs: couleurs) }
+        .task(id: declencheur) {
+            debut = .now
+            salve = (0..<Self.nombre).map { _ in Particule.aleatoire(couleurs: couleurs) }
+            enCours = true
+            // Annulée si la vue disparaît avant la fin : rien à nettoyer,
+            // elle emporte son état avec elle.
+            guard (try? await Task.sleep(for: .seconds(Self.duree))) != nil else { return }
+            salve = []
+            enCours = false
+        }
     }
 
     private func dessiner(_ particule: Particule, temps: Double, dans dessin: inout GraphicsContext, taille: CGSize) {
