@@ -51,7 +51,7 @@ struct PaywallAdapte: View {
     /// écran de debug qui ne doit jamais atteindre un utilisateur — alors que
     /// le paywall maison, lui, est toujours prêt.
     private static func aUnPaywallConfigure(_ offering: Offering) -> Bool {
-        offering.paywall != nil || offering.paywallComponents != nil
+        offering.hasPaywall
     }
 }
 
