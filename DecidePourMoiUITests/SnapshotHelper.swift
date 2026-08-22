@@ -1,19 +1,26 @@
 //
 //  SnapshotHelper.swift
-//  Fichier d'aide de fastlane snapshot (version distribuée avec fastlane).
-//  Ne pas modifier : il est remplacé tel quel lors des mises à jour de fastlane.
+//  Example
 //
+//  Created by Felix Krause on 10/8/15.
+//
+
+// -----------------------------------------------------
+// IMPORTANT: When modifying this file, make sure to
+//            increment the version number at the very
+//            bottom of the file to notify users about
+//            the new SnapshotHelper.swift
+// -----------------------------------------------------
 
 import Foundation
 import XCTest
 
-var deviceLanguage = ""
-var locale = ""
-
+@MainActor
 func setupSnapshot(_ app: XCUIApplication, waitForAnimations: Bool = true) {
     Snapshot.setupSnapshot(app, waitForAnimations: waitForAnimations)
 }
 
+@MainActor
 func snapshot(_ name: String, waitForLoadingIndicator: Bool) {
     if waitForLoadingIndicator {
         Snapshot.snapshot(name)
@@ -22,6 +29,10 @@ func snapshot(_ name: String, waitForLoadingIndicator: Bool) {
     }
 }
 
+/// - Parameters:
+///   - name: The name of the snapshot
+///   - timeout: Amount of seconds to wait until the network loading indicator disappears. Pass `0` if you don't want to wait.
+@MainActor
 func snapshot(_ name: String, timeWaitingForIdle timeout: TimeInterval = 20) {
     Snapshot.snapshot(name, timeWaitingForIdle: timeout)
 }
@@ -41,6 +52,7 @@ enum SnapshotError: Error, CustomDebugStringConvertible {
 }
 
 @objcMembers
+@MainActor
 open class Snapshot: NSObject {
     static var app: XCUIApplication?
     static var waitForAnimations = true
@@ -52,6 +64,7 @@ open class Snapshot: NSObject {
     static var currentLocale = ""
 
     open class func setupSnapshot(_ app: XCUIApplication, waitForAnimations: Bool = true) {
+
         Snapshot.app = app
         Snapshot.waitForAnimations = waitForAnimations
 
@@ -77,7 +90,6 @@ open class Snapshot: NSObject {
         do {
             let trimCharacterSet = CharacterSet.whitespacesAndNewlines
             deviceLanguage = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
-            Snapshot.deviceLanguage = deviceLanguage
             app.launchArguments += ["-AppleLanguages", "(\(deviceLanguage))"]
         } catch {
             NSLog("Couldn't detect/set language...")
@@ -94,18 +106,17 @@ open class Snapshot: NSObject {
 
         do {
             let trimCharacterSet = CharacterSet.whitespacesAndNewlines
-            locale = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
-            Snapshot.currentLocale = locale
+            currentLocale = try String(contentsOf: path, encoding: .utf8).trimmingCharacters(in: trimCharacterSet)
         } catch {
             NSLog("Couldn't detect/set locale...")
         }
 
-        if locale.isEmpty && !deviceLanguage.isEmpty {
-            locale = Locale(identifier: deviceLanguage).identifier
+        if currentLocale.isEmpty && !deviceLanguage.isEmpty {
+            currentLocale = Locale(identifier: deviceLanguage).identifier
         }
 
-        if !locale.isEmpty {
-            app.launchArguments += ["-AppleLocale", "\"\(locale)\""]
+        if !currentLocale.isEmpty {
+            app.launchArguments += ["-AppleLocale", "\"\(currentLocale)\""]
         }
     }
 
@@ -136,7 +147,7 @@ open class Snapshot: NSObject {
             waitForLoadingIndicatorToDisappear(within: timeout)
         }
 
-        NSLog("snapshot: \(name)")
+        NSLog("snapshot: \(name)") // more information about this, check out https://docs.fastlane.tools/actions/snapshot/#how-does-it-work
 
         if Snapshot.waitForAnimations {
             sleep(1) // Waiting for the animation to be finished (kind of)
@@ -148,15 +159,20 @@ open class Snapshot: NSObject {
                 return
             }
 
-            app.typeKey(XCUIKeyboardKey.secondaryFn, modifierFlags: [])
+            app.typeKey(XCUIKeyboardKeySecondaryFn, modifierFlags: [])
         #else
+
             guard self.app != nil else {
                 NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
                 return
             }
 
             let screenshot = XCUIScreen.main.screenshot()
-            let image = XCUIDevice.shared.orientation.isLandscape ? fixLandscapeOrientation(image: screenshot.image) : screenshot.image
+            #if os(iOS) && !targetEnvironment(macCatalyst)
+            let image = XCUIDevice.shared.orientation.isLandscape ?  fixLandscapeOrientation(image: screenshot.image) : screenshot.image
+            #else
+            let image = screenshot.image
+            #endif
 
             guard var simulator = ProcessInfo().environment["SIMULATOR_DEVICE_NAME"], let screenshotsDir = screenshotsDirectory else { return }
 
@@ -173,19 +189,27 @@ open class Snapshot: NSObject {
                     try image.pngData()?.write(to: path, options: .atomic)
                 #endif
             } catch let error {
-                NSLog("Problem writing screenshot: \(name) to \(screenshotsDir)")
+                NSLog("Problem writing screenshot: \(name) to \(screenshotsDir)/\(simulator)-\(name).png")
                 NSLog(error.localizedDescription)
             }
         #endif
     }
 
     class func fixLandscapeOrientation(image: UIImage) -> UIImage {
-        let format = UIGraphicsImageRendererFormat()
-        format.scale = image.scale
-        let renderer = UIGraphicsImageRenderer(size: image.size, format: format)
-        return renderer.image { context in
-            image.draw(in: CGRect(origin: .zero, size: image.size))
-        }
+        #if os(watchOS)
+            return image
+        #else
+            if #available(iOS 10.0, *) {
+                let format = UIGraphicsImageRendererFormat()
+                format.scale = image.scale
+                let renderer = UIGraphicsImageRenderer(size: image.size, format: format)
+                return renderer.image { context in
+                    image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+                }
+            } else {
+                return image
+            }
+        #endif
     }
 
     class func waitForLoadingIndicatorToDisappear(within timeout: TimeInterval) {
@@ -260,6 +284,7 @@ private extension XCUIElementQuery {
         return self.containing(isNetworkLoadingIndicator)
     }
 
+    @MainActor
     var deviceStatusBars: XCUIElementQuery {
         guard let app = Snapshot.app else {
             fatalError("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
@@ -282,3 +307,7 @@ private extension CGFloat {
         return numberA...numberB ~= self
     }
 }
+
+// Please don't remove the lines below
+// They are used to detect outdated configuration files
+// SnapshotHelperVersion [1.30]
