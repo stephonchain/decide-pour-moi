@@ -70,12 +70,12 @@ struct OverlayResultat: View {
 
                     Button(action: fermer) {
                         Text(tr("Fermer"))
-                            .accessibilityIdentifier("bouton.fermerResultat")
                             .font(.system(.subheadline, design: .rounded, weight: .semibold))
                             .foregroundStyle(.white.opacity(0.7))
                             .padding(.vertical, 8)
                             .padding(.horizontal, 20)
                     }
+                    .accessibilityIdentifier("bouton.fermerResultat")
                 }
                 .font(.system(.subheadline, design: .rounded, weight: .semibold))
             }

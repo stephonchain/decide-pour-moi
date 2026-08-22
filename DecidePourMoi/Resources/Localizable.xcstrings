@@ -1735,6 +1735,23 @@
         }
       }
     },
+    "La classe": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The class"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La classe"
+          }
+        }
+      }
+    },
     "La pondération": {
       "extractionState": "manual",
       "localizations": {

@@ -27,9 +27,15 @@ struct MesRouesView: View {
                 LazyVGrid(columns: colonnes, spacing: 14) {
                     BoutonNouvelleRoue { creer() }
 
-                    ForEach(roues) { roue in
+                    ForEach(Array(roues.enumerated()), id: \.element.id) { rang, roue in
                         let ouvrable = premium.acces.peutOuvrir(roue)
                         VignetteRoue(roue: roue, estCourante: roue.id == roueCourante.id, verrouillee: !ouvrable)
+                            // Une vignette = un seul élément d'accessibilité,
+                            // annoncé comme un bouton : VoiceOver l'atteint
+                            // d'un geste, et les captures automatiques aussi.
+                            .accessibilityElement(children: .combine)
+                            .accessibilityAddTraits(.isButton)
+                            .accessibilityIdentifier("roue.\(rang)")
                             .onTapGesture {
                                 if ouvrable {
                                     Haptiques.shared.selection()
@@ -68,13 +74,13 @@ struct MesRouesView: View {
                     }
                 } label: {
                     Label(tr("Coller une liste pour créer une roue"), systemImage: "doc.on.clipboard")
-                        .accessibilityIdentifier("bouton.collerListe")
                         .font(.system(.subheadline, design: .rounded, weight: .semibold))
                         .foregroundStyle(.white.opacity(0.85))
                         .frame(maxWidth: .infinity)
                         .padding(.vertical, 14)
                         .background(.white.opacity(0.08), in: .rect(cornerRadius: 16))
                 }
+                .accessibilityIdentifier("bouton.collerListe")
                 .padding(.horizontal, 16)
                 .padding(.top, 14)
 

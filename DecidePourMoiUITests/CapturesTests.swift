@@ -1,110 +1,113 @@
 import XCTest
 
 /// Parcours de captures pour l'App Store, piloté par `fastlane snapshot` :
-/// il déroule les six écrans de la fiche dans la langue que fastlane injecte,
-/// et produit les captures des deux localisations en une commande.
+/// il déroule les cinq écrans de la fiche dans la langue que fastlane
+/// injecte, et produit les deux localisations en une commande.
 ///
-/// L'état de départ est fixé par des arguments de lancement (domaine
-/// d'arguments d'UserDefaults) : onboarding déjà vu, premium simulé — les
-/// deux drapeaux debug n'existant qu'en build de développement, exactement
-/// comme ces tests.
-///
-/// La classe est isolée sur l'acteur principal : `setupSnapshot` et
-/// `snapshot` le sont depuis les versions récentes de fastlane.
+/// L'état de départ est entièrement fixé par des arguments de lancement
+/// (domaine d'arguments d'UserDefaults) : onboarding déjà vu, premium
+/// simulé, jeu de roues de démonstration. Ces drapeaux n'existent qu'en
+/// build de développement, exactement comme ces tests — et le parcours ne
+/// tape jamais au clavier, ce qui l'affranchit de l'état du clavier
+/// logiciel du simulateur.
 @MainActor
 final class CapturesTests: XCTestCase {
 
     /// Attente longue : la roue tourne 3 à 5 secondes.
-    private let attenteRoue: TimeInterval = 10
+    private let attenteRoue: TimeInterval = 15
 
-    private func lancer(premium: Bool) -> XCUIApplication {
+    /// Rang de la roue « classe » dans la grille, fixé par `RouesDeDemo` :
+    /// on la désigne par sa position, son titre changeant avec la langue.
+    private let rangDeLaClasse = 1
+
+    func testCaptures() throws {
         continueAfterFailure = false
+
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launchArguments += [
             "-onboarding.fait", "YES",
-            "-debug.premium", premium ? "YES" : "NO",
-            "-avis.demande", "YES"          // jamais de popup d'avis en pleine capture
+            "-debug.premium", "YES",
+            "-avis.demande", "YES",      // jamais de popup d'avis en pleine capture
+            "-captures.demo", "YES"      // contenu identique dans les deux langues
         ]
         app.launch()
-        return app
-    }
 
-    /// Langue réellement injectée par fastlane, lue dans les arguments que
-    /// `setupSnapshot` vient d'ajouter — le helper n'expose plus de variable
-    /// globale pour cela.
-    private func langueEstFrancaise(_ app: XCUIApplication) -> Bool {
-        guard
-            let position = app.launchArguments.firstIndex(of: "-AppleLanguages"),
-            app.launchArguments.indices.contains(position + 1)
-        else { return true }
-        return app.launchArguments[position + 1].contains("fr")
-    }
-
-    func testCaptures() throws {
-        let app = lancer(premium: true)
-        let enFrancais = langueEstFrancaise(app)
-
-        // 01 — La roue principale, prête à tourner
-        let moyeu = app.buttons["bouton.moyeu"]
-        XCTAssertTrue(moyeu.waitForExistence(timeout: 15))
+        // 01 — La roue d'accueil, prête à tourner
+        let moyeu = element(app, "bouton.moyeu")
+        XCTAssertTrue(moyeu.waitForExistence(timeout: 25), "La roue d'accueil ne s'affiche pas.")
         snapshot("01-Roue")
 
         // 02 — Le résultat, confettis compris
-        moyeu.tap()
-        let fermerResultat = app.buttons["bouton.fermerResultat"]
-        XCTAssertTrue(fermerResultat.waitForExistence(timeout: attenteRoue))
+        tirer(app, moyeu: moyeu)
         snapshot("02-Resultat")
-        fermerResultat.tap()
+        fermerLeResultat(app)
 
-        // 04 — La grille des roues
-        app.buttons["bouton.mesRoues"].tap()
-        let collerListe = app.buttons["bouton.collerListe"]
-        XCTAssertTrue(collerListe.waitForExistence(timeout: 5))
-        snapshot("04-MesRoues")
+        // 03 — La grille des roues
+        taper(app, "bouton.mesRoues", "Le bouton « Mes roues » est absent.")
+        let collerListe = element(app, "bouton.collerListe")
+        XCTAssertTrue(collerListe.waitForExistence(timeout: 10), "La grille des roues ne s'affiche pas.")
+        sleep(1)                     // la feuille finit de monter
+        snapshot("03-MesRoues")
 
-        // 03 — Collage d'une liste d'élèves
-        collerListe.tap()
-        let champTitre = app.textFields["champ.titreListe"]
-        XCTAssertTrue(champTitre.waitForExistence(timeout: 5))
-        champTitre.tap()
-        champTitre.typeText(enFrancais ? "La classe" : "The class")
-        let champListe = app.textViews["champ.listeOptions"]
-        champListe.tap()
-        champListe.typeText("Lea\nMarco\nAicha\nTom\nNina\nSacha")
-        snapshot("03-CollerListe")
-        app.buttons["bouton.creerListe"].tap()
-
-        // 05 — Le mode ordre de passage : on le choisit, on tire une fois,
-        // le bandeau ordonné apparaît sous la roue.
-        let edition = app.buttons["bouton.edition"]
-        XCTAssertTrue(edition.waitForExistence(timeout: 10))
-        edition.tap()
-        let modeOrdre = app.buttons["mode.ordreDePassage"]
-        XCTAssertTrue(modeOrdre.waitForExistence(timeout: 5))
-        modeOrdre.tap()
-        app.buttons["bouton.enregistrerRoue"].tap()
-
-        XCTAssertTrue(moyeu.waitForExistence(timeout: 10))
-        moyeu.tap()
-        XCTAssertTrue(fermerResultat.waitForExistence(timeout: attenteRoue))
-        fermerResultat.tap()
+        // 04 — La liste en texte brut, déjà remplie : une ligne = une option.
+        // On passe par la roue de classe, celle qui a six prénoms.
+        taper(app, "roue.\(rangDeLaClasse)", "La vignette de la roue de classe est absente.")
+        sleep(1)                     // la feuille finit de se retirer
+        taper(app, "bouton.edition", "Le bouton d'édition est absent.")
+        taper(app, "bouton.listeTexte", "Le bouton de liste en texte est absent.")
+        let annulerListe = element(app, "bouton.annulerListe")
+        XCTAssertTrue(annulerListe.waitForExistence(timeout: 10), "La feuille de liste ne s'ouvre pas.")
         sleep(1)
+        snapshot("04-Liste")
+
+        // On referme la liste puis l'édition, sans rien avoir changé.
+        annulerListe.tap()
+        sleep(1)
+        taper(app, "bouton.enregistrerRoue", "Le bouton d'enregistrement est absent.")
+        sleep(1)
+
+        // 05 — L'ordre de passage : trois tirages, le bandeau se remplit
+        XCTAssertTrue(moyeu.waitForExistence(timeout: 15), "Retour à la roue impossible.")
+        for _ in 0..<3 {
+            tirer(app, moyeu: moyeu)
+            fermerLeResultat(app)
+        }
         snapshot("05-OrdreDePassage")
     }
 
-    func testCapturePaywall() throws {
-        let app = lancer(premium: false)
+    // MARK: Outils
 
-        // 06 — Le paywall, offres chargées depuis le fichier StoreKit local
-        let reglages = app.buttons["bouton.reglages"]
-        XCTAssertTrue(reglages.waitForExistence(timeout: 15))
-        reglages.tap()
-        let premium = app.buttons["bouton.premium"]
-        XCTAssertTrue(premium.waitForExistence(timeout: 5))
-        premium.tap()
-        // Le temps que les offres arrivent du fichier StoreKit
-        sleep(3)
-        snapshot("06-Paywall")
+    /// Recherche par identifiant sans présumer du type d'élément : selon
+    /// la vue, SwiftUI expose un bouton, un texte ou un simple groupe.
+    private func element(_ app: XCUIApplication, _ identifiant: String) -> XCUIElement {
+        app.descendants(matching: .any).matching(identifier: identifiant).firstMatch
+    }
+
+    /// Tape sur un élément, en faisant défiler si besoin : une liste plus
+    /// longue que l'écran ne doit pas faire échouer le parcours.
+    private func taper(_ app: XCUIApplication, _ identifiant: String, _ description: String) {
+        let cible = element(app, identifiant)
+        XCTAssertTrue(cible.waitForExistence(timeout: 15), description)
+        var essais = 0
+        while !cible.isHittable && essais < 3 {
+            app.swipeUp()
+            essais += 1
+        }
+        cible.tap()
+    }
+
+    /// Lance la roue et attend la fin de l'animation.
+    private func tirer(_ app: XCUIApplication, moyeu: XCUIElement) {
+        moyeu.tap()
+        let fermer = element(app, "bouton.fermerResultat")
+        XCTAssertTrue(fermer.waitForExistence(timeout: attenteRoue), "Le résultat ne s'affiche pas.")
+    }
+
+    /// Referme le résultat et laisse l'overlay disparaître avant la suite.
+    private func fermerLeResultat(_ app: XCUIApplication) {
+        let fermer = element(app, "bouton.fermerResultat")
+        if fermer.waitForExistence(timeout: attenteRoue) { fermer.tap() }
+        sleep(1)
     }
 }

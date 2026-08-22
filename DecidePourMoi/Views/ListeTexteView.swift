@@ -53,6 +53,7 @@ struct ListeTexteView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(tr("Annuler")) { fermer() }
+                        .accessibilityIdentifier("bouton.annulerListe")
                 }
                 ToolbarItem(placement: .confirmationAction) {
                     Button(tr("Valider")) { valider(lignes) }

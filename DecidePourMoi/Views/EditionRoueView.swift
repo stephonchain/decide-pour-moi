@@ -94,6 +94,7 @@ struct EditionRoueView: View {
                     Label(tr("Coller ou modifier la liste"), systemImage: "doc.on.clipboard")
                         .font(.system(.body, design: .rounded))
                 }
+                .accessibilityIdentifier("bouton.listeTexte")
                 .listRowBackground(Fond.carte)
             } header: {
                 Text(tr("Options"))

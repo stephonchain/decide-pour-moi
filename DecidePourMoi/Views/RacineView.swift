@@ -48,6 +48,17 @@ struct RacineView: View {
         guard !amorcageTente else { return }
         amorcageTente = true
 
+#if DEBUG
+        // Parcours de captures : contenu remis à neuf dans la langue du
+        // moment, onboarding sauté, aucune retraduction à faire.
+        if RouesDeDemo.demandees {
+            RouesDeDemo.installer(dans: contexte, roues: roues)
+            Reglages.amorcageFait = true
+            Reglages.onboardingFait = true
+            return
+        }
+#endif
+
         if !Reglages.amorcageFait {
             // Installation neuve : les roues secondaires sont des teasers
             // verrouillés, et l'onboarding s'ouvre par-dessus.

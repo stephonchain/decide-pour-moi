@@ -26,17 +26,41 @@ fastlane captures
 ```
 
 Ce que ça fait : compile la cible `DecidePourMoiUITests`, lance le
-simulateur iPhone 16 Pro Max une fois par langue, déroule les six écrans
-(roue, résultat avec confettis, collage d'une liste d'élèves, grille des
-roues, ordre de passage, paywall) et range les PNG dans
-`fastlane/screenshots/fr-FR` et `en-US`, barre d'état forcée à 9:41.
+simulateur iPhone 16 Pro Max une fois par langue, déroule cinq écrans et
+range les PNG dans `fastlane/screenshots/fr-FR` et `en-US`, barre d'état
+forcée à 9:41.
 
-Le paywall est capturé hors premium, offres chargées depuis
-`DecidePourMoi.storekit` : les prix sont en euros dans les deux langues.
-Un rapport HTML s'ouvre à la fin pour tout relire d'un coup d'œil.
+| Fichier | Écran |
+| --- | --- |
+| `01-Roue` | La roue d'accueil, prête à tourner |
+| `02-Resultat` | Le résultat, confettis compris |
+| `03-MesRoues` | La grille des roues |
+| `04-Liste` | La liste en texte brut : une ligne = une option |
+| `05-OrdreDePassage` | L'ordre de passage après trois tirages |
 
-Seul le 6,9" est capturé : App Store Connect dérive les tailles plus
-petites automatiquement.
+Pas de capture du paywall : une fiche App Store se vend sur ce que l'app
+fait, pas sur son tarif.
+
+Un rapport HTML s'ouvre à la fin pour tout relire d'un coup d'œil. Seul le
+6,9" est capturé : App Store Connect dérive les tailles plus petites
+automatiquement.
+
+### Ce qui rend le parcours reproductible
+
+Trois arguments de lancement, tous sous `#if DEBUG`, donc absents du
+binaire publié :
+
+- `-captures.demo YES` — remet à chaque lancement le même jeu de roues,
+  dans la langue du moment (`RouesDeDemo`). Les deux localisations montrent
+  donc exactement le même contenu, aux mêmes positions.
+- `-debug.premium YES` — tout est déverrouillé, aucun cadenas à l'image.
+- `-avis.demande YES` et `-onboarding.fait YES` — ni popup d'avis ni
+  tunnel d'accueil au milieu d'une capture.
+
+Le parcours ne tape jamais au clavier : il navigue au doigt et s'appuie sur
+des identifiants d'accessibilité. C'est ce qui l'immunise contre l'état du
+clavier logiciel du simulateur, principale source d'échecs de ce genre de
+test.
 
 ## Publier la fiche et les captures
 
@@ -55,12 +79,15 @@ part par Xcode → Product → Archive, comme d'habitude.
 et on relance `fastlane publier_textes`. Plus jamais d'édition à la main
 dans App Store Connect.
 
-## Deux pièges connus
+## Pièges connus
 
 - **Localisation anglaise** : les dossiers supposent « English (U.S.) ».
   Si la fiche a été créée en « English (U.K.) », renommer
   `fastlane/metadata/en-US` en `en-GB` et la ligne `languages` du Snapfile.
-- **Premier passage** : la cible de tests UI n'a jamais compilé — si un
-  identifiant d'accessibilité manque ou qu'un écran met plus de temps que
-  prévu, le test échoue proprement avec le nom de l'élément introuvable.
-  M'envoyer la sortie, c'est réglé en un échange.
+- **Assistant fastlane** : si la commande demande *Would you like to set
+  fastlane up?*, répondre **n**. C'est le signe que le dépôt n'est pas à
+  jour (`git pull`) ou qu'on n'est pas dans le bon dossier.
+- **Un écran manquant** : le parcours continue et va au bout des deux
+  langues (`stop_after_first_error(false)`), puis liste ce qui a échoué
+  avec le nom de l'élément introuvable. M'envoyer cette ligne, c'est réglé
+  en un échange.
