@@ -176,7 +176,7 @@ def main() -> int:
         print(f"Aucune langue à traiter dans {ENTREE}.", file=sys.stderr)
         return 1
 
-    total, manquants = 0, []
+    total, manquants, doublons = 0, [], []
     for langue in langues:
         source = ENTREE / langue
         destination = SORTIE / langue
@@ -184,27 +184,45 @@ def main() -> int:
         for ancienne in destination.glob("*.png"):
             ancienne.unlink()
 
-        captures = sorted(source.glob("*.png"))
-        cles = {c: next((k for k in titres.get(langue, {}) if k in c.stem), None)
-                for c in captures}
-        gabarit = Image.open(captures[0]).size if captures else (1320, 2868)
+        # Une planche par écran, et une seule. Le dossier de captures peut
+        # contenir plusieurs fichiers pour le même écran — reprise d'une
+        # exécution interrompue, ancien nom d'appareil : sur la fiche, ça se
+        # verrait en doublon. Le nom de l'écran fait foi, pas le fichier.
+        retenues: dict[str, Path] = {}
+        for capture in sorted(source.glob("*.png")):
+            # fastlane préfixe le nom de l'appareil : « iPhone 16 Pro Max-01-Roue.png »
+            cle = next((k for k in titres.get(langue, {}) if k in capture.stem), None)
+            if cle is None:
+                manquants.append(f"{langue}/{capture.name}")
+            elif cle in retenues:
+                doublons.append(f"{langue}/{capture.name}")
+            else:
+                retenues[cle] = capture
+
+        if not retenues:
+            continue
+
+        gabarit = Image.open(next(iter(retenues.values()))).size
         corps = corps_commun(
-            [titres[langue][k] for k in cles.values() if k],
+            [titres[langue][cle] for cle in retenues],
             largeur_max=int(gabarit[0] * LARGEUR_TEXTE_MAX),
             hauteur_max=int(min(gabarit[1] * HAUTEUR_ZONE_TITRE,
                                 gabarit[1] * CORPS_TITRE_MAX * 2 * INTERLIGNE)),
         )
 
-        for capture in captures:
-            # fastlane préfixe le nom de l'appareil : « iPhone 16 Pro Max-01-Roue.png »
-            cle = cles[capture]
-            if cle is None:
-                manquants.append(f"{langue}/{capture.name}")
-                continue
+        for cle, capture in sorted(retenues.items()):
             planche = habiller(capture, titres[langue][cle], fonds[cle], corps)
-            planche.save(destination / capture.name, "PNG")
+            # Nommées d'après l'écran : App Store Connect les classe par
+            # ordre alphabétique, donc 01, 02, 03… comme prévu.
+            planche.save(destination / f"{cle}.png", "PNG")
             total += 1
-        print(f"{langue} : {len(list(destination.glob('*.png')))} planches → {destination}")
+        print(f"{langue} : {len(retenues)} planches → {destination}")
+
+    if doublons:
+        print("\nÉcrans déjà pris, donc ignorés (pas de doublon sur la fiche) :",
+              file=sys.stderr)
+        for nom in doublons:
+            print(f"  {nom}", file=sys.stderr)
 
     if manquants:
         print("\nSans titre défini, donc ignorées :", file=sys.stderr)
