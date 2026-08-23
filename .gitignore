@@ -27,4 +27,8 @@ fastlane/test_output/
 # L'Appfile généré localement contient l'identifiant Apple personnel :
 # il reste sur la machine, jamais dans un dépôt public.
 fastlane/Appfile
+
+# Clé privée App Store Connect : elle donne un accès complet au compte
+# développeur. Sa place est hors du dépôt ; ce filet n'est qu'un garde-fou.
+*.p8
 Gemfile.lock
