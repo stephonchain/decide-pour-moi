@@ -45,6 +45,48 @@ Un rapport HTML s'ouvre à la fin pour tout relire d'un coup d'œil. Seul le
 6,9" est capturé : App Store Connect dérive les tailles plus petites
 automatiquement.
 
+## Habillage des planches
+
+`fastlane captures` enchaîne directement sur l'habillage. Chaque capture
+brute est posée sur un fond dégradé, sous un titre marketing, dans un cadre
+aux coins arrondis avec ombre portée — le format attendu par l'App Store,
+aux dimensions exactes de l'original (1320 × 2868).
+
+| Dossier | Contenu |
+| --- | --- |
+| `fastlane/screenshots/` | les captures brutes, telles que sorties du simulateur |
+| `fastlane/captures_habillees/` | les planches finies, celles qui partent sur la fiche |
+
+Les deux dossiers sont ignorés par git : ils se régénèrent en une commande.
+
+**Pour changer un texte ou une couleur, on ne touche pas au code** :
+
+- `fastlane/habillage/titres.json` — un titre par écran et par langue. Le
+  retour à la ligne est explicite (`\n`) : c'est vous qui décidez de la
+  coupure, pas un algorithme.
+- `fastlane/habillage/fonds.json` — les deux couleurs du dégradé de chaque
+  écran. La série suit une montée indigo → violet ; en changer une seule
+  casse l'unité, elles se règlent ensemble.
+
+Puis :
+
+```bash
+fastlane habiller     # ré-habille sans refaire tourner le simulateur
+```
+
+Le corps de la police est calculé **une fois pour toute la série** d'une
+langue : cinq tailles différentes côte à côte sur une fiche, c'est le
+premier détail qui trahit un montage. Un titre trop long rapetisse donc
+tous les autres — c'est voulu, mais ça se voit : gardez-les de longueur
+comparable.
+
+La police est Nunito (licence SIL OFL), versionnée dans
+`fastlane/habillage/polices/`. C'est l'équivalent libre le plus proche du
+SF Pro Rounded de l'app ; SF Pro lui-même n'est pas redistribuable.
+
+Pillow s'installe tout seul dans `.venv_captures/` à la racine du dépôt —
+rien n'est installé sur le système.
+
 ### Ce qui rend le parcours reproductible
 
 Trois arguments de lancement, tous sous `#if DEBUG`, donc absents du
@@ -71,8 +113,9 @@ fastlane publier_textes   # métadonnées seules
 
 `deliver` pousse tout ce que contient `fastlane/metadata/` (nom,
 sous-titre, mots-clés, promo, description, URLs, notes de revue) et les
-captures, dans les deux localisations, sans toucher au binaire — celui-ci
-part par Xcode → Product → Archive, comme d'habitude.
+planches de `fastlane/captures_habillees/`, dans les deux localisations,
+sans toucher au binaire — celui-ci part par Xcode → Product → Archive,
+comme d'habitude.
 
 **La vérité vit dans le dépôt** : pour changer un texte de la fiche, on
 édite `fastlane/metadata/…` (ou `docs/fiche-app-store.md` puis on reporte),

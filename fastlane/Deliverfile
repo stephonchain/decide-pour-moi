@@ -13,6 +13,10 @@ secondary_category("LIFESTYLE")
 
 submit_for_review(false)
 
+# Ce sont les planches habillées qui partent sur la fiche, pas les captures
+# brutes : `fastlane captures` produit les deux, dans cet ordre.
+screenshots_path("./fastlane/captures_habillees")
+
 # Pas de question interactive en cas de différence : la vérité est ici.
 force(true)
 overwrite_screenshots(true)

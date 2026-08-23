@@ -17,8 +17,10 @@ xcuserdata/
 # macOS
 .DS_Store
 
-# fastlane
+# fastlane — les captures et les planches se régénèrent en une commande
 fastlane/screenshots/
+fastlane/captures_habillees/
+.venv_captures/
 fastlane/report.xml
 fastlane/README.md
 fastlane/test_output/

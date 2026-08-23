@@ -1,0 +1,16 @@
+{
+  "fr-FR": {
+    "01-Roue": "Tournez.\nC’est décidé.",
+    "02-Resultat": "Le hasard tranche,\npas vous.",
+    "03-MesRoues": "Une roue\npour chaque situation",
+    "04-Liste": "Collez une liste,\nla roue est prête",
+    "05-OrdreDePassage": "Un ordre de passage\nsans contestation"
+  },
+  "en-US": {
+    "01-Roue": "Give it a spin.\nDone deciding.",
+    "02-Resultat": "Let chance decide,\nnot you.",
+    "03-MesRoues": "One wheel\nfor every situation",
+    "04-Liste": "Paste a list,\nthe wheel is ready",
+    "05-OrdreDePassage": "A running order\nnobody argues with"
+  }
+}

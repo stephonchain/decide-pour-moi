@@ -1,12 +1,23 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Captures d'écran FR + EN sur simulateur (fastlane captures)"
+  desc "Captures d'écran FR + EN sur simulateur, puis habillage (fastlane captures)"
   lane :captures do
     capture_screenshots
+    habiller
   end
 
-  desc "Publie fiche + captures vers App Store Connect (fastlane publier)"
+  desc "Habille les captures déjà prises : fond, titre, cadre (fastlane habiller)"
+  lane :habiller do
+    # Pillow dans un environnement isolé, à la racine du dépôt : rien
+    # d'installé sur le système, et le même rendu d'une machine à l'autre.
+    # `venv` est idempotent, donc pas de test d'existence à faire.
+    sh("cd .. && python3 -m venv .venv_captures" \
+       " && .venv_captures/bin/pip install --quiet --upgrade pillow" \
+       " && .venv_captures/bin/python scripts/habiller_captures.py")
+  end
+
+  desc "Publie fiche + captures habillées vers App Store Connect (fastlane publier)"
   lane :publier do
     cle_asc
     deliver
