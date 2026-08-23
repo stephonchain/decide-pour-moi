@@ -19,4 +19,11 @@ screenshots_path("./fastlane/captures_habillees")
 
 # Pas de question interactive en cas de différence : la vérité est ici.
 force(true)
-overwrite_screenshots(true)
+
+# Synchronisation plutôt que remplacement. `overwrite_screenshots` efface
+# tout puis renvoie tout : si App Store Connect n'a pas fini de traiter les
+# images quand deliver vérifie leur présence, il les croit perdues et
+# renvoie le lot entier — chaque visuel se retrouve en double sur la fiche.
+# En mode synchronisé, deliver compare les empreintes : il n'envoie que ce
+# qui manque vraiment et retire de la fiche ce qui n'existe plus ici.
+sync_screenshots(true)

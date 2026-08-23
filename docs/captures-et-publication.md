@@ -139,6 +139,14 @@ dans App Store Connect.
   grep -E "XCTAssertTrue|error:|Failed to|not idle|Crash"     ~/Library/Logs/snapshot/DecidePourMoi-DecidePourMoi.log | head -30
   ```
 
+- **Visuels en double sur la fiche** : `deliver` a renvoyé le lot entier
+  après avoir cru sa première salve perdue (`is missing on App Store
+  Connect` puis `Tries remaining`). App Store Connect n'avait pas fini de
+  traiter les images au moment de la vérification. Le Deliverfile est en
+  `sync_screenshots(true)` pour ça : deliver compare les empreintes et
+  n'envoie que ce qui manque. Si des doublons restent d'un envoi
+  antérieur, un `fastlane publier` de plus les retire.
+
 - **`Executed 0 tests`** : le test n'a pas échoué, il est mort en route —
   l'app a planté ou s'est figée. La commande ci-dessus le dit ; la cause
   classique est une animation qui ne s'arrête jamais, car le système ne
