@@ -34,3 +34,6 @@ La version gratuite offre une vraie roue complète, modifiable à volonté, avec
 Une question, une idée de roue qui manque ? Écrivez-nous : contact@steverover.com — nous lisons tout.
 
 Décide pour moi. La roue tourne, vous vivez.
+
+Conditions d'utilisation : https://stephonchain.github.io/legal/decide-pour-moi/conditions.html
+Politique de confidentialité : https://stephonchain.github.io/legal/decide-pour-moi/confidentialite.html
