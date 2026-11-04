@@ -24,9 +24,13 @@ struct MesRouesView: View {
     var body: some View {
         FeuilleSombre(titre: tr("Mes roues")) {
             ScrollView {
-                LazyVGrid(columns: colonnes, spacing: 14) {
-                    BoutonNouvelleRoue { creer() }
+                if !premium.acces.estPremium && !premium.acces.estHistorique {
+                    BandeauPremium { presenterPaywall(.roueVerrouillee) }
+                        .padding(.horizontal, 16)
+                        .padding(.top, 12)
+                }
 
+                LazyVGrid(columns: colonnes, spacing: 12) {
                     ForEach(Array(roues.enumerated()), id: \.element.id) { rang, roue in
                         let ouvrable = premium.acces.peutOuvrir(roue)
                         VignetteRoue(roue: roue, estCourante: roue.id == roueCourante.id, verrouillee: !ouvrable)
@@ -66,6 +70,10 @@ struct MesRouesView: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
 
+                BoutonNouvelleRoue(verrouille: !peutCreer) { creer() }
+                    .padding(.horizontal, 16)
+                    .padding(.top, 14)
+
                 Button {
                     if peutCreer {
                         importAffiche = true
@@ -74,15 +82,11 @@ struct MesRouesView: View {
                     }
                 } label: {
                     Label(tr("Coller une liste pour créer une roue"), systemImage: "doc.on.clipboard")
-                        .font(.system(.subheadline, design: .rounded, weight: .semibold))
-                        .foregroundStyle(.white.opacity(0.85))
-                        .frame(maxWidth: .infinity)
-                        .padding(.vertical, 14)
-                        .background(.white.opacity(0.08), in: .rect(cornerRadius: 16))
+                        .boutonBarre()
                 }
                 .accessibilityIdentifier("bouton.collerListe")
                 .padding(.horizontal, 16)
-                .padding(.top, 14)
+                .padding(.top, 10)
 
                 EncartPromo()
                     .padding(.horizontal, 16)
@@ -196,70 +200,111 @@ struct VignetteRoue: View {
     var verrouillee = false
 
     var body: some View {
-        VStack(spacing: 10) {
-            ZStack {
-                RoueCanvas(
-                    segments: roue.optionsOrdonnees.prefix(12).map {
-                        SegmentAffichage(id: $0.id, label: "", poids: $0.poidsValide)
-                    },
-                    palette: roue.palette
-                )
-                .opacity(verrouillee ? 0.45 : 1)
-                if verrouillee {
-                    Image(systemName: "lock.fill")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(.white.opacity(0.85))
-                } else {
-                    Circle()
-                        .fill(.white)
-                        .frame(width: 16, height: 16)
-                }
-            }
-            .frame(width: 84, height: 84)
+        VStack(alignment: .leading, spacing: 12) {
+            RoueCanvas(
+                segments: roue.optionsOrdonnees.prefix(12).map {
+                    SegmentAffichage(id: $0.id, label: "", poids: $0.poidsValide)
+                },
+                palette: roue.palette
+            )
+            .frame(width: 74, height: 74)
+            .opacity(verrouillee ? 0.55 : 1)
 
-            VStack(spacing: 2) {
+            VStack(alignment: .leading, spacing: 2) {
                 Text(roue.titre.isEmpty ? tr("Sans titre") : roue.titre)
-                    .font(.system(.subheadline, design: .rounded, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .lineLimit(1)
+                    .font(.system(size: 16, weight: .black, design: .rounded))
+                    .foregroundStyle(Encre.vive)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
                 Text(roue.resume)
-                    .font(.system(.caption2, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.55))
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .foregroundStyle(Encre.discrete)
                     .lineLimit(1)
             }
+            Spacer(minLength: 0)
         }
-        .frame(maxWidth: .infinity)
-        .padding(.vertical, 16)
-        .background(Fond.carte, in: .rect(cornerRadius: 18))
+        .frame(maxWidth: .infinity, minHeight: 168, alignment: .topLeading)
+        .padding(14)
+        .background(Fond.carte, in: .rect(cornerRadius: 22))
         .overlay {
-            RoundedRectangle(cornerRadius: 18)
-                .strokeBorder(.white.opacity(estCourante ? 0.8 : 0), lineWidth: 2)
+            RoundedRectangle(cornerRadius: 22)
+                .strokeBorder(estCourante ? Accent.soleil : .clear, lineWidth: 2)
+        }
+        // Le cadenas se pose sur la vignette, il ne remplace pas la roue :
+        // on doit voir ce qu'on n'a pas encore.
+        .overlay(alignment: .topTrailing) {
+            if verrouillee {
+                PastilleCadenas()
+                    .padding(12)
+            }
         }
         .accessibilityElement(children: .combine)
         .accessibilityAddTraits(.isButton)
     }
 }
 
-struct BoutonNouvelleRoue: View {
+/// Appel au premium en tête de « Mes roues » : la seule carte jaune de
+/// l'écran, et elle dit ce qu'elle débloque avant de demander quoi que ce
+/// soit.
+struct BandeauPremium: View {
     let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 10) {
-                Image(systemName: "plus")
-                    .font(.system(size: 30, weight: .semibold))
-                    .foregroundStyle(.white)
-                    .frame(width: 84, height: 84)
-                    .background(.white.opacity(0.12), in: .circle)
-                Text(tr("Nouvelle roue"))
-                    .font(.system(.subheadline, design: .rounded, weight: .semibold))
-                    .foregroundStyle(.white)
-                Text(verbatim: " ")
-                    .font(.system(.caption2, design: .rounded))
+            HStack(spacing: 14) {
+                Image(systemName: "star.fill")
+                    .font(.system(size: 18, weight: .black))
+                    .foregroundStyle(Accent.soleil)
+                    .frame(width: 40, height: 40)
+                    .background(Fond.sombre, in: .rect(cornerRadius: 12))
+
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(tr("Débloquez toutes les roues"))
+                        .font(.system(size: 16, weight: .black, design: .rounded))
+                    Text(tr("3 jours gratuits, sans engagement"))
+                        .font(.system(size: 13, weight: .heavy, design: .rounded))
+                        .opacity(0.8)
+                }
+                .multilineTextAlignment(.leading)
+
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .black))
             }
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(.white.opacity(0.06), in: .rect(cornerRadius: 18))
+            .foregroundStyle(Fond.sombre)
+            .padding(.horizontal, 16)
+            .padding(.vertical, 14)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Accent.soleil, in: .rect(cornerRadius: 20))
+        }
+        .buttonStyle(.plain)
+    }
+}
+
+/// Création d'une roue : un contour pointillé plutôt qu'une carte pleine.
+/// Ce n'est pas une roue de plus dans la grille, c'est une place à prendre.
+struct BoutonNouvelleRoue: View {
+    var verrouille = false
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            HStack(spacing: 10) {
+                Image(systemName: "plus")
+                    .font(.system(size: 17, weight: .black))
+                Text(tr("Nouvelle roue"))
+                    .font(.system(size: 16, weight: .black, design: .rounded))
+                if verrouille { Cadenas() }
+            }
+            .foregroundStyle(Encre.vive)
+            .frame(maxWidth: .infinity, minHeight: 56)
+            .background {
+                RoundedRectangle(cornerRadius: 20)
+                    .strokeBorder(
+                        .white.opacity(0.22),
+                        style: StrokeStyle(lineWidth: 2, dash: [7, 6])
+                    )
+            }
         }
         .buttonStyle(.plain)
     }

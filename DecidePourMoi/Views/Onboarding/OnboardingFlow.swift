@@ -22,7 +22,11 @@ struct OnboardingFlow: View {
             FondApplication()
 
             VStack(spacing: 0) {
-                barreDeProgression
+                // Le paywall porte sa propre croix de fermeture : lui
+                // laisser aussi l'en-tête ferait deux sorties concurrentes.
+                if page < Self.derniere {
+                    enTete
+                }
                 contenu
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
@@ -38,44 +42,41 @@ struct OnboardingFlow: View {
 
     // MARK: Progression
 
-    private var barreDeProgression: some View {
-        VStack(spacing: 0) {
-            HStack {
-                if page > 1, page < Self.derniere {
-                    Button {
-                        reculer()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                            .font(.system(size: 15, weight: .semibold))
-                            .foregroundStyle(.white.opacity(0.45))
-                            .frame(width: 38, height: 38)
-                    }
-                    .accessibilityLabel(Text(tr("Page précédente")))
-                } else {
-                    Color.clear.frame(width: 38, height: 38)
+    /// Retour, progression, « Passer ». Les deux extrémités occupent la
+    /// même largeur même quand elles sont vides : sans cela la barre de
+    /// progression se décale d'une page à l'autre.
+    private var enTete: some View {
+        HStack(spacing: 12) {
+            if page > 1 {
+                Button {
+                    reculer()
+                } label: {
+                    Image(systemName: "chevron.left")
+                        .boutonRond()
                 }
-
-                ProgressView(value: Double(page), total: Double(Self.derniere))
-                    .tint(.white)
-                    .scaleEffect(y: 0.6)
-
-                if page >= Self.pageDuPasser && page < Self.derniere || estUneRevisite {
-                    Button {
-                        avancer(vers: Self.derniere)
-                    } label: {
-                        Text(tr("Passer"))
-                            .font(.system(.footnote, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.4))
-                            .frame(height: 38)
-                    }
-                } else {
-                    Color.clear.frame(width: 38, height: 38)
-                }
+                .accessibilityLabel(Text(tr("Page précédente")))
+            } else {
+                Color.clear.frame(width: 44, height: 44)
             }
-            .padding(.horizontal, 12)
-            .padding(.top, 8)
+
+            ProgressionSegmentee(page: page, total: Self.derniere)
+
+            if page >= Self.pageDuPasser || estUneRevisite {
+                Button {
+                    avancer(vers: Self.derniere)
+                } label: {
+                    Text(tr("Passer"))
+                        .font(.system(size: 15, weight: .heavy, design: .rounded))
+                        .foregroundStyle(Encre.discrete)
+                        .frame(minWidth: 44, minHeight: 44)
+                }
+            } else {
+                Color.clear.frame(width: 44, height: 44)
+            }
         }
-        .opacity(page == Self.derniere ? 0 : 1)
+        .frame(height: 44)
+        .padding(.horizontal, 24)
+        .padding(.top, 10)
     }
 
     // MARK: Pages
@@ -91,8 +92,9 @@ struct OnboardingFlow: View {
                 } continuer: { avancer() }
             case 3:
                 PageQuestionSimple(
+                    rang: 1,
                     question: tr("Vous arrive-t-il d'hésiter longtemps pour des petites décisions ?"),
-                    options: ReponsesOnboarding.Frequence.allCases.map { ($0.id, $0.libelle) },
+                    options: ReponsesOnboarding.Frequence.allCases.map { ($0.id, $0.libelle, $0.symbole) },
                     selection: ReponsesOnboarding.frequence?.id
                 ) { choix in
                     ReponsesOnboarding.frequence = .init(rawValue: choix)
@@ -107,8 +109,9 @@ struct OnboardingFlow: View {
                 } continuer: { avancer() }
             case 7:
                 PageQuestionSimple(
+                    rang: 3,
                     question: tr("Combien de temps perdez-vous par jour à hésiter ?"),
-                    options: ReponsesOnboarding.TempsPerdu.allCases.map { ($0.id, $0.libelle) },
+                    options: ReponsesOnboarding.TempsPerdu.allCases.map { ($0.id, $0.libelle, $0.symbole) },
                     selection: ReponsesOnboarding.tempsPerdu?.id
                 ) { choix in
                     ReponsesOnboarding.tempsPerdu = .init(rawValue: choix)
@@ -119,8 +122,9 @@ struct OnboardingFlow: View {
             case 10: PagePonderation { avancer() }
             case 11:
                 PageQuestionSimple(
+                    rang: 4,
                     question: tr("Qui décidera avec vous ?"),
-                    options: ReponsesOnboarding.Compagnie.allCases.map { ($0.id, $0.libelle) },
+                    options: ReponsesOnboarding.Compagnie.allCases.map { ($0.id, $0.libelle, $0.symbole) },
                     selection: ReponsesOnboarding.compagnie?.id
                 ) { choix in
                     ReponsesOnboarding.compagnie = .init(rawValue: choix)

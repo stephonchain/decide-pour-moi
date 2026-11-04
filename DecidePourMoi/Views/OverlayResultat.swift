@@ -17,8 +17,8 @@ struct OverlayResultat: View {
     @State private var apparu = false
 
     var body: some View {
-        ZStack {
-            Color.black.opacity(0.62)
+        ZStack(alignment: .bottom) {
+            Color(hex: 0x0C0C28).opacity(0.55)
                 .ignoresSafeArea()
                 .onTapGesture(perform: fermer)
 
@@ -28,65 +28,83 @@ struct OverlayResultat: View {
                     .ignoresSafeArea()
             }
 
-            VStack(spacing: 26) {
-                Text(intitule)
-                    .font(.system(.subheadline, design: .rounded, weight: .semibold))
-                    .foregroundStyle(.white.opacity(0.6))
-                    .textCase(.uppercase)
-                    .tracking(1.5)
+            // Une feuille posée en bas plutôt qu'un bloc au centre : la
+            // roue reste visible derrière, et les actions tombent sous le
+            // pouce.
+            VStack(spacing: 22) {
+                Surtitre(texte: intitule)
 
-                Text(label)
-                    .font(.system(size: 46, weight: .heavy, design: .rounded))
-                    .foregroundStyle(.white)
-                    .multilineTextAlignment(.center)
-                    .minimumScaleFactor(0.4)
-                    .lineLimit(4)
-                    .padding(.horizontal, 24)
-                    .scaleEffect(apparu ? 1 : 0.75)
-                    .opacity(apparu ? 1 : 0)
+                HStack(spacing: 14) {
+                    Circle()
+                        .fill(couleurDuResultat)
+                        .frame(width: 22, height: 22)
+                    Text(label)
+                        .font(.system(size: 46, weight: .black, design: .rounded))
+                        .foregroundStyle(Encre.vive)
+                        .multilineTextAlignment(.leading)
+                        .minimumScaleFactor(0.4)
+                        .lineLimit(3)
+                }
+                .scaleEffect(apparu ? 1 : 0.75)
+                .opacity(apparu ? 1 : 0)
 
                 if roue.mode == .ordreDePassage {
                     Text(tr("Position \(roue.ordreDePassage.count) sur \(roue.optionsOrdonnees.count)"))
-                        .font(.system(.subheadline, design: .rounded, weight: .medium))
-                        .foregroundStyle(.white.opacity(0.7))
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .foregroundStyle(Encre.discrete)
                 }
 
-                VStack(spacing: 12) {
+                VStack(spacing: 10) {
                     Button(action: relancer) {
                         Label(tr("Relancer"), systemImage: "arrow.clockwise")
                             .boutonPrincipal()
                     }
                     .disabled(!roue.peutTourner)
+                    .opacity(roue.peutTourner ? 1 : 0.45)
 
-                    if roue.mode == .avecRemise {
-                        Button(action: retirer) {
-                            HStack(spacing: 6) {
-                                Label(tr("Retirer cette option"), systemImage: "minus.circle")
-                                if !retraitAutorise { Cadenas() }
+                    HStack(spacing: 10) {
+                        if roue.mode == .avecRemise {
+                            Button(action: retirer) {
+                                HStack(spacing: 6) {
+                                    Text(tr("Retirer"))
+                                    if !retraitAutorise { Cadenas() }
+                                }
+                                .boutonSecondaire()
                             }
-                            .boutonSecondaire()
                         }
-                    }
 
-                    Button(action: fermer) {
-                        Text(tr("Fermer"))
-                            .font(.system(.subheadline, design: .rounded, weight: .semibold))
-                            .foregroundStyle(.white.opacity(0.7))
-                            .padding(.vertical, 8)
-                            .padding(.horizontal, 20)
+                        Button(action: fermer) {
+                            Text(tr("Fermer"))
+                                .boutonSecondaire()
+                        }
+                        .accessibilityIdentifier("bouton.fermerResultat")
                     }
-                    .accessibilityIdentifier("bouton.fermerResultat")
                 }
-                .font(.system(.subheadline, design: .rounded, weight: .semibold))
             }
-            .padding(.vertical, 34)
+            .padding(.top, 30)
             .padding(.horizontal, 20)
+            .padding(.bottom, 20)
+            .frame(maxWidth: .infinity)
+            .background(Fond.carte, in: .rect(cornerRadius: 32))
+            .padding(.horizontal, 12)
+            .padding(.bottom, 24)
+            .offset(y: apparu ? 0 : 60)
         }
         .accessibilityElement(children: .contain)
         .accessibilityAddTraits(.isModal)
         .onAppear {
             withAnimation(.spring(response: 0.42, dampingFraction: 0.62)) { apparu = true }
         }
+    }
+
+    /// La pastille reprend la couleur du segment gagnant : le lien entre la
+    /// roue et l'annonce se fait sans qu'on ait à l'expliquer.
+    private var couleurDuResultat: Color {
+        let options = roue.optionsOrdonnees
+        guard let index = options.firstIndex(where: { $0.label == label }) else {
+            return roue.palette.teintes.first ?? .accentColor
+        }
+        return roue.palette.couleur(index: index, total: options.count)
     }
 
     private var intitule: String {

@@ -20,6 +20,15 @@ enum ReponsesOnboarding {
             case .parfois: tr("Parfois")
             }
         }
+
+        /// Puce de l'option : l'intensité se lit avant le libellé.
+        var symbole: String {
+            switch self {
+            case .toutLeTemps: "exclamationmark.3"
+            case .souvent: "exclamationmark.2"
+            case .parfois: "exclamationmark"
+            }
+        }
     }
 
     static var frequence: Frequence? {
@@ -106,6 +115,14 @@ enum ReponsesOnboarding {
             }
         }
 
+        var symbole: String {
+            switch self {
+            case .moinsDe10: "hourglass.bottomhalf.filled"
+            case .de10a30: "hourglass"
+            case .plusDe30: "hourglass.tophalf.filled"
+            }
+        }
+
         /// Projection mensuelle arrondie, pour la page 8.
         var heuresParMois: Int {
             switch self {
@@ -133,6 +150,15 @@ enum ReponsesOnboarding {
             case .amis: tr("Mes amis")
             case .travail: tr("Mes élèves ou collègues")
             case .moi: tr("Juste moi")
+            }
+        }
+
+        var symbole: String {
+            switch self {
+            case .famille: "person.3.fill"
+            case .amis: "person.2.fill"
+            case .travail: "graduationcap.fill"
+            case .moi: "person.fill"
             }
         }
     }

@@ -103,9 +103,34 @@ extension Color {
     }
 }
 
-/// Fond de l'app : l'indigo profond de l'icône, la roue reste la star.
+/// Les surfaces, direction « Soirée confettis » : la roue reste la star,
+/// tout le reste s'efface. Les huit couleurs de `Palette.toutes[0]` sont
+/// réservées au jeu — segments, puces, progression — et ne servent jamais
+/// de fond.
 enum Fond {
-    static let sombre = Color(hex: 0x1E1E3C)
-    static let sombreProfond = Color(hex: 0x14142B)
-    static let carte = Color(hex: 0x2A2A50)
+    /// La nuit de l'icône. Le fond de toute l'app, et — posée sur le jaune
+    /// ou le blanc — l'encre des boutons : une seule teinte, deux rôles.
+    static let sombre = Color(hex: 0x15153A)
+    static let sombreProfond = Color(hex: 0x15153A)
+    /// Une carte posée sur la nuit.
+    static let carte = Color(hex: 0x23234D)
+    /// La même carte, choisie. Le liseré jaune fait le reste.
+    static let carteChoisie = Color(hex: 0x2E2E5E)
+}
+
+/// Les trois niveaux de texte, et rien d'autre : un quatrième gris finit
+/// toujours par passer sous le seuil de contraste.
+enum Encre {
+    static let vive = Color.white
+    static let douce = Color(hex: 0xC3C3E6)
+    static let discrete = Color(hex: 0xA9A9D6)
+}
+
+/// Le seul jaune de l'interface. Il ne sert qu'à agir : bouton principal,
+/// option retenue, surtitre. Jamais décoratif — sans quoi il n'indique
+/// plus rien.
+enum Accent {
+    static let soleil = Color(hex: 0xFFD53E)
+    /// Le même jaune en voile, derrière les marques premium.
+    static let voile = Color(hex: 0xFFD53E).opacity(0.14)
 }

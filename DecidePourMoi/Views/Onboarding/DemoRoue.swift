@@ -84,9 +84,13 @@ struct DemoRoue: View {
 
     var body: some View {
         VStack(spacing: 18) {
-            Text(titre)
-                .font(.system(.headline, design: .rounded, weight: .bold))
-                .foregroundStyle(.white)
+            // Titre vide : la page le porte elle-même, et une ligne de
+            // texte vide laisserait un trou au-dessus de la roue.
+            if !titre.isEmpty {
+                Text(titre)
+                    .font(.system(.headline, design: .rounded, weight: .bold))
+                    .foregroundStyle(Encre.vive)
+            }
 
             GeometryReader { geometrie in
                 let cote = min(geometrie.size.width, geometrie.size.height)

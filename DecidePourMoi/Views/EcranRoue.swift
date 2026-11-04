@@ -85,19 +85,20 @@ struct EcranRoue: View {
                 mesRouesAffichees = true
             } label: {
                 Image(systemName: "square.grid.2x2.fill")
-                    .boutonRond()
+                    .boutonCarte()
             }
             .accessibilityLabel(Text(tr("Mes roues")))
             .accessibilityIdentifier("bouton.mesRoues")
 
             VStack(spacing: 2) {
                 Text(roue.titre.isEmpty ? tr("Sans titre") : roue.titre)
-                    .font(.system(.headline, design: .rounded, weight: .bold))
-                    .foregroundStyle(.white)
+                    .font(.system(size: 19, weight: .black, design: .rounded))
+                    .foregroundStyle(Encre.vive)
                     .lineLimit(1)
                 Text(sousTitre)
-                    .font(.system(.caption, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.6))
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .foregroundStyle(Encre.discrete)
+                    .lineLimit(1)
             }
             .frame(maxWidth: .infinity)
 
@@ -106,7 +107,7 @@ struct EcranRoue: View {
                 editionAffichee = true
             } label: {
                 Image(systemName: "slider.horizontal.3")
-                    .boutonRond()
+                    .boutonCarte()
             }
             .accessibilityLabel(Text(tr("Modifier la roue")))
             .accessibilityIdentifier("bouton.edition")
@@ -180,6 +181,19 @@ struct EcranRoue: View {
                 BandeauOrdreDePassage(roue: roue) { reinitialiser() }
             }
 
+            // Le moyeu et le geste restent le cœur du jeu ; ce bouton est
+            // la porte d'entrée évidente pour qui ne les a pas encore
+            // découverts — et la seule cible atteignable au clavier.
+            Button {
+                lancerParTap()
+            } label: {
+                Text(tr("Lancer la roue"))
+                    .boutonPrincipal()
+            }
+            .disabled(controleur.enRotation || !roue.peutTourner)
+            .opacity(controleur.enRotation || !roue.peutTourner ? 0.45 : 1)
+            .accessibilityIdentifier("bouton.lancer")
+
             HStack(spacing: 10) {
                 Button {
                     Haptiques.shared.selection()
@@ -193,7 +207,7 @@ struct EcranRoue: View {
                         Label(tr("Historique"), systemImage: "clock.arrow.circlepath")
                         if !premium.acces.historiqueAutorise { Cadenas() }
                     }
-                    .boutonSecondaire()
+                    .boutonBarre()
                 }
 
                 if roue.mode.retireLOptionTiree {
@@ -201,7 +215,7 @@ struct EcranRoue: View {
                         reinitialiser()
                     } label: {
                         Label(tr("Réinitialiser"), systemImage: "arrow.counterclockwise")
-                            .boutonSecondaire()
+                            .boutonBarre()
                     }
                     .disabled(roue.optionsActives.count == roue.optionsOrdonnees.count)
                 }
@@ -324,14 +338,11 @@ struct RoueEpuisee: View {
     }
 }
 
-/// Fond de l'app : le dégradé indigo profond de l'icône.
+/// Fond de l'app : la nuit de l'icône, à plat. Un dégradé fabriquerait une
+/// profondeur qui concurrencerait la roue — seule elle a le droit d'avoir
+/// du relief.
 struct FondApplication: View {
     var body: some View {
-        LinearGradient(
-            colors: [Fond.sombre, Fond.sombreProfond],
-            startPoint: .top,
-            endPoint: .bottom
-        )
-        .ignoresSafeArea()
+        Fond.sombre.ignoresSafeArea()
     }
 }

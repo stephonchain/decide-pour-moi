@@ -171,6 +171,23 @@
         }
       }
     },
+    "3 jours gratuits, sans engagement": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 days free, cancel anytime"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3 jours gratuits, sans engagement"
+          }
+        }
+      }
+    },
     "Abonnement de %@ par mois, renouvelé automatiquement. Annulable à tout moment dans les réglages de votre compte App Store.": {
       "extractionState": "manual",
       "localizations": {
@@ -405,6 +422,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aucune roue"
+          }
+        }
+      }
+    },
+    "Augmenter le poids": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Increase weight"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Augmenter le poids"
           }
         }
       }
@@ -987,6 +1021,23 @@
         }
       }
     },
+    "Diminuer le poids": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Decrease weight"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diminuer le poids"
+          }
+        }
+      }
+    },
     "Documentaire": {
       "extractionState": "manual",
       "localizations": {
@@ -1259,6 +1310,23 @@
         }
       }
     },
+    "En classe": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At school"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En classe"
+          }
+        }
+      }
+    },
     "En classe ou au travail": {
       "extractionState": "manual",
       "localizations": {
@@ -1289,6 +1357,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "En classe, l'ordre de passage se tire au sort : plus de débat, plus de favoritisme."
+          }
+        }
+      }
+    },
+    "En soirée": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At a party"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "En soirée"
           }
         }
       }
@@ -1544,6 +1629,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Historique"
+          }
+        }
+      }
+    },
+    "Je sais pas, et toi ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "I don't know, you pick."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je sais pas, et toi ?"
           }
         }
       }
@@ -1867,6 +1969,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Lance un tirage au sort parmi %lld options"
+          }
+        }
+      }
+    },
+    "Lancer la roue": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spin the wheel"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lancer la roue"
           }
         }
       }
@@ -2313,6 +2432,23 @@
         }
       }
     },
+    "Mode premium": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premium feature"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode premium"
+          }
+        }
+      }
+    },
     "Modifier": {
       "extractionState": "manual",
       "localizations": {
@@ -2483,6 +2619,23 @@
         }
       }
     },
+    "On regarde quoi ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What are we watching?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "On regarde quoi ?"
+          }
+        }
+      }
+    },
     "Option": {
       "extractionState": "manual",
       "localizations": {
@@ -2632,6 +2785,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Palette des nouvelles roues"
+          }
+        }
+      }
+    },
+    "Palettes et historique": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palettes and history"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Palettes et historique"
           }
         }
       }
@@ -2819,6 +2989,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Pizza"
+          }
+        }
+      }
+    },
+    "Pizza ou sushis ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pizza or sushi?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pizza ou sushis ?"
           }
         }
       }
@@ -3044,6 +3231,23 @@
         }
       }
     },
+    "Question %lld sur 4": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld of 4"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Question %lld sur 4"
+          }
+        }
+      }
+    },
     "Qui commence ?": {
       "extractionState": "manual",
       "localizations": {
@@ -3074,6 +3278,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qui décidera avec vous ?"
+          }
+        }
+      }
+    },
+    "Qui fait la vaisselle ?": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Who does the dishes?"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Qui fait la vaisselle ?"
           }
         }
       }
@@ -3197,6 +3418,23 @@
         }
       }
     },
+    "Restaurer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restore"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Restaurer"
+          }
+        }
+      }
+    },
     "Restaurer les roues de départ": {
       "extractionState": "manual",
       "localizations": {
@@ -3248,6 +3486,23 @@
         }
       }
     },
+    "Retirer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Remove"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retirer"
+          }
+        }
+      }
+    },
     "Retirer cette option": {
       "extractionState": "manual",
       "localizations": {
@@ -3295,6 +3550,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Revoir la présentation"
+          }
+        }
+      }
+    },
+    "Roues illimitées": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unlimited wheels"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Roues illimitées"
           }
         }
       }
@@ -3741,6 +4013,23 @@
         }
       }
     },
+    "Tous les modes": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Every draw mode"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tous les modes"
+          }
+        }
+      }
+    },
     "Tous les modes : sans remise, ordre de passage": {
       "extractionState": "manual",
       "localizations": {
@@ -4064,6 +4353,23 @@
         }
       }
     },
+    "Votre plan est prêt": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your plan is ready"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Votre plan est prêt"
+          }
+        }
+      }
+    },
     "Vous arrive-t-il d'hésiter longtemps pour des petites décisions ?": {
       "extractionState": "manual",
       "localizations": {
@@ -4111,6 +4417,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vous voyez l'idée."
+          }
+        }
+      }
+    },
+    "commence": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "starts"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "commence"
           }
         }
       }
@@ -4217,6 +4540,23 @@
         }
       }
     },
+    "À table": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At the table"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À table"
+          }
+        }
+      }
+    },
     "À vie": {
       "extractionState": "manual",
       "localizations": {
@@ -4230,6 +4570,40 @@
           "stringUnit": {
             "state": "translated",
             "value": "À vie"
+          }
+        }
+      }
+    },
+    "À vous de jouer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your turn"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "À vous de jouer"
+          }
+        }
+      }
+    },
+    "Étape %lld sur %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Step %lld of %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Étape %lld sur %lld"
           }
         }
       }
