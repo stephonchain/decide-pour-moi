@@ -74,7 +74,7 @@ DONNEZ PLUS DE CHANCES À VOS ENVIES
 Une option peut peser deux ou trois fois plus lourd que les autres : sa part de la roue grandit, et ses chances avec. Parfait pour pencher gentiment vers la pizza sans fermer la porte à la salade.
 
 ET AUSSI
-• Cinq roues prêtes à l'emploi : Oui / Non, Pile ou face, Chiffres de 1 à 10, Qui commence ?, Ce soir on mange…
+• Cinq roues prêtes à l'emploi, dont deux ouvertes en version gratuite : Oui / Non, Pile ou face, Chiffres de 1 à 10, Qui commence ?, Ce soir on mange…
 • Historique des cinquante derniers tirages de chaque roue
 • Six palettes de couleurs harmonieuses
 • Interface en français et en anglais, au choix dans l'app
@@ -83,7 +83,7 @@ VOS DONNÉES RESTENT CHEZ VOUS
 Pas de compte, pas de traceur, pas de publicité tierce. Vos roues, vos options et vos tirages sont stockés sur votre iPhone et n'en sortent jamais. La politique de confidentialité tient en une page, et elle est lisible hors ligne dans l'app.
 
 GRATUIT, ET PREMIUM SI VOUS VOULEZ TOUT
-La version gratuite offre deux roues prêtes à tourner, avec le tirage classique : « Ce soir on mange… », que vous pouvez modifier trois fois, et « Pile ou face ». Le premium débloque tout : roues illimitées, les trois modes de tirage, la pondération, l'historique et toutes les palettes. Trois formules au choix — hebdomadaire, mensuelle avec essai gratuit de trois jours, ou un achat unique valable à vie. Les prix sont affichés clairement avant tout paiement, et l'abonnement s'annule à tout moment dans les réglages de votre compte App Store.
+La version gratuite offre deux roues prêtes à tourner, avec le tirage classique : « Ce soir on mange… », que vous pouvez modifier trois fois, et « Pile ou face ». Le premium débloque tout : roues illimitées, modifications sans limite, les trois modes de tirage, la pondération, l'historique et toutes les palettes. Trois formules au choix — hebdomadaire, mensuelle avec essai gratuit de trois jours, ou un achat unique valable à vie. Les prix sont affichés clairement avant tout paiement, et l'abonnement s'annule à tout moment dans les réglages de votre compte App Store.
 
 Une question, une idée de roue qui manque ? Écrivez-nous : contact@steverover.com — nous lisons tout.
 
@@ -149,7 +149,7 @@ GIVE YOUR CRAVINGS BETTER ODDS
 Any option can weigh two or three times more than the others: its slice grows, and so do its chances. Perfect for leaning gently toward pizza without slamming the door on salad.
 
 ALSO INSIDE
-• Five ready-made wheels: Yes / No, Heads or tails, Numbers 1 to 10, Who goes first?, Tonight we eat…
+• Five ready-made wheels, two of them open in the free version: Yes / No, Heads or tails, Numbers 1 to 10, Who goes first?, Tonight we eat…
 • History of each wheel's last fifty draws
 • Six matching color palettes
 • Interface in English and French, switchable inside the app
@@ -158,7 +158,7 @@ YOUR DATA STAYS WITH YOU
 No account, no tracker, no third-party ads. Your wheels, options and draws are stored on your iPhone and never leave it. The privacy policy fits on one page, and you can read it offline inside the app.
 
 FREE, AND PREMIUM IF YOU WANT IT ALL
-The free version gives you two ready-to-spin wheels with the classic draw mode: “Tonight we eat…”, which you can edit three times, and “Heads or tails”. Premium unlocks everything: unlimited wheels, all three draw modes, weighting, history and every palette. Three plans — weekly, monthly with a three-day free trial, or a one-time lifetime purchase. Prices are shown clearly before any payment, and subscriptions can be cancelled anytime in your App Store account settings.
+The free version gives you two ready-to-spin wheels with the classic draw mode: “Tonight we eat…”, which you can edit three times, and “Heads or tails”. Premium unlocks everything: unlimited wheels, unlimited edits, all three draw modes, weighting, history and every palette. Three plans — weekly, monthly with a three-day free trial, or a one-time lifetime purchase. Prices are shown clearly before any payment, and subscriptions can be cancelled anytime in your App Store account settings.
 
 A question, a wheel idea we're missing? Write to us: contact@steverover.com — we read everything.
 
