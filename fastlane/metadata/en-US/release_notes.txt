@@ -1,1 +1,7 @@
-First release. Build wheels by pasting a list, spin them with a flick, let chance settle it. 3-day free trial to unlock everything.
+A new look, the same wheel.
+
+• A fresh design in the colors of the icon: a night background, a single yellow for actions, and every color saved for the wheel.
+• Results now appear at the bottom of the screen: the wheel stays visible behind, and “Spin again” sits right under your thumb.
+• A “Spin the wheel” button joins the flick and the hub: one tap is enough.
+• “My wheels” gets a makeover: bigger tiles, and anything locked is visible before you tap.
+• The free version now includes two wheels: “Tonight we eat…”, editable three times, and “Heads or tails”, now open to everyone.

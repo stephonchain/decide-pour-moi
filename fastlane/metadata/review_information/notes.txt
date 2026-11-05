@@ -1,5 +1,16 @@
 Thank you for reviewing Let the Wheel Decide.
 
+WHAT'S NEW IN VERSION 1.1
+1. Visual redesign: new colors, results shown in a bottom sheet, a "Spin the wheel" button on the main screen, a redesigned "My wheels" screen and paywall. No change to the core feature or to data handling.
+2. Free tier adjustment, now consistent across the app, the paywall and the App Store description:
+   - "Tonight we eat…" is open and can be edited three times. An edit only counts if the wheel actually changed; opening and closing the editor is free.
+   - "Heads or tails" is open but cannot be edited.
+   - The other pre-installed wheels remain visible with a lock, and open with premium.
+   Users who installed the app before these changes keep everything they already had.
+
+HOW TO CHECK THE FREE TIER
+Dismiss the paywall at the end of onboarding (X, top right). On the main screen, the edit button (top right, slider icon) shows a yellow badge with the number of free edits left. Change anything in the editor and close it: the badge goes from 3 to 2. After the third edit, the badge becomes a lock and the button opens the paywall ("Edit your wheels without limits"). In "My wheels", open "Heads or tails": it spins normally, but its edit button opens the paywall right away.
+
 WHAT THE APP IS
 A customizable decision wheel: the user types or pastes a list of options, spins the wheel, and one option is drawn at random. It is an entertainment / utility app. It is NOT a gambling app: there are no stakes, no real or virtual currency, no prizes — the wheel only picks among options the user typed themselves (e.g. what to eat tonight, which student goes to the board).
 
@@ -16,12 +27,15 @@ IN-APP PURCHASES (3 products, attached to this version)
 All three unlock the same "premium" feature set: unlimited wheels, two extra draw modes, option weighting, draw history, extra color palettes. Prices, the post-trial price, auto-renewal terms, Restore Purchases, Terms and Privacy links are all shown on the paywall.
 
 HOW TO REACH THE PAYWALL AFTER ONBOARDING
-Settings (gear icon on the main screen) > "Go premium", or tap any feature marked with a lock icon (e.g. a locked pre-installed wheel in "My wheels", or the History button).
+Settings (gear icon on the main screen) > "Go premium", or tap any feature marked with a lock icon: a locked pre-installed wheel in "My wheels", the History button, or the edit button once the free edits are used up.
 
 RECEIPT HANDLING
 Purchases are processed by the App Store; receipt validation uses the RevenueCat SDK in anonymous mode (no personal data, no custom user ID).
 
 LOCALIZATION
 The app ships in French and English. The default follows the device language and can be changed inside the app (Settings > Language).
+
+TERMS OF USE (EULA)
+Following the previous review, a functional link to our Terms of Use is included at the end of the App Store description, in both localizations: https://stephonchain.github.io/legal/decide-pour-moi/conditions.html (English and French on the same page).
 
 Contact for any question: contact@steverover.com

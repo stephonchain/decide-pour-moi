@@ -1,1 +1,7 @@
-Première version. Créez vos roues en collant une liste, lancez-les d'un geste, laissez le hasard trancher. Essai gratuit de 3 jours pour tout débloquer.
+Nouveau look, même roue.
+
+• Un habillage aux couleurs de l'icône : un fond nuit, un seul jaune pour agir, et toutes les couleurs réservées à la roue.
+• Le résultat s'affiche en bas de l'écran : la roue reste visible derrière, et « Relancer » tombe sous le pouce.
+• Un bouton « Lancer la roue » rejoint le geste et le moyeu : un simple tap suffit.
+• « Mes roues » fait peau neuve : vignettes plus grandes, et ce qui est verrouillé se voit avant de taper.
+• La version gratuite comprend désormais deux roues : « Ce soir on mange… », modifiable trois fois, et « Pile ou face », maintenant ouverte à tous.
