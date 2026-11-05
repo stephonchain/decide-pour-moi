@@ -64,19 +64,44 @@ final class PremiumManager {
     /// sont utilisables.
     var outilsRevenueCatDisponibles: Bool { source == .revenueCat && demarre }
 
-    /// Accès courant, à passer aux vues.
-    var acces: Acces {
-        Acces(estPremium: estPremiumEffectif, estHistorique: Reglages.utilisateurHistorique)
+    /// Accès imposé en développement, par-dessus l'état réel des achats.
+    enum AccesImpose: String, CaseIterable, Sendable {
+        /// L'état réel : achats StoreKit ou RevenueCat, sandbox compris.
+        case reel
+        /// Tout débloqué, sans aucun achat.
+        case premium
+        /// Un nouvel utilisateur gratuit — même avec un abonnement sandbox
+        /// actif, et même sur une installation « historique ».
+        case gratuit
     }
 
-    /// En DEBUG, un réglage local simule premium pour tester le gating sans
-    /// aucun achat.
-    var estPremiumEffectif: Bool {
-        #if DEBUG
-        if UserDefaults.standard.bool(forKey: CleReglage.debugPremium) { return true }
-        #endif
-        return estPremium
+    /// Stocké ici plutôt que relu dans `UserDefaults` à chaque accès : la
+    /// classe est observée, donc changer de position redessine aussitôt
+    /// tous les écrans. Déclaré hors `#if DEBUG`, la macro Observation
+    /// supportant mal les propriétés conditionnelles ; en Release il existe
+    /// mais n'est jamais lu.
+    private(set) var accesImpose: AccesImpose =
+        AccesImpose(rawValue: UserDefaults.standard.string(forKey: CleReglage.debugAcces) ?? "") ?? .reel
+
+    func imposerAcces(_ niveau: AccesImpose) {
+        accesImpose = niveau
+        UserDefaults.standard.set(niveau.rawValue, forKey: CleReglage.debugAcces)
     }
+
+    /// Accès courant, à passer aux vues.
+    var acces: Acces {
+        #if DEBUG
+        switch accesImpose {
+        case .premium: return Acces(estPremium: true, estHistorique: false)
+        case .gratuit: return Acces(estPremium: false, estHistorique: false)
+        case .reel: break
+        }
+        #endif
+        return Acces(estPremium: estPremium, estHistorique: Reglages.utilisateurHistorique)
+    }
+
+    /// Premium tel que le gating le voit, accès imposé compris.
+    var estPremiumEffectif: Bool { acces.estPremium }
 
     // MARK: Démarrage
 

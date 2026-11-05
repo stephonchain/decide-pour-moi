@@ -95,7 +95,9 @@ binaire publié :
 - `-captures.demo YES` — remet à chaque lancement le même jeu de roues,
   dans la langue du moment (`RouesDeDemo`). Les deux localisations montrent
   donc exactement le même contenu, aux mêmes positions.
-- `-debug.premium YES` — tout est déverrouillé, aucun cadenas à l'image.
+- `-debug.acces premium` — tout est déverrouillé, aucun cadenas à l'image,
+  même si le simulateur porte un vrai abonnement sandbox ou un réglage
+  « Gratuit » laissé par une session de test.
 - `-avis.demande YES` et `-onboarding.fait YES` — ni popup d'avis ni
   tunnel d'accueil au milieu d'une capture.
 

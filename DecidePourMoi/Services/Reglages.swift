@@ -8,7 +8,8 @@ enum CleReglage {
     static let confettis = "reglage.confettis"
     static let paletteParDefaut = "reglage.paletteParDefaut"
     static let langue = "reglage.langue"
-    static let debugPremium = "debug.premium"
+    /// Développement seulement : « reel », « premium » ou « gratuit ».
+    static let debugAcces = "debug.acces"
     static let debugSourceAchats = "debug.sourceAchats"
     /// Partagée avec `@AppStorage` : l'écran de la roue doit se redessiner
     /// dès qu'une modification offerte est consommée.

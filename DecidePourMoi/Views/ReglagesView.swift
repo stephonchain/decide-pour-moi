@@ -17,7 +17,7 @@ struct ReglagesView: View {
     @State private var onboardingRevisite = false
     @State private var messageRestauration: String? = nil
     #if DEBUG
-    @AppStorage(CleReglage.debugPremium) private var debugPremium = false
+    @AppStorage(CleReglage.modificationsGratuitesUtilisees) private var modificationsUtilisees = 0
     @AppStorage(CleReglage.debugSourceAchats) private var debugSourceAchats = "auto"
     #endif
 
@@ -195,13 +195,38 @@ struct ReglagesView: View {
 
                 #if DEBUG
                 Section {
-                    Toggle(isOn: $debugPremium) {
+                    Picker(selection: Binding(
+                        get: { premium.accesImpose },
+                        set: { premium.imposerAcces($0) }
+                    )) {
+                        Text(verbatim: "Réel (achats)").tag(PremiumManager.AccesImpose.reel)
+                        Text(verbatim: "Premium").tag(PremiumManager.AccesImpose.premium)
+                        Text(verbatim: "Gratuit").tag(PremiumManager.AccesImpose.gratuit)
+                    } label: {
                         Label {
-                            Text(verbatim: "Simuler premium")
+                            Text(verbatim: "Accès")
                         } icon: {
                             Image(systemName: "wrench.and.screwdriver")
                         }
                     }
+                    .listRowBackground(Fond.carte)
+
+                    Button {
+                        modificationsUtilisees = 0
+                    } label: {
+                        HStack {
+                            Label {
+                                Text(verbatim: "Rendre les modifications offertes")
+                            } icon: {
+                                Image(systemName: "arrow.counterclockwise")
+                            }
+                            Spacer()
+                            Text(verbatim: "\(modificationsUtilisees)/\(Acces.modificationsGratuites) utilisées")
+                                .font(.system(.footnote, design: .monospaced))
+                                .foregroundStyle(.white.opacity(0.5))
+                        }
+                    }
+                    .disabled(modificationsUtilisees == 0)
                     .listRowBackground(Fond.carte)
 
                     Picker(selection: $debugSourceAchats) {

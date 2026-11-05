@@ -28,7 +28,7 @@ final class CapturesTests: XCTestCase {
         setupSnapshot(app)
         app.launchArguments += [
             "-onboarding.fait", "YES",
-            "-debug.premium", "YES",
+            "-debug.acces", "premium",
             "-avis.demande", "YES",      // jamais de popup d'avis en pleine capture
             "-captures.demo", "YES"      // contenu identique dans les deux langues
         ]
