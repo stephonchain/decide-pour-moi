@@ -9,6 +9,9 @@ struct EditionRoueView: View {
     @Bindable var roue: Roue
     let estUneCreation: Bool
     var apresCreation: ((Roue) -> Void)? = nil
+    /// Version gratuite : modifications offertes qu'il reste, celle-ci
+    /// comprise. `nil` quand l'édition est libre.
+    var modificationsRestantes: Int? = nil
 
     @Environment(\.modelContext) private var contexte
     @Environment(\.dismiss) private var fermer
@@ -64,6 +67,28 @@ struct EditionRoueView: View {
 
     private var formulaire: some View {
         List {
+            if let modificationsRestantes {
+                Section {
+                    HStack(spacing: 12) {
+                        Text(verbatim: "\(modificationsRestantes)")
+                            .font(.system(size: 17, weight: .black, design: .rounded))
+                            .foregroundStyle(Fond.sombre)
+                            .frame(width: 34, height: 34)
+                            .background(Accent.soleil, in: .circle)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(tr("Modifications gratuites restantes : \(modificationsRestantes)"))
+                                .font(.system(size: 15, weight: .heavy, design: .rounded))
+                                .foregroundStyle(Encre.vive)
+                            Text(tr("Ouvrir sans rien changer ne compte pas."))
+                                .font(.system(size: 13, weight: .bold, design: .rounded))
+                                .foregroundStyle(Encre.douce)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                    .listRowBackground(Accent.voile)
+                }
+            }
+
             Section {
                 TextField(tr("Titre de la roue"), text: $roue.titre)
                     .font(.system(.body, design: .rounded, weight: .semibold))

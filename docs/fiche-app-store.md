@@ -83,7 +83,7 @@ VOS DONNÉES RESTENT CHEZ VOUS
 Pas de compte, pas de traceur, pas de publicité tierce. Vos roues, vos options et vos tirages sont stockés sur votre iPhone et n'en sortent jamais. La politique de confidentialité tient en une page, et elle est lisible hors ligne dans l'app.
 
 GRATUIT, ET PREMIUM SI VOUS VOULEZ TOUT
-La version gratuite offre une vraie roue complète, modifiable à volonté, avec le tirage classique. Le premium débloque tout : roues illimitées, les trois modes de tirage, la pondération, l'historique et toutes les palettes. Trois formules au choix — hebdomadaire, mensuelle avec essai gratuit de trois jours, ou un achat unique valable à vie. Les prix sont affichés clairement avant tout paiement, et l'abonnement s'annule à tout moment dans les réglages de votre compte App Store.
+La version gratuite offre deux roues prêtes à tourner, avec le tirage classique : « Ce soir on mange… », que vous pouvez modifier trois fois, et « Pile ou face ». Le premium débloque tout : roues illimitées, les trois modes de tirage, la pondération, l'historique et toutes les palettes. Trois formules au choix — hebdomadaire, mensuelle avec essai gratuit de trois jours, ou un achat unique valable à vie. Les prix sont affichés clairement avant tout paiement, et l'abonnement s'annule à tout moment dans les réglages de votre compte App Store.
 
 Une question, une idée de roue qui manque ? Écrivez-nous : contact@steverover.com — nous lisons tout.
 
@@ -158,7 +158,7 @@ YOUR DATA STAYS WITH YOU
 No account, no tracker, no third-party ads. Your wheels, options and draws are stored on your iPhone and never leave it. The privacy policy fits on one page, and you can read it offline inside the app.
 
 FREE, AND PREMIUM IF YOU WANT IT ALL
-The free version gives you a real, fully editable wheel with the classic draw mode. Premium unlocks everything: unlimited wheels, all three draw modes, weighting, history and every palette. Three plans — weekly, monthly with a three-day free trial, or a one-time lifetime purchase. Prices are shown clearly before any payment, and subscriptions can be cancelled anytime in your App Store account settings.
+The free version gives you two ready-to-spin wheels with the classic draw mode: “Tonight we eat…”, which you can edit three times, and “Heads or tails”. Premium unlocks everything: unlimited wheels, all three draw modes, weighting, history and every palette. Three plans — weekly, monthly with a three-day free trial, or a one-time lifetime purchase. Prices are shown clearly before any payment, and subscriptions can be cancelled anytime in your App Store account settings.
 
 A question, a wheel idea we're missing? Write to us: contact@steverover.com — we read everything.
 
@@ -207,7 +207,7 @@ NO ACCOUNT NEEDED
 There is no login and no demo account to provide. The app is fully usable on first launch. All data stays on the device.
 
 FIRST LAUNCH FLOW
-A 15-page onboarding (two interactive wheel demos + short questions) ends on the paywall. The paywall can be dismissed with the X button (top right); the user then lands on the free tier, which includes one fully functional wheel.
+A 15-page onboarding (two interactive wheel demos + short questions) ends on the paywall. The paywall can be dismissed with the X button (top right); the user then lands on the free tier: two wheels with the classic draw mode, “Tonight we eat…” (editable three times) and “Heads or tails” (not editable). Premium removes every limit.
 
 IN-APP PURCHASES (3 products, attached to this version)
 - dpm_premium_weekly: auto-renewable subscription, weekly

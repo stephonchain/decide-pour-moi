@@ -79,6 +79,15 @@ struct RacineView: View {
             onboardingVisible = true
         }
 
+        // Offre gratuite à deux roues : « Pile ou face » s'ouvre désormais
+        // sans premium, mais figée. Une installation neuve l'a déjà créée
+        // ainsi ; une ancienne doit la retrouver et la déverrouiller.
+        if !Reglages.migrationOffreGratuite {
+            RouesParDefaut.migrerVersLOffreGratuite(roues)
+            Reglages.migrationOffreGratuite = true
+            try? contexte.save()
+        }
+
         // Les roues préinstallées jamais modifiées suivent la langue de
         // l'app ; celles que l'utilisateur a touchées lui appartiennent.
         RouesParDefaut.retraduire(roues)

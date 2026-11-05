@@ -8,21 +8,33 @@ enum RouesParDefaut {
     /// Langues dans lesquelles l'app sait reconnaître ses propres graines.
     private static let codesConnus = ["fr", "en"]
 
+    /// Place d'une roue préinstallée dans la version gratuite.
+    enum OffreGratuite {
+        /// Ouverte, modifiable dans la limite des modifications offertes.
+        case modifiable
+        /// Ouverte, jamais modifiable : elle n'a rien à personnaliser.
+        case figee
+        /// Visible en teaser, ouverte seulement en premium.
+        case verrouillee
+    }
+
     /// Définition d'une roue préinstallée, indépendante de la langue.
     struct Graine {
         let titre: String.LocalizationValue
         let options: [String.LocalizationValue]
         let palette: Int
+        var offreGratuite: OffreGratuite = .verrouillee
     }
 
     static let graines: [Graine] = [
         Graine(
             titre: "Ce soir on mange…",
             options: ["Pizza", "Sushis", "Burger", "Pâtes", "Salade", "Restes du frigo"],
-            palette: 0
+            palette: 0,
+            offreGratuite: .modifiable
         ),
         Graine(titre: "Oui / Non", options: ["Oui", "Non"], palette: 2),
-        Graine(titre: "Pile ou face", options: ["Pile", "Face"], palette: 5),
+        Graine(titre: "Pile ou face", options: ["Pile", "Face"], palette: 5, offreGratuite: .figee),
         Graine(
             titre: "Chiffres 1 à 10",
             options: (1...10).map { "\($0)" },
@@ -41,7 +53,10 @@ enum RouesParDefaut {
                 OptionRoue(label: tr(cle), ordre: position)
             }
             let roue = Roue(titre: tr(graine.titre), options: options, paletteID: graine.palette)
-            roue.verrouillee = verrouillerSecondaires && index > 0
+            roue.verrouillee = verrouillerSecondaires && graine.offreGratuite == .verrouillee
+            if graine.offreGratuite == .figee {
+                Reglages.roueFigee = roue.id
+            }
             // La première roue de la liste doit être celle qui s'ouvre au lancement.
             roue.utiliseeLe = Date(timeIntervalSinceNow: -Double(index))
             roue.creeeLe = roue.utiliseeLe
@@ -70,6 +85,18 @@ enum RouesParDefaut {
                 option.label = label
             }
         }
+    }
+
+    /// Installations antérieures à l'offre « deux roues » : la roue figée
+    /// y avait été créée verrouillée. On la retrouve parmi les roues
+    /// intactes — un utilisateur gratuit n'a jamais pu l'ouvrir, donc
+    /// jamais pu la modifier — pour l'ouvrir et la marquer.
+    static func migrerVersLOffreGratuite(_ roues: [Roue]) {
+        guard let figee = roues.first(where: { graineIntacte(pour: $0)?.offreGratuite == .figee }) else {
+            return
+        }
+        figee.verrouillee = false
+        Reglages.roueFigee = figee.id
     }
 
     /// La graine dont cette roue est la version intacte, s'il y en a une.

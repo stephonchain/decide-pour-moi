@@ -2449,6 +2449,23 @@
         }
       }
     },
+    "Modifications gratuites restantes : %lld": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Free edits left: %lld"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifications gratuites restantes : %lld"
+          }
+        }
+      }
+    },
     "Modifier": {
       "extractionState": "manual",
       "localizations": {
@@ -2479,6 +2496,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Modifier la roue"
+          }
+        }
+      }
+    },
+    "Modifiez vos roues sans limite": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Edit your wheels without limits"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modifiez vos roues sans limite"
           }
         }
       }
@@ -2734,6 +2768,23 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ouvre la fiche App Store"
+          }
+        }
+      }
+    },
+    "Ouvrir sans rien changer ne compte pas.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opening without changing anything doesn't count."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir sans rien changer ne compte pas."
           }
         }
       }

@@ -9,7 +9,8 @@ import Foundation
 ///   été donné ne se reprend pas : ses roues et toutes leurs fonctions
 ///   restent utilisables ; seule la création de nouvelles roues passe sous
 ///   la limite gratuite.
-/// - **gratuit** : une roue, tirage avec remise, deux palettes.
+/// - **gratuit** : deux roues — « Ce soir on mange… », modifiable trois
+///   fois, et « Pile ou face », figée —, tirage avec remise, deux palettes.
 struct Acces: Equatable, Sendable {
 
     let estPremium: Bool
@@ -21,6 +22,21 @@ struct Acces: Equatable, Sendable {
 
     /// Nombre de roues déverrouillées permises sans premium.
     static let rouesGratuites = 1
+
+    /// Modifications offertes en version gratuite, toutes roues confondues.
+    /// Le compteur est global et non attaché à une roue : supprimer puis
+    /// restaurer les roues de départ ne le remet pas à zéro.
+    static let modificationsGratuites = 3
+
+    /// Ce que l'éditeur autorise sur une roue donnée.
+    enum DroitDEdition: Equatable, Sendable {
+        /// Premium ou historique : aucune limite.
+        case libre
+        /// Gratuit : encore `restantes` modifications offertes.
+        case limite(restantes: Int)
+        /// Roue figée, ou modifications offertes épuisées.
+        case bloque
+    }
 
     // MARK: Règles
 
@@ -53,6 +69,18 @@ struct Acces: Equatable, Sendable {
     /// de la limite, mais rien ne leur est retiré.
     func peutCreerRoue(rouesDeverrouillees nombre: Int) -> Bool {
         estPremium || nombre < Self.rouesGratuites
+    }
+
+    /// Droit d'édition d'une roue. L'utilisateur historique garde la main
+    /// sur tout, comme avant le passage en freemium. En gratuit, la roue
+    /// figée (« Pile ou face ») ne se modifie jamais — elle n'a rien à
+    /// personnaliser, c'est sa raison d'être —, les autres tant qu'il reste
+    /// des modifications offertes.
+    func droitDEdition(roueFigee: Bool, modificationsUtilisees: Int) -> DroitDEdition {
+        if estPremium || estHistorique { return .libre }
+        if roueFigee { return .bloque }
+        let restantes = max(0, Self.modificationsGratuites - modificationsUtilisees)
+        return restantes > 0 ? .limite(restantes: restantes) : .bloque
     }
 
     /// Ensemble des palettes autorisées, pour les sélecteurs.

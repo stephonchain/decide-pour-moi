@@ -209,3 +209,32 @@ final class Tirage {
         self.faitPartieDeLOrdre = faitPartieDeLOrdre
     }
 }
+
+/// Ce que l'utilisateur voit et règle d'une roue. Sert à savoir si une
+/// session d'édition a réellement changé quelque chose : ouvrir l'éditeur
+/// puis le refermer ne doit pas coûter une modification offerte.
+///
+/// Les tirages en cours (options retirées, historique) n'en font pas
+/// partie : c'est le jeu, pas l'édition.
+struct EmpreinteRoue: Equatable {
+    let titre: String
+    let mode: String
+    let palette: Int
+    /// Libellé et poids de chaque option, dans l'ordre. Une ligne laissée
+    /// vide n'est pas une option : l'éditeur la jette à l'enregistrement.
+    let options: [String]
+}
+
+extension Roue {
+    var empreinte: EmpreinteRoue {
+        EmpreinteRoue(
+            titre: titre.trimmingCharacters(in: .whitespacesAndNewlines),
+            mode: modeBrut,
+            palette: paletteID,
+            options: optionsOrdonnees.compactMap { option in
+                let label = option.label.trimmingCharacters(in: .whitespacesAndNewlines)
+                return label.isEmpty ? nil : "\(label)|\(option.poidsValide)"
+            }
+        )
+    }
+}

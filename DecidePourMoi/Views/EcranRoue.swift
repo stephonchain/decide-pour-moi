@@ -20,8 +20,13 @@ struct EcranRoue: View {
     @State private var angleDuDoigt: Double? = nil
 
     @AppStorage(CleReglage.confettis) private var confettis = Reglages.confettisParDefaut
+    @AppStorage(CleReglage.modificationsGratuitesUtilisees) private var modificationsUtilisees = 0
     @State private var premium = PremiumManager.shared
     @State private var contextePaywall: ContextePaywall? = nil
+    /// Empreinte prise à l'ouverture de l'éditeur, en version gratuite
+    /// seulement : c'est elle qui dit, à la fermeture, s'il y a eu
+    /// modification.
+    @State private var empreinteAvantEdition: EmpreinteRoue? = nil
 
     var body: some View {
         ZStack {
@@ -57,8 +62,8 @@ struct EcranRoue: View {
                 ouvrir(choisie)
             }
         }
-        .sheet(isPresented: $editionAffichee) {
-            EditionRoueView(roue: roue, estUneCreation: false)
+        .sheet(isPresented: $editionAffichee, onDismiss: decompterLaModification) {
+            EditionRoueView(roue: roue, estUneCreation: false, modificationsRestantes: modificationsRestantes)
         }
         .sheet(isPresented: $reglagesAffichees) {
             ReglagesView()
@@ -103,16 +108,87 @@ struct EcranRoue: View {
             .frame(maxWidth: .infinity)
 
             Button {
-                Haptiques.shared.selection()
-                editionAffichee = true
+                ouvrirLEdition()
             } label: {
                 Image(systemName: "slider.horizontal.3")
                     .boutonCarte()
+                    .overlay(alignment: .topTrailing) { marqueDEdition }
             }
             .accessibilityLabel(Text(tr("Modifier la roue")))
+            .accessibilityValue(Text(valeurDAccessibiliteDeLEdition))
             .accessibilityIdentifier("bouton.edition")
         }
         .padding(.top, 4)
+    }
+
+    // MARK: Édition en version gratuite
+
+    private var droitDEdition: Acces.DroitDEdition {
+        premium.acces.droitDEdition(
+            roueFigee: roue.id == Reglages.roueFigee,
+            modificationsUtilisees: modificationsUtilisees
+        )
+    }
+
+    private var modificationsRestantes: Int? {
+        if case .limite(let restantes) = droitDEdition { return restantes }
+        return nil
+    }
+
+    /// Le compte se lit sur le bouton avant de taper : le verrou se montre,
+    /// il ne surprend pas.
+    @ViewBuilder
+    private var marqueDEdition: some View {
+        switch droitDEdition {
+        case .libre:
+            EmptyView()
+        case .limite(let restantes):
+            Text(verbatim: "\(restantes)")
+                .font(.system(size: 11, weight: .black, design: .rounded))
+                .foregroundStyle(Fond.sombre)
+                .frame(width: 18, height: 18)
+                .background(Accent.soleil, in: .circle)
+                .offset(x: 5, y: -5)
+        case .bloque:
+            Image(systemName: "lock.fill")
+                .font(.system(size: 9, weight: .black))
+                .foregroundStyle(Accent.soleil)
+                .frame(width: 18, height: 18)
+                .background(Fond.sombre, in: .circle)
+                .offset(x: 5, y: -5)
+        }
+    }
+
+    private var valeurDAccessibiliteDeLEdition: String {
+        switch droitDEdition {
+        case .libre: ""
+        case .limite(let restantes): tr("Modifications gratuites restantes : \(restantes)")
+        case .bloque: tr("Mode premium")
+        }
+    }
+
+    private func ouvrirLEdition() {
+        Haptiques.shared.selection()
+        switch droitDEdition {
+        case .bloque:
+            contextePaywall = .modification
+        case .libre:
+            empreinteAvantEdition = nil
+            editionAffichee = true
+        case .limite:
+            empreinteAvantEdition = roue.empreinte
+            editionAffichee = true
+        }
+    }
+
+    /// Une modification offerte n'est décomptée que si la roue a vraiment
+    /// changé : on ne fait pas payer une simple consultation.
+    private func decompterLaModification() {
+        guard let avant = empreinteAvantEdition else { return }
+        empreinteAvantEdition = nil
+        if roue.empreinte != avant {
+            modificationsUtilisees += 1
+        }
     }
 
     private var sousTitre: String {

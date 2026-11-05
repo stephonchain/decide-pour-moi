@@ -12,6 +12,8 @@ enum ContextePaywall: Equatable, Identifiable {
     case historique
     case palette
     case roueVerrouillee
+    /// Roue figée, ou modifications offertes épuisées.
+    case modification
     case reglages
     /// Abonné qui veut basculer sur l'achat unique.
     case passageAVie
@@ -29,6 +31,7 @@ enum ContextePaywall: Equatable, Identifiable {
         case .historique: tr("Retrouvez tous vos tirages")
         case .palette: tr("Toutes les palettes de couleurs")
         case .roueVerrouillee: tr("Débloquez toutes les roues")
+        case .modification: tr("Modifiez vos roues sans limite")
         case .passageAVie: tr("Passez à l'achat à vie")
         case .evolution: tr("Décide pour moi évolue")
         }

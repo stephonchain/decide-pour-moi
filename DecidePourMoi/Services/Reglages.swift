@@ -10,6 +10,9 @@ enum CleReglage {
     static let langue = "reglage.langue"
     static let debugPremium = "debug.premium"
     static let debugSourceAchats = "debug.sourceAchats"
+    /// Partagée avec `@AppStorage` : l'écran de la roue doit se redessiner
+    /// dès qu'une modification offerte est consommée.
+    static let modificationsGratuitesUtilisees = "gratuit.modificationsUtilisees"
 }
 
 /// Réglages et compteurs de l'app. Tout tient dans `UserDefaults` : aucune
@@ -26,6 +29,8 @@ enum Reglages {
         static let avisNombreTirages = "avis.nombreTirages"
         static let avisJours = "avis.jours"
         static let avisDemande = "avis.demande"
+        static let roueFigee = "gratuit.roueFigee"
+        static let migrationOffreGratuite = "migration.offreGratuite"
     }
 
     private static var defaults: UserDefaults { .standard }
@@ -75,6 +80,28 @@ enum Reglages {
     static var evolutionAnnoncee: Bool {
         get { defaults.bool(forKey: Cle.evolutionAnnoncee) }
         set { defaults.set(newValue, forKey: Cle.evolutionAnnoncee) }
+    }
+
+    // MARK: Offre gratuite
+
+    /// La roue « Pile ou face » de la version gratuite : ouverte, jamais
+    /// modifiable. Repérée par son identifiant plutôt que par son titre,
+    /// que la traduction change.
+    static var roueFigee: UUID? {
+        get { defaults.string(forKey: Cle.roueFigee).flatMap(UUID.init(uuidString:)) }
+        set { defaults.set(newValue?.uuidString, forKey: Cle.roueFigee) }
+    }
+
+    static var modificationsGratuitesUtilisees: Int {
+        get { defaults.integer(forKey: CleReglage.modificationsGratuitesUtilisees) }
+        set { defaults.set(newValue, forKey: CleReglage.modificationsGratuitesUtilisees) }
+    }
+
+    /// Passage à l'offre « deux roues dont une figée », une seule fois par
+    /// installation existante.
+    static var migrationOffreGratuite: Bool {
+        get { defaults.bool(forKey: Cle.migrationOffreGratuite) }
+        set { defaults.set(newValue, forKey: Cle.migrationOffreGratuite) }
     }
 
     // MARK: Encart promo

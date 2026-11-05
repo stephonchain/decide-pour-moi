@@ -82,4 +82,28 @@ struct AccesTests {
         #expect(!historique.peutOuvrir(teaser))
         #expect(historique.peutOuvrir(libre))
     }
+
+    @Test("Trois modifications offertes en gratuit, puis le verrou")
+    func modificationsGratuites() {
+        #expect(gratuit.droitDEdition(roueFigee: false, modificationsUtilisees: 0) == .limite(restantes: 3))
+        #expect(gratuit.droitDEdition(roueFigee: false, modificationsUtilisees: 2) == .limite(restantes: 1))
+        #expect(gratuit.droitDEdition(roueFigee: false, modificationsUtilisees: 3) == .bloque)
+        // Un compteur corrompu ou dépassé ne doit jamais rouvrir l'édition.
+        #expect(gratuit.droitDEdition(roueFigee: false, modificationsUtilisees: 99) == .bloque)
+    }
+
+    @Test("La roue figée ne se modifie qu'en premium")
+    func roueFigee() {
+        #expect(gratuit.droitDEdition(roueFigee: true, modificationsUtilisees: 0) == .bloque)
+        #expect(premium.droitDEdition(roueFigee: true, modificationsUtilisees: 0) == .libre)
+    }
+
+    @Test("Premium et historique modifient sans limite")
+    func editionLibre() {
+        #expect(premium.droitDEdition(roueFigee: false, modificationsUtilisees: 50) == .libre)
+        // Ce qui a été donné ne se reprend pas : l'historique modifiait
+        // librement avant le freemium, il continue.
+        #expect(historique.droitDEdition(roueFigee: false, modificationsUtilisees: 50) == .libre)
+        #expect(historique.droitDEdition(roueFigee: true, modificationsUtilisees: 0) == .libre)
+    }
 }

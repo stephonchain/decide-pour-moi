@@ -7,7 +7,7 @@ NO ACCOUNT NEEDED
 There is no login and no demo account to provide. The app is fully usable on first launch. All data stays on the device.
 
 FIRST LAUNCH FLOW
-A 15-page onboarding (two interactive wheel demos + short questions) ends on the paywall. The paywall can be dismissed with the X button (top right); the user then lands on the free tier, which includes one fully functional wheel.
+A 15-page onboarding (two interactive wheel demos + short questions) ends on the paywall. The paywall can be dismissed with the X button (top right); the user then lands on the free tier: two wheels with the classic draw mode, “Tonight we eat…” (editable three times) and “Heads or tails” (not editable). Premium removes every limit.
 
 IN-APP PURCHASES (3 products, attached to this version)
 - dpm_premium_weekly: auto-renewable subscription, weekly
